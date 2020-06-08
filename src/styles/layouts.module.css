@@ -1,0 +1,28 @@
+@value tokens: "./tokens.module.css";
+@value spacerLarge, spacer1, solight from tokens;
+
+.container {
+  display: grid;
+  grid-template-rows: 8rem 1fr spacerLarge;
+  height: 100vh;
+}
+
+.base {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: solight;
+}
+
+.content {
+  composes: base;
+  grid-row: span 2;
+}
+
+.full {
+  composes: base;
+  grid-row: 1 / -1;
+}
+
+.column {
+  padding: spacer1;
+}

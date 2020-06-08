@@ -1,5 +1,4 @@
-# Thatsapp: COMBINING BEST OF BOTH WORLDS
+# uDance: Bring the world of dance to you.
 
-In deze oplossing van Thatsapp vertrekken we van de oplossing van Thatsapp met PHP backend en switchen we de backend naar Firebase.
-
-Dit is het resultaat op het einde van de livestream en is zeker nog niet volledig qua features.
+This is an app where people from all over the world can connect trough local dances. 
+They can trade their own dance with others they can do this solo and duo dances.

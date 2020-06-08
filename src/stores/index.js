@@ -12,7 +12,7 @@ class RootStore {
 
     this.messageStore = new MessageStore(this);
     this.userStore = new UserStore(this);
-    this.groupStore = new GroupStore(this);
+    this.matchStore = new GroupStore(this);
     this.uiStore = new UiStore(this);
   }
 

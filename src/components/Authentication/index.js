@@ -1,20 +1,27 @@
 import React from "react";
-import Sidebar from "../../containers/Sidebar/Sidebar";
-import Content from "../../containers/Content/Content";
-import { Switch, Route, NavLink, Redirect } from "react-router-dom";
-import { ROUTES } from "../../consts";
-import LoginForm from "./LoginForm";
-import AppHeader from "../../containers/Sidebar/AppHeader";
-import style from "./Authentication.module.css";
-import RegisterForm from "./RegisterForm";
+// import Sidebar from "../../containers/Sidebar/Sidebar";
+// import Content from "../../containers/Content/Content";
+// import { Switch, Route, NavLink, Redirect } from "react-router-dom";
+// import { ROUTES } from "../../consts";
+// import LoginForm from "./LoginForm";
+// import AppHeader from "../../containers/Sidebar/AppHeader";
+// import style from "./Authentication.module.css";
+// import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 
 const Authentication = () => {
-  const { uiStore } = useStore();
+  const { userStore, matchStore } = useStore();
   return useObserver(() => (
     <>
-      <Switch>
+      <p>Hello world</p>
+      {userStore.users.map((user) => (
+        console.log(userStore.getUserById(user.partnerId))
+      ))}
+      {matchStore.matches.map(match => (
+        console.log(match)
+      ))}
+      {/* <Switch>
         <Route exact path={ROUTES.login}>
           {uiStore.currentUser ? (
             <Redirect to={ROUTES.home} />
@@ -48,7 +55,7 @@ const Authentication = () => {
             <Redirect to={ROUTES.login} />
           )}
         </Route>
-      </Switch>
+      </Switch> */}
     </>
   ));
 };

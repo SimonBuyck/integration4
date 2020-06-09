@@ -1,26 +1,17 @@
 import * as firebase from "firebase/app";
 
-import MessageStore from "./MessageStore";
 import UserStore from "./UserStore";
-import GroupStore from "./GroupStore";
 import UiStore from "./UiStore";
 import { decorate, computed } from "mobx";
+import MatchStore from "./MatchStore";
 
 class RootStore {
   constructor() {
     this.firebase = getFirebase();
 
-    this.messageStore = new MessageStore(this);
-    this.userStore = new UserStore(this);
-    this.matchStore = new GroupStore(this);
+    this.userStore = new UserStore(this)
+    this.matchStore = new MatchStore(this);
     this.uiStore = new UiStore(this);
-  }
-
-  get unreadLength() {
-    return this.groupStore.groups.reduce(
-      (total, group) => (total += group.unreadLength),
-      0
-    );
   }
 }
 

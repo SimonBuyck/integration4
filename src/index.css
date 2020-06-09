@@ -46,8 +46,6 @@ body {
 }
 
 #root {
-  display: grid;
-  grid-template-columns: 1.64fr 3fr;
   height: 100vh;
 }
 

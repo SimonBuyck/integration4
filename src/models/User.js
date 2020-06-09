@@ -8,6 +8,8 @@ class User {
     video,
     dance,
     password,
+    partnerId = "",
+    duo = false,
     email,
     matches = [],
     store,
@@ -17,6 +19,11 @@ class User {
     this.country = country;
     this.video = video;
     this.dance = dance;
+    this.partnerId = partnerId;
+    this.duo = duo;
+    if (partnerId !== "") {
+      this.duo = true;
+    }
     this.password = password;
     this.email = email;
     this.matches = matches;

@@ -16,7 +16,7 @@ class Match {
       throw new Error("voorzie een store");
     }
     this.store = store;
-    this.store.addUser(this);
+    this.store.addMatch(this);
   }
 
   linkMatch(match) {

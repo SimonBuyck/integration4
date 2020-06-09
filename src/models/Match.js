@@ -1,15 +1,10 @@
 import { v4 } from "uuid";
-import { decorate, observable } from "mobx";
+import { decorate, observable, action } from "mobx";
 
 class Match {
-  constructor({
-    id = v4(),
-    date,
-    accepted,
-    users = [],
-    store,
-  }) {
+  constructor({ id = v4(), match = false, date, accepted, users = [], store }) {
     this.id = id;
+    this.match = match;
     this.date = date;
     this.accepted = accepted;
     this.users = users;
@@ -22,13 +17,14 @@ class Match {
 
   linkMatch(match) {
     !this.matches.includes(match) && this.matches.push(match);
-    !match.userId.includes(this) && match.linkUser(this);
+    !match.users.includes(this) && match.linkUser(this);
   }
 }
 
 decorate(Match, {
   accepted: observable,
-  date: observable
+  date: observable,
+  setMatch: action,
 });
 
 export default Match;

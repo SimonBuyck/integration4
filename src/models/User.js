@@ -9,7 +9,7 @@ class User {
     video,
     dance,
     password,
-    partnerId = "",
+    partner = "",
     duo = false,
     email,
     viewingUser = 0,
@@ -24,9 +24,9 @@ class User {
     }
     this.video = video;
     this.dance = dance;
-    this.partnerId = partnerId;
+    this.partner = partner;
     this.duo = duo;
-    if (partnerId !== "") {
+    if (partner) {
       this.duo = true;
     }
     this.password = password;
@@ -53,7 +53,7 @@ class User {
 decorate(User, {
   video: observable,
   dance: observable,
-  partnerId: observable,
+  partner: observable,
   duo: observable,
   password: observable,
   viewingUser: observable,

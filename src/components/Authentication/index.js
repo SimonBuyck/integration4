@@ -9,35 +9,76 @@ import React from "react";
 // import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
+import Match from "../../models/Match";
 
 const Authentication = () => {
-  const { userStore, uiStore } = useStore();
+  const { userStore, uiStore, matchStore } = useStore();
 
   const otherUsers = userStore.users.filter(
     (user) => user.id !== uiStore.currentUser.id
   );
-  let amount = uiStore.currentUser.viewingUser
+  let amount = uiStore.currentUser.viewingUser;
 
   const nextUser = (e) => {
     e.preventDefault();
-    amount++
-    if(amount > otherUsers.length-1){
-      amount = 0
+    console.log("next");
+    amount++;
+    if (amount > otherUsers.length - 1) {
+      amount = 0;
     }
     uiStore.currentUser.setViewingUser(amount);
-  }
+  };
+
+  const match = (e, user) => {
+    e.preventDefault();
+    matchStore.matches.map((match) =>
+      match.users.includes(
+        uiStore.currentUser && otherUsers[uiStore.currentUser.viewingUser]
+      )
+        ? ((match.match = true),
+          amount++,
+          amount > otherUsers.length - 1 ? (amount = 0) : "",
+          uiStore.currentUser.setViewingUser(amount),
+          console.log("match accepted"))
+        : (new Match({
+            users: [uiStore.currentUser, user],
+            store: matchStore,
+          }),
+          amount++,
+          amount > otherUsers.length - 1 ? (amount = 0) : "",
+          uiStore.currentUser.setViewingUser(amount),
+          console.log("match created"))
+    );
+
+    //store checken als er al een match bestaat met deze mensen
+    //anders een nieuwe match aanmaken
+  };
 
   return useObserver(() => (
     <>
-      {console.log(otherUsers)}
-      {}
+      {/* {otherUsers.[uiStore.currentUser.viewingUser]} */}
       <video
         src={otherUsers[uiStore.currentUser.viewingUser].video}
         width="375"
-        autoPlay
       ></video>
+      <h1>
+        {otherUsers[uiStore.currentUser.viewingUser].name}
+        {otherUsers[uiStore.currentUser.viewingUser].duo ? (
+          <span>
+            {" "}
+            & {otherUsers[uiStore.currentUser.viewingUser].partner.name}
+          </span>
+        ) : (
+          ""
+        )}
+      </h1>
+      <p>{otherUsers[amount].dance}</p>
       <div>
-        <button onClick={nextUser}>next</button>
+        <button
+          onClick={(e) => match(e, otherUsers[uiStore.currentUser.viewingUser])}
+        >
+          match
+        </button>
         <button onClick={nextUser}>skip</button>
       </div>
       {/* <Switch>

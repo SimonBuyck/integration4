@@ -11,16 +11,35 @@ import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 
 const Authentication = () => {
-  const { userStore, matchStore } = useStore();
+  const { userStore, uiStore } = useStore();
+
+  const otherUsers = userStore.users.filter(
+    (user) => user.id !== uiStore.currentUser.id
+  );
+  let amount = uiStore.currentUser.viewingUser
+
+  const nextUser = (e) => {
+    e.preventDefault();
+    amount++
+    if(amount > otherUsers.length-1){
+      amount = 0
+    }
+    uiStore.currentUser.setViewingUser(amount);
+  }
+
   return useObserver(() => (
     <>
-      <p>Hello world</p>
-      {userStore.users.map((user) => (
-        console.log(userStore.getUserById(user.partnerId))
-      ))}
-      {matchStore.matches.map(match => (
-        console.log(match)
-      ))}
+      {console.log(otherUsers)}
+      {}
+      <video
+        src={otherUsers[uiStore.currentUser.viewingUser].video}
+        width="375"
+        autoPlay
+      ></video>
+      <div>
+        <button onClick={nextUser}>next</button>
+        <button onClick={nextUser}>skip</button>
+      </div>
       {/* <Switch>
         <Route exact path={ROUTES.login}>
           {uiStore.currentUser ? (

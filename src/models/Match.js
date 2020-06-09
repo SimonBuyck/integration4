@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import { decorate, observable } from "mobx";
 
 class Match {
   constructor({
@@ -24,5 +25,10 @@ class Match {
     !match.userId.includes(this) && match.linkUser(this);
   }
 }
+
+decorate(Match, {
+  accepted: observable,
+  date: observable
+});
 
 export default Match;

@@ -6,6 +6,11 @@ class MatchStore {
     this.matches = [];
   }
 
+  linkMatch(match) {
+    !this.matches.includes(match) && this.matches.push(match);
+    !match.users.includes(this) && match.linkUser(this);
+  }
+
   addMatch = (match) => {
     this.matches.push(match);
   };
@@ -14,7 +19,8 @@ class MatchStore {
     this.matches = [];
   }
 
-  getUserByUserId = (id) => this.matches.user.map(user => user.find((user) => user.id === id));
+  getUserByUserId = (id) =>
+    this.matches.user.map((user) => user.find((user) => user.id === id));
 }
 
 decorate(MatchStore, {

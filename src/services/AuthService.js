@@ -1,44 +1,58 @@
 import "firebase/auth";
 
 class AuthService {
-  constructor({ firebase, onAuthStateChanged }) {
+  constructor(firebase, onAuthStateChanged) {
     this.auth = firebase.auth();
-    this.auth.onAuthStateChanged((data) => {
-      if (data) {
-        data.id = data.uid;
-        data.name = data.displayName;
-      }
-      onAuthStateChanged(data);
-    });
+    this.auth.onAuthStateChanged((user) => onAuthStateChanged(user));
   }
 
+  isRegistered = async (email) => {
+    //controleren of email bestaat
+    const signInMethods = await this.auth.fetchSignInMethodsForEmail(email);
+    return signInMethods.length === 0 ? false : true;
+  };
+
   login = async (email, password) => {
-    const data = await this.auth.signInWithEmailAndPassword(email, password);
-    return data;
+    try {
+      const result = await this.auth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      return result;
+    } catch (error) {
+      return error.code;
+    }
   };
 
   logout = async () => {
-    return await this.auth.signOut();
-  };
-
-  register = async ({ name, email, password, avatar }) => {
-    const userCredential = await this.auth.createUserWithEmailAndPassword(
-      email,
-      password
-    );
-    await userCredential.user.updateProfile({
-      displayName: name,
-      photoURL: avatar,
-    });
-    return userCredential.user;
-  };
-
-  isRegistered = async (email) => {
-    const signInMethods = await this.auth.fetchSignInMethodsForEmail(email);
-    if (signInMethods.length > 0) {
-      return true;
+    try {
+      const result = await this.auth.signOut();
+      return result;
+    } catch (error) {
+      return error.code;
     }
-    return false;
+  };
+
+  register = async (name, email, password, avatar) => {
+    try {
+      const userCredential = await this.auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (userCredential) {
+        try {
+          await userCredential.user.updateProfile({
+            displayName: name,
+            photoURL: avatar,
+          });
+          return userCredential.user;
+        } catch (error) {
+          return error;
+        }
+      }
+    } catch (error) {
+      return error.code;
+    }
   };
 }
 

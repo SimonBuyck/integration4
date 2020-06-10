@@ -1,121 +1,75 @@
 import React from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
-// import { Switch, Route, NavLink, Redirect } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect, useHistory } from "react-router-dom";
 // import { ROUTES } from "../../consts";
 // import LoginForm from "./LoginForm";
 // import AppHeader from "../../containers/Sidebar/AppHeader";
 // import style from "./Authentication.module.css";
 // import RegisterForm from "./RegisterForm";
-import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
-import Match from "../../models/Match";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import { useStore } from "../../hooks/useStore";
+import Swipe from "../Swipe/Swipe";
+import VideoStartButton from "../VideoStartButton/Video";
 
 const Authentication = () => {
-  const { userStore, uiStore, matchStore } = useStore();
+  const { uiStore } = useStore();
 
-  const otherUsers = userStore.users.filter(
-    (user) => user.id !== uiStore.currentUser.id
-  );
-  let amount = uiStore.currentUser.viewingUser;
+  const history = useHistory();
 
-  const nextUser = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
-    console.log("next");
-    amount++;
-    if (amount > otherUsers.length - 1) {
-      amount = 0;
-    }
-    uiStore.currentUser.setViewingUser(amount);
-  };
 
-  const match = (e, user) => {
-    e.preventDefault();
-    matchStore.matches.map((match) =>
-      match.users.includes(
-        uiStore.currentUser && otherUsers[uiStore.currentUser.viewingUser]
-      )
-        ? ((match.match = true),
-          amount++,
-          amount > otherUsers.length - 1 ? (amount = 0) : "",
-          uiStore.currentUser.setViewingUser(amount),
-          console.log("match accepted"))
-        : (new Match({
-            users: [uiStore.currentUser, user],
-            store: matchStore,
-          }),
-          amount++,
-          amount > otherUsers.length - 1 ? (amount = 0) : "",
-          uiStore.currentUser.setViewingUser(amount),
-          console.log("match created"))
-    );
-
-    //store checken als er al een match bestaat met deze mensen
-    //anders een nieuwe match aanmaken
+    const result = uiStore.logoutUser();
+    console.log(result);
+    history.push("/login");
   };
 
   return useObserver(() => (
     <>
-      {/* {otherUsers.[uiStore.currentUser.viewingUser]} */}
-      <video
-        src={otherUsers[uiStore.currentUser.viewingUser].video}
-        width="375"
-      ></video>
-      <h1>
-        {otherUsers[uiStore.currentUser.viewingUser].name}
-        {otherUsers[uiStore.currentUser.viewingUser].duo ? (
-          <span>
-            {" "}
-            & {otherUsers[uiStore.currentUser.viewingUser].partner.name}
-          </span>
-        ) : (
-          ""
-        )}
-      </h1>
-      <p>{otherUsers[amount].dance}</p>
-      <div>
-        <button
-          onClick={(e) => match(e, otherUsers[uiStore.currentUser.viewingUser])}
-        >
-          match
-        </button>
-        <button onClick={nextUser}>skip</button>
-      </div>
-      {/* <Switch>
-        <Route exact path={ROUTES.login}>
+      <Switch>
+        <Route exact path="/login">
           {uiStore.currentUser ? (
-            <Redirect to={ROUTES.home} />
+            <Redirect to="/" />
           ) : (
-            <div className={style.wrapper}>
-              <AppHeader name="ThatsApp" title="Login" />
+            <div>
               <LoginForm />
-              <NavLink to={ROUTES.register} className={style.textlink}>
+              <NavLink to="/register">
                 <span>Do you want to register?</span>
               </NavLink>
             </div>
           )}
         </Route>
-        <Route exact path={ROUTES.register}>
+        <Route exact path="/register">
           {uiStore.currentUser ? (
-            <Redirect to={ROUTES.home} />
+            <Redirect to="/" />
           ) : (
-            <div className={style.wrapper}>
-              <AppHeader name="ThatsApp" title="Register" />
+            <div>
               <RegisterForm />
+              <NavLink to="/login">
+                <span>Do you want to login?</span>
+              </NavLink>
             </div>
           )}
         </Route>
-        <Route path={ROUTES.home}>
+        <Route path="/">
           {uiStore.currentUser ? (
             <>
-              <Sidebar />
-              <Content />
+              {uiStore.currentUser ? (
+                <button onClick={handleLogout}>Logout</button>
+              ) : (
+                <></>
+              )}
+              <Swipe />
+              <VideoStartButton />
             </>
           ) : (
-            <Redirect to={ROUTES.login} />
+            <Redirect to="/login" />
           )}
         </Route>
-      </Switch> */}
+      </Switch>
     </>
   ));
 };

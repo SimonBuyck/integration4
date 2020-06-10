@@ -50,11 +50,11 @@ new User({
 
 new Match({
   accepted: false,
-  users: [u1 , u2 ],
+  users: [u1 , u2],
   store: store.matchStore,
 });
 
-store.uiStore.setCurrentUser(u1);
+// store.uiStore.setCurrentUser(u1);
 
 window.store = store;
 

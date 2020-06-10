@@ -19,9 +19,9 @@ class User {
     this.id = id;
     this.name = name;
     this.country = country;
-    if (!video) {
-      throw new Error("voorzie een video");
-    }
+    // if (!video) {
+    //   throw new Error("voorzie een video");
+    // }
     this.video = video;
     this.dance = dance;
     this.partner = partner;

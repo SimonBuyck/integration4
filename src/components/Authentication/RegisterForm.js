@@ -3,46 +3,43 @@ import User from "../../models/User";
 import { useHistory } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
-import firebase from 'firebase';
+import firebase from "firebase";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [Uname, setUName] = useState("");
   const [password, setPassWord] = useState("");
   const [passwordAgain, setPassWordAgain] = useState("");
   const [video, setVideo] = useState(null);
-  const [videoURL, setVideoURL] = useState(null)
+  const [videoURL, setVideoURL] = useState("");
+  const [videoName, setVideoName] = useState("");
 
   const { uiStore, userStore } = useStore();
   const history = useHistory();
 
-  const getVideoURL = async (e, videoFile) => {
+  const getVideoURL = async (e, file) => {
     e.preventDefault();
-
-    setVideo(videoFile);
-    console.log(video);
-    const uploadTask = firebase
-      .storage()
-      .ref(`videos/${video.name}`)
-      .put(video);
+    setVideo(file);
+    setVideoName(file.name);
+    const uploadTask = firebase.storage().ref(`videos/${file.name}`).put(file);
 
     await uploadTask;
-    firebase
+    const getURL = firebase
       .storage()
-      .ref("videos")
-      .child(video.name)
+      .ref("videos/")
+      .child(file.name)
       .getDownloadURL()
       .then((url) => setVideoURL(url));
 
-    console.log(videoURL);
-  }
+    await getURL;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(video);
     if (password === passwordAgain) {
       const user = new User({
-        name: name,
+        name: Uname,
         email: email,
         store: userStore,
         password: password,
@@ -51,7 +48,7 @@ const RegisterForm = () => {
       if (result.uid) {
         console.log(result);
         //gebruiker is correct geregistreerd
-        history.push('/');
+        history.push("/");
       } else {
         //registratie mislukt
         console.log(result);
@@ -67,8 +64,8 @@ const RegisterForm = () => {
           name="name"
           type="name"
           placeholder="Fill in your name."
-          value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
+          value={Uname}
+          onChange={(e) => setUName(e.currentTarget.value)}
         />
         <TextInputGroup
           label="Email"
@@ -94,8 +91,12 @@ const RegisterForm = () => {
           value={passwordAgain}
           onChange={(e) => setPassWordAgain(e.currentTarget.value)}
         />
-        <input type='file' accept='video/*' onChange={(e) => getVideoURL(e, e.target.files[0])}></input>
-        <video src={videoURL} width='200'></video>
+        <input
+          type="file"
+          accept="video/*"
+          onChange={(e) => getVideoURL(e, e.target.files[0])}
+        ></input>
+        <video src={videoURL} width="200"></video>
         <input type="submit" value="Register" />
       </form>
     </div>

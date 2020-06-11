@@ -49,6 +49,7 @@ new User({
 });
 
 new Match({
+  creator: u1,
   accepted: false,
   users: [u1 , u2],
   store: store.matchStore,

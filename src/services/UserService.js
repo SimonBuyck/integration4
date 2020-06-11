@@ -1,7 +1,7 @@
 import "firebase/firestore";
 
 class UserService {
-  constructor({ firebase }) {
+  constructor(firebase) {
     this.db = firebase.firestore();
   }
 

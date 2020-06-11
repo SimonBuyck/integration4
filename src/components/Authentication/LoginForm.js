@@ -14,7 +14,6 @@ const LoginForm = () => {
     e.preventDefault();
     const user = new User({
       name: "",
-      video: '../../assets/video/video1.mp4',
       store: userStore,
       email: email,
       password: password

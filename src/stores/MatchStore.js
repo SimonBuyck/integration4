@@ -4,11 +4,7 @@ class MatchStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.matches = [];
-  }
-
-  linkMatch(match) {
-    !this.matches.includes(match) && this.matches.push(match);
-    !match.users.includes(this) && match.linkUser(this);
+    
   }
 
   addMatch = (match) => {

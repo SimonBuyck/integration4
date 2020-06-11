@@ -40,23 +40,16 @@ const Swipe = () => {
 
   const match = (e, user) => {
     e.preventDefault();
-    if(matches.length !== 0){
-      matches.map((match) =>
-        match.users.includes(user)
-          ? console.log("match found")
-          : console.log("match created")
-      );
-    } else {
-      console.log("match created");
-      new Match({
-        store: matchStore,
-        creator: uiStore.currentUser,
-        users: [user, uiStore.currentUser],
-      });
+    user.likes.includes(uiStore.currentUser)
+      ? new Match({ store: matchStore, users: [user, uiStore.currentUser] })
+      : uiStore.currentUser.likes.push(user);
+    amount++;
+    if (amount > otherUsers.length - 1) {
+      amount = 0;
     }
-
+    uiStore.currentUser.setViewingUser(amount);
     console.log(matchStore.matches);
-    console.log(matches)
+    console.log(matches);
 
     //store checken als er al een match bestaat met deze mensen
     //anders een nieuwe match aanmaken

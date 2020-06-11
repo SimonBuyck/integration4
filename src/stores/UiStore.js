@@ -61,7 +61,6 @@ class UiStore {
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,
-      video: result.video,
       store: this.rootStore.userStore,
       email: result.email,
     });

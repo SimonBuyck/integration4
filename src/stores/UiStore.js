@@ -26,7 +26,6 @@ class UiStore {
           name: user.displayName,
           email: user.email,
           store: this.rootStore.userStore,
-          video: user.video,
         })
       );
       // //inlezen van de groepen
@@ -52,18 +51,32 @@ class UiStore {
     return result;
   };
   registerUser = async (user) => {
+    console.log("user: ");
+    console.log(user);
+    console.log("-------------------------");
     const result = await this.authService.register(
       user.name,
       user.email,
       user.password,
-      user.video
     );
+    console.log('registered user: ');
+    console.log(result)
+    console.log("-------------------------");
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,
       store: this.rootStore.userStore,
       email: result.email,
+      video: user.video,
+      country: user.country,
+      viewingUser: user.viewingUser,
+      dance: user.dance,
+      duo: user.duo,
+      partner: user.partner
     });
+    console.log('new registered user: ');
+    console.log(newRegisteredUser)
+    console.log("-------------------------");
     if (result) {
       //user toevoegen aan onze users collection
       this.rootStore.userStore.createUser(newRegisteredUser);

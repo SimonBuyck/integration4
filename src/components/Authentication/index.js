@@ -62,8 +62,8 @@ const Authentication = () => {
               ) : (
                 <></>
               )}
-              <Swipe />
-              <VideoStartButton />
+              {/* <Swipe />
+              <VideoStartButton /> */}
             </>
           ) : (
             <Redirect to="/login" />

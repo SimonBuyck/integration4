@@ -4,7 +4,6 @@ class MatchStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.matches = [];
-    
   }
 
   addMatch = (match) => {

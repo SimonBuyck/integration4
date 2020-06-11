@@ -10,39 +10,48 @@ const RegisterForm = () => {
   const [Uname, setUName] = useState("");
   const [password, setPassWord] = useState("");
   const [passwordAgain, setPassWordAgain] = useState("");
-  const [video, setVideo] = useState(null);
-  const [videoURL, setVideoURL] = useState("");
-  const [videoName, setVideoName] = useState("");
+  const [videoSource, setVideoSource] = useState(null);
+  const [video, setVideo] = useState("");
+  const [dance, setDance] = useState("");
+  const [country, setCountry] = useState("");
+  const [duo, setDuo] = useState("");
+  const [partner, setPartner] = useState("");
 
   const { uiStore, userStore } = useStore();
   const history = useHistory();
 
+  // zorgen dat deze niet onmiddelijk naar de server wordt geupload
+  //maar dat deze in preview mode staat.
   const getVideoURL = async (e, file) => {
     e.preventDefault();
-    setVideo(file);
-    setVideoName(file.name);
     const uploadTask = firebase.storage().ref(`videos/${file.name}`).put(file);
 
     await uploadTask;
-    const getURL = firebase
+    // setting the video preview url/source
+    const urls = firebase
       .storage()
       .ref("videos/")
       .child(file.name)
       .getDownloadURL()
-      .then((url) => setVideoURL(url));
+      .then((url) => setVideoSource(url));
 
-    await getURL;
+    await urls;
+    setVideo(`${file.name}`);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(video);
     if (password === passwordAgain) {
       const user = new User({
         name: Uname,
         email: email,
         store: userStore,
         password: password,
+        country: country,
+        video: video,
+        dance: dance,
+        duo: duo,
+        partner: partner,
       });
       const result = await uiStore.registerUser(user);
       if (result.uid) {
@@ -91,12 +100,50 @@ const RegisterForm = () => {
           value={passwordAgain}
           onChange={(e) => setPassWordAgain(e.currentTarget.value)}
         />
+        <TextInputGroup
+          label="country"
+          type="text"
+          name="country"
+          placeholder="Fill in your country."
+          value={country}
+          onChange={(e) => setCountry(e.currentTarget.value)}
+        />
+        <TextInputGroup
+          label="Dance"
+          type="text"
+          name="dance"
+          placeholder="Fill in your dance."
+          value={dance}
+          onChange={(e) => setDance(e.currentTarget.value)}
+        />
+        <label>
+          duo
+          <input
+            label="duo"
+            type="checkbox"
+            name="duo"
+            placeholder="check for duo."
+            value={duo}
+            onChange={(e) => setDuo(e.currentTarget.value)}
+          />
+        </label>
+        <label>
+          duo
+          <input
+            label="partner"
+            type="text"
+            name="partner"
+            placeholder="partners name."
+            value={partner}
+            onChange={(e) => setPartner(e.currentTarget.value)}
+          />
+        </label>
         <input
           type="file"
           accept="video/*"
           onChange={(e) => getVideoURL(e, e.target.files[0])}
         ></input>
-        <video src={videoURL} width="200"></video>
+        <video src={videoSource} width="200" autoPlay></video>
         <input type="submit" value="Register" />
       </form>
     </div>

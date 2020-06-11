@@ -58,7 +58,7 @@ const Swipe = () => {
   return useObserver(() => (
     <>
       {/* {otherUsers.[uiStore.currentUser.viewingUser]} */}
-      <video
+      {/* <video
         src={otherUsers[uiStore.currentUser.viewingUser].video}
         width="375"
       ></video>
@@ -73,7 +73,7 @@ const Swipe = () => {
           ""
         )}
       </h1>
-      <p>{otherUsers[amount].dance}</p>
+      <p>{otherUsers[amount].dance}</p> */}
       <div>
         <button
           onClick={(e) => match(e, otherUsers[uiStore.currentUser.viewingUser])}

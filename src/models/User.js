@@ -22,11 +22,8 @@ class User {
     this.country = country;
     this.video = video;
     this.dance = dance;
-    this.partner = partner;
     this.duo = duo;
-    if (partner) {
-      this.duo = true;
-    }
+    this.partner = partner;
     this.password = password;
     this.email = email;
     this.viewingUser = viewingUser;
@@ -48,6 +45,38 @@ class User {
   setViewingUser(amount){
     this.viewingUser = amount;
   }
+
+  
+};
+
+const userConverter = {
+  toFirestore: function(user) {
+    return {
+      userId: user.id,
+      name: user.name,
+      video: user.video,
+      email: user.email,
+      country: user.country,
+      dance: user.dance,
+      viewingUser: user.viewingUser,
+      partner: user.partner,
+      duo: user.duo
+    };
+  },
+  fromFirestore: function(snapshot, options) {
+    const data = snapshot.data(options);
+    return new User({
+      dance: data.dance,
+      viewingUser: data.viewingUser,
+      partner: data.partner,
+      duo: data.duo,
+      country: data.country,
+      name: data.name,
+      email: data.email,
+      video: data.video,
+      id: data.userId
+    });
+  }
 }
 
 decorate(User, {
@@ -60,4 +89,5 @@ decorate(User, {
   matches: observable,
 })
 
+export {userConverter}
 export default User;

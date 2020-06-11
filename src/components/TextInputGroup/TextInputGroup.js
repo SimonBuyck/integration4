@@ -10,7 +10,7 @@ const TextInputGroup = ({
 }) => {
   return (
     <>
-      <label htmlFor={name} className="visually-hidden ">
+      <label htmlFor={name}>
         {label}
       </label>
       <input

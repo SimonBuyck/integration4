@@ -1,4 +1,5 @@
 import "firebase/firestore";
+import { userConverter } from "../models/User";
 
 class UserService {
   constructor(firebase) {
@@ -6,7 +7,11 @@ class UserService {
   }
 
   create = async (user) => {
-    return await this.db.collection("users").doc(user.email).set(user);
+    return await this.db
+      .collection("users")
+      .doc(user.email)
+      .withConverter(userConverter)
+      .set(user);
   };
 
   getUserByEmail = async (email) => {

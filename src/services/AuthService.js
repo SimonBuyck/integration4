@@ -33,7 +33,7 @@ class AuthService {
     }
   };
 
-  register = async (name, email, password, video) => {
+  register = async (name, email, password) => {
     try {
       const userCredential = await this.auth.createUserWithEmailAndPassword(
         email,
@@ -43,7 +43,6 @@ class AuthService {
         try {
           await userCredential.user.updateProfile({
             displayName: name,
-            photoURL: video
           });
           return userCredential.user;
         } catch (error) {

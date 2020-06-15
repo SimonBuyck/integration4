@@ -1,26 +1,37 @@
-const newRoomEndpoint =
-  "https://fu6720epic.execute-api.us-west-2.amazonaws.com/default/dailyWwwApiDemoNewCall";
+var data = null;
+let apiData = null;
+let url = "";
 
-/**
- * Create a short-lived room for demo purposes.
- *
- * IMPORTANT: this is purely a "demo-only" API, and *not* how we recommend
- * you create rooms in real production code. In your code, we recommend that you:
- * - Create rooms by invoking the Daily.co REST API from your own backend server
- *   (or from the Daily.co dashboard if you're OK with creating rooms manually).
- * - Pass an "exp" (expiration) parameter to the Daily.co REST endpoint so you
- *   don't end up with a huge number of live rooms.
- *
- * See https://docs.daily.co/reference#create-room for more information on how
- * to use the Daily.co REST API to create rooms.
- */
 async function createRoom() {
-  let response = await fetch(newRoomEndpoint),
-    room = await response.json();
-  return room;
+  var xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      console.log(this.responseText);
+      apiData = JSON.parse(this.responseText);
+      console.log(apiData);
+      url = apiData.url;
+      console.log(url);
+      return { xhr, url, apiData };
+    }
+  });
+
+  xhr.open("POST", "https://api.daily.co/v1/rooms");
+  xhr.setRequestHeader("content-type", "application/json");
+  xhr.setRequestHeader(
+    "authorization",
+    "Bearer 38b978f11062e181895d8369b3a8b2b21f486a0e49a0f6fb119954f797b6a3e9"
+  );
+
+  xhr.send(data);
+  
+  // await xhr;
+
+  // console.log(url);
+  // return { url: `${url}` };
 
   // Comment out the above and uncomment the below, using your own URL
-  // return { url: "https://your-domain.daily.co/hello" };
+  // return {url: `https://int4-2020firebaseapp.daily.co/hello`};
 }
 
 export default { createRoom };

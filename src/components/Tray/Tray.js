@@ -47,6 +47,26 @@ export default function Tray(props) {
 
   function leaveCall() {
     props.onClickLeaveCall && props.onClickLeaveCall();
+
+
+    // deletes teh room after leaving
+    // var data = null;
+
+    // var xhr = new XMLHttpRequest();
+
+    // xhr.addEventListener("readystatechange", function () {
+    //   if (this.readyState === this.DONE) {
+    //     console.log(this.responseText);
+    //   }
+    // });
+
+    // xhr.open("DELETE", "https://api.daily.co/v1/rooms/pipi");
+    // xhr.setRequestHeader(
+    //   "authorization",
+    //   "Bearer 38b978f11062e181895d8369b3a8b2b21f486a0e49a0f6fb119954f797b6a3e9"
+    // );
+
+    // xhr.send(data);
   }
 
   /**

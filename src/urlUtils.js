@@ -8,4 +8,4 @@ export function pageUrlFromRoomUrl(roomUrl) {
     window.location.href.split("?")[0] +
     (roomUrl ? `?roomUrl=${encodeURIComponent(roomUrl)}` : "")
   );
-}
+} 

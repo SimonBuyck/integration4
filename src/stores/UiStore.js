@@ -51,17 +51,11 @@ class UiStore {
     return result;
   };
   registerUser = async (user) => {
-    console.log("user: ");
-    console.log(user);
-    console.log("-------------------------");
     const result = await this.authService.register(
       user.name,
       user.email,
       user.password,
     );
-    console.log('registered user: ');
-    console.log(result)
-    console.log("-------------------------");
     const newRegisteredUser = new User({
       id: result.uid,
       name: result.displayName,
@@ -74,9 +68,6 @@ class UiStore {
       duo: user.duo,
       partner: user.partner
     });
-    console.log('new registered user: ');
-    console.log(newRegisteredUser)
-    console.log("-------------------------");
     if (result) {
       //user toevoegen aan onze users collection
       this.rootStore.userStore.createUser(newRegisteredUser);

@@ -1148,7 +1148,7 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@daily-co/daily-js@^0.9.986":
+"@daily-co/daily-js@^0.9.991":
   version "0.9.991"
   resolved "https://registry.yarnpkg.com/@daily-co/daily-js/-/daily-js-0.9.991.tgz#43580ae888aa40904e13184224e38b07b7c5ef25"
   integrity sha512-m/owwe3EwUAZX9l7zs4uTDWSgUjoJgtSAFykNIl7Xam3rq3uQ1v7PmgJMjopWQtLik+x0r9zBTqQ/xAfgpa2Rw==

@@ -1,23 +1,23 @@
 import "firebase/firestore";
 
-class GroupService {
+class MatchService {
   constructor({ firebase }) {
     this.db = firebase.firestore();
   }
 
   getAll = async () => {
-    const snapshot = await this.db.collection("groups").get();
+    const snapshot = await this.db.collection("matches").get();
     return snapshot.docs.map((o) => o.data());
   };
 
   getById = async (id) => {
-    return (await this.db.collection("groups").doc(id).get()).data();
+    return (await this.db.collection("matches").doc(id).get()).data();
   };
 
-  create = async (group) => {
-    const groupRef = await this.db.collection("groups").doc(group.id);
-    await groupRef.set(group);
-    return group;
+  create = async (match) => {
+    const groupRef = await this.db.collection("matches").doc(match.id);
+    await groupRef.set(match);
+    return match;
   };
 
   getGroupsForUser = async (userId, onGroupAdded) => {
@@ -36,7 +36,7 @@ class GroupService {
 
   getMessagesForGroup = async (groupId, onMessageAdded) => {
     this.db
-      .collectionGroup("messages")
+      .collectionGroup("matches")
       .where("groupId", "==", groupId)
       .orderBy("timestamp")
       .onSnapshot(async (snapshot) => {
@@ -49,29 +49,29 @@ class GroupService {
       });
   };
 
-  getMembersForGroup = async (groupId) => {
+  getUsersForMatch = async (matchId) => {
     const members = await this.db
-      .collection("groups")
-      .doc(groupId)
-      .collection("members")
+      .collection("matches")
+      .doc(matchId)
+      .collection("users")
       .get();
     return members.docs.map((u) => u.data());
   };
 
-  addMemberToGroup = async (groupId, user) => {
-    console.log("add", user.name, " to ", groupId);
-    const group = await this.getById(groupId);
-    if (!group) {
-      throw new Error(`Group ${groupId} does not exist`);
+  addUserToMatch = async (matchId, user) => {
+    console.log("add", user.name, " to ", matchId);
+    const match = await this.getById(matchId);
+    if (!match) {
+      throw new Error(`Group ${matchId} does not exist`);
     }
     return await this.db
 
-      .collection("groups")
-      .doc(groupId)
-      .collection("members")
+      .collection("matches")
+      .doc(matchId)
+      .collection("users")
       .doc()
       .set(user);
   };
 }
 
-export default GroupService;
+export default MatchService;

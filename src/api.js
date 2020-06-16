@@ -5,7 +5,7 @@ let url = "";
 async function createRoom() {
   var xhr = new XMLHttpRequest();
 
-  xhr.addEventListener("readystatechange", function () {
+  await xhr.addEventListener("readystatechange", function () {
     if (this.readyState === this.DONE) {
       console.log(this.responseText);
       apiData = JSON.parse(this.responseText);
@@ -24,6 +24,8 @@ async function createRoom() {
   );
 
   xhr.send(data);
+
+  return url
   
   // await xhr;
 

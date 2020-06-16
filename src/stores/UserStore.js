@@ -1,5 +1,6 @@
 import { decorate, observable, action } from "mobx";
 import UserService from "../services/UserService";
+import User from "../models/User";
 
 class UserStore {
   constructor(rootStore) {
@@ -10,6 +11,15 @@ class UserStore {
 
   createUser = async (user) => {
     return await this.userService.create(user);
+  };
+
+  getAll = async () => {
+    const users = await this.userService.getAll();
+    users.map((u) => new User({ store: this, ...u }));
+  };
+
+  createLikeForUser = async (user, contactEmail) => {
+    this.userService.createLikeForUser(user, contactEmail);
   };
 
   addUser = (user) => {
@@ -43,6 +53,11 @@ class UserStore {
 
 decorate(UserStore, {
   users: observable,
+  otherUsers: observable,
+  getAll: action,
+  searchUser: action,
+  getUserById: action,
+  createUser: action,
   empty: action,
   addUser: action,
 });

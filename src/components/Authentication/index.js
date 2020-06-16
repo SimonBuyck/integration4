@@ -12,7 +12,8 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import Swipe from "../Swipe/Swipe";
-import VideoStartButton from "../VideoStartButton/Video";
+// import VideoStartButton from "../VideoStartButton/Video";
+
 
 const Authentication = () => {
   const { uiStore } = useStore();
@@ -21,7 +22,6 @@ const Authentication = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-
     const result = uiStore.logoutUser();
     console.log(result);
     history.push("/login");
@@ -63,7 +63,7 @@ const Authentication = () => {
                 <></>
               )}
               <Swipe />
-              <VideoStartButton />
+              {/* <VideoStartButton /> */}
             </>
           ) : (
             <Redirect to="/login" />

@@ -11,7 +11,6 @@ const RegisterForm = () => {
   const [password, setPassWord] = useState("");
   const [passwordAgain, setPassWordAgain] = useState("");
   const [videoSource, setVideoSource] = useState(null);
-  const [video, setVideo] = useState("");
   const [dance, setDance] = useState("");
   const [country, setCountry] = useState("");
   const [duo, setDuo] = useState("");
@@ -36,7 +35,6 @@ const RegisterForm = () => {
       .then((url) => setVideoSource(url));
 
     await urls;
-    setVideo(`${file.name}`);
   };
 
   const handleSubmit = async (e) => {
@@ -48,7 +46,7 @@ const RegisterForm = () => {
         store: userStore,
         password: password,
         country: country,
-        video: video,
+        video: videoSource,
         dance: dance,
         duo: duo,
         partner: partner,

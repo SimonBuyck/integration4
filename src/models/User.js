@@ -34,6 +34,7 @@ class User {
     }
     this.store = store;
     this.store.addUser(this);
+    this.RootStore = 
     this.matches.map(match => match.linkUser(this))
   }
 
@@ -45,8 +46,6 @@ class User {
   setViewingUser(amount){
     this.viewingUser = amount;
   }
-
-  
 };
 
 const userConverter = {
@@ -81,12 +80,15 @@ const userConverter = {
 
 decorate(User, {
   video: observable,
+  name: observable,
+  country: observable,
   dance: observable,
   partner: observable,
   duo: observable,
   password: observable,
   viewingUser: observable,
   matches: observable,
+  likes: observable
 })
 
 export {userConverter}

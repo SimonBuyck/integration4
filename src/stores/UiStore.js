@@ -28,8 +28,8 @@ class UiStore {
           store: this.rootStore.userStore,
         })
       );
-      // //inlezen van de groepen
-      // this.rootStore.groupStore.getGroups();
+      this.rootStore.userStore.getAll();
+      // this.rootStore.matchStore.getMatches();
 
       // //inlezen van de contacten van de currentuser
       // this.rootStore.userStore.getContactsForUser();

@@ -19,7 +19,7 @@ class MatchStore {
 }
 
 decorate(MatchStore, {
-  users: observable,
+  matches: observable,
   empty: action,
   addMatch: action,
 });

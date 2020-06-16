@@ -24,24 +24,22 @@ class UserService {
 
   getAll = async () => {
     const snapshot = await this.db.collection("users").get();
-    return snapshot.docs
-      .map((o) => o.data())
-      .map((u) => {
-        u.id = u.userId; // quick fix to make it compatible with koens db
-        return u;
-      });
+    const users = snapshot.docs.map((o) => {
+      return o.data();
+    });
+    return users;
   };
 
-  getContactsForUser = async (user) => {
-    const contacts = await this.db
+  getLikesForUser = async (user) => {
+    const likes = await this.db
       .collection("users")
       .doc(user.email)
-      .collection("contacts")
+      .collection("likes")
       .get();
-    return contacts.docs.map((u) => u.data());
+    return likes.docs.map((u) => u.data());
   };
 
-  createContactForUser = async (user, contactEmail) => {
+  createLikeForUser = async (user, contactEmail) => {
     const contact = await this.getUserByEmail(contactEmail);
     if (!contact) {
       throw new Error(`User ${contactEmail} does not exist`);
@@ -49,7 +47,7 @@ class UserService {
     await this.db
       .collection("users")
       .doc(user.email)
-      .collection("contacts")
+      .collection("likes")
       .doc(contact.email)
       .set(contact);
 

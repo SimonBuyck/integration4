@@ -14,42 +14,39 @@ import Match from "../../models/Match";
 const Swipe = () => {
   const { userStore, uiStore, matchStore } = useStore();
 
-  const otherUsers = userStore.users.filter(
-    (user) => user.id !== uiStore.currentUser.id
-  );
   let amount = uiStore.currentUser.viewingUser;
-
-  let matches = [];
-  matchStore.matches.map((match) =>
-    match.users.includes(uiStore.currentUser)
-      ? match.creator !== uiStore.currentUser
-        ? matches.push(match)
-        : ""
-      : ""
-  );
 
   const nextUser = (e) => {
     e.preventDefault();
     console.log("next");
     amount++;
-    if (amount > otherUsers.length - 1) {
-      amount = 0;
+    console.log(amount);
+    if (amount > userStore.users.length - 1) {
+      amount = 1;
     }
-    uiStore.currentUser.setViewingUser(amount);
+    uiStore.currentUser.viewingUser = amount;
+    console.log(userStore.users[amount]);
   };
 
   const match = (e, user) => {
     e.preventDefault();
-    user.likes.includes(uiStore.currentUser)
-      ? new Match({ store: matchStore, users: [user, uiStore.currentUser] })
-      : uiStore.currentUser.likes.push(user);
-    amount++;
-    if (amount > otherUsers.length - 1) {
-      amount = 0;
+    console.log(user);
+    if(user.likes){
+      if(user.likes.includes(uiStore.currentUser.id)){
+        
+      } else {
+        uiStore.currentUser.likes.push(user);
+        userStore.createLikeForUser(uiStore.currentUser, user.email);
+      }
     }
-    uiStore.currentUser.setViewingUser(amount);
-    console.log(matchStore.matches);
-    console.log(matches);
+    amount++;
+    console.log(amount);
+    if (amount > userStore.users.length - 1) {
+      amount = 1;
+    }
+    uiStore.currentUser.viewingUser = amount;
+    console.log(userStore.users[amount]);
+    // console.log(matchStore.matches);
 
     //store checken als er al een match bestaat met deze mensen
     //anders een nieuwe match aanmaken
@@ -57,30 +54,34 @@ const Swipe = () => {
 
   return useObserver(() => (
     <>
-      {/* {otherUsers.[uiStore.currentUser.viewingUser]} */}
-      {/* <video
-        src={otherUsers[uiStore.currentUser.viewingUser].video}
-        width="375"
-      ></video>
-      <h1>
-        {otherUsers[uiStore.currentUser.viewingUser].name}
-        {otherUsers[uiStore.currentUser.viewingUser].duo ? (
-          <span>
-            {" "}
-            & {otherUsers[uiStore.currentUser.viewingUser].partner.name}
-          </span>
-        ) : (
-          ""
-        )}
-      </h1>
-      <p>{otherUsers[amount].dance}</p> */}
       <div>
-        <button
-          onClick={(e) => match(e, otherUsers[uiStore.currentUser.viewingUser])}
-        >
-          match
-        </button>
-        <button onClick={nextUser}>skip</button>
+        <video
+          src={userStore.users[uiStore.currentUser.viewingUser].video}
+          width="375"
+          autoPlay
+        ></video>
+        <h1>
+          {userStore.users[uiStore.currentUser.viewingUser].name}
+          {userStore.users[uiStore.currentUser.viewingUser].duo ? (
+            <span>
+              {" "}
+              & {userStore.users[uiStore.currentUser.viewingUser].partner}
+            </span>
+          ) : (
+            ""
+          )}
+        </h1>
+        <p>{userStore.users[uiStore.currentUser.viewingUser].dance}</p>
+        <div>
+          <button
+            onClick={(e) =>
+              match(e, userStore.users[uiStore.currentUser.viewingUser])
+            }
+          >
+            match
+          </button>
+          <button onClick={nextUser}>skip</button>
+        </div>
       </div>
     </>
   ));

@@ -12,7 +12,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import Swipe from "../Swipe/Swipe";
-// import VideoStartButton from "../VideoStartButton/Video";
+import VideoStartButton from "../VideoStartButton/Video";
 
 
 const Authentication = () => {
@@ -63,7 +63,7 @@ const Authentication = () => {
                 <></>
               )}
               <Swipe />
-              {/* <VideoStartButton /> */}
+              <VideoStartButton />
             </>
           ) : (
             <Redirect to="/login" />

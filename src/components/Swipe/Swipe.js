@@ -9,7 +9,6 @@ import React from "react";
 // import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
-import Match from "../../models/Match";
 
 const Swipe = () => {
   const { userStore, uiStore, matchStore } = useStore();

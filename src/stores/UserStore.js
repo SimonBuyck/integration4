@@ -15,7 +15,7 @@ class UserStore {
 
   getAll = async () => {
     const users = await this.userService.getAll();
-    users.map((u) => new User({ store: this, ...u }));
+    users.map((u) => u.id !== this.rootStore.uiStore.currentUser.id ? new User({ store: this, ...u }): console.log('this is the current user'));
   };
 
   createLikeForUser = async (user, contactEmail) => {

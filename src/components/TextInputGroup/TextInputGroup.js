@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./TextInputGroup.module.css";
 
 const TextInputGroup = ({
   label,
@@ -10,10 +11,10 @@ const TextInputGroup = ({
 }) => {
   return (
     <>
-      <label htmlFor={name}>
+      <label className={style.hidden} htmlFor={name}>
         {label}
       </label>
-      <input
+      <input className={style.input}
         type={type}
         name={name}
         placeholder={placeholder}

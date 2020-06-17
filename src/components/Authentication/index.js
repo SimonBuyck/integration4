@@ -19,16 +19,9 @@ const Authentication = () => {
   const { uiStore } = useStore();
   
   const history = useHistory();
-<<<<<<< HEAD
 
   const handleLogout = async (e) => {
     e.preventDefault();
-=======
-  
-  const handleLogout = (e) => {
-    e.preventDefault();
-    
->>>>>>> d69ca022a1c73ac6794936365b4cd5ce3b513e73
     const result = uiStore.logoutUser();
     console.log(result);
     history.push("/login");
@@ -63,7 +56,7 @@ const Authentication = () => {
           ) : (
             <>
             <header className={style.header}>
-            <NavLink className={style.return} to="/login"><img class="return__img" src="back_arrow.svg" alt="Sign up" height="20px"></img>
+            <NavLink className={style.return} to="/login"><img src="../../assets/back_arrow.svg" alt="Sign up" height="20px"></img>
             </NavLink>
         <h1 className={style.header__title}>Sign Up</h1>
         <span></span>
@@ -80,7 +73,6 @@ const Authentication = () => {
               <>
               {uiStore.currentUser ? (
                 <button onClick={handleLogout}>Logout</button>
-<<<<<<< HEAD
               ) : (
                 <></>
               )}
@@ -97,22 +89,3 @@ const Authentication = () => {
 };
 
 export default Authentication;
-=======
-                ) : (
-                  <></>
-                  )}
-                  <Swipe />
-                  <VideoStartButton />
-                  </>
-                  ) : (
-                    <Redirect to="/login" />
-                    )}
-                    </Route>
-                    </Switch>
-                    </>
-                    ));
-                  };
-                  
-                  export default Authentication;
-                  
->>>>>>> d69ca022a1c73ac6794936365b4cd5ce3b513e73

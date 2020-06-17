@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import firebase from "firebase";
+import style from "./Authentication.module.css";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -66,54 +67,17 @@ const RegisterForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <TextInputGroup
-          label="Name"
-          name="name"
-          type="name"
-          placeholder="Fill in your name."
-          value={Uname}
-          onChange={(e) => setUName(e.currentTarget.value)}
-        />
-        <TextInputGroup
+    <p className={style.error}>*This email address is already registered</p>
+      <TextInputGroup
           label="Email"
           name="email"
           type="email"
-          placeholder="Fill in your email."
+          placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
-        <TextInputGroup
-          label="Password"
-          type="password"
-          name="Password"
-          placeholder="Fill in your password."
-          value={password}
-          onChange={(e) => setPassWord(e.currentTarget.value)}
-        />
-        <TextInputGroup
-          label="Passwordagain"
-          type="password"
-          name="Passwordagain"
-          placeholder="Fill in your password again."
-          value={passwordAgain}
-          onChange={(e) => setPassWordAgain(e.currentTarget.value)}
-        />
-        <TextInputGroup
-          label="country"
-          type="text"
-          name="country"
-          placeholder="Fill in your country."
-          value={country}
-          onChange={(e) => setCountry(e.currentTarget.value)}
-        />
-        <TextInputGroup
-          label="Dance"
-          type="text"
-          name="dance"
-          placeholder="Fill in your dance."
-          value={dance}
-          onChange={(e) => setDance(e.currentTarget.value)}
-        />
+        <p className={style.smallText}>By continuing, you agree to uDance's <span className={style.terms_of_use}>Terms of Use</span>.</p>
+
         <label>
           duo
           <input
@@ -126,16 +90,57 @@ const RegisterForm = () => {
           />
         </label>
         <label>
-          duo
-          <input
+        duo
+          <TextInputGroup //Dit is aangepast van input naar TextInputGroup
             label="partner"
             type="text"
             name="partner"
-            placeholder="partners name."
+            placeholder="Partners name"
             value={partner}
             onChange={(e) => setPartner(e.currentTarget.value)}
           />
         </label>
+        <TextInputGroup
+          label="Name"
+          name="name"
+          type="name"
+          placeholder="Your name"
+          value={Uname}
+          onChange={(e) => setUName(e.currentTarget.value)}
+        />
+        
+        <TextInputGroup
+          label="Password"
+          type="password"
+          name="Password"
+          placeholder="Choose password"
+          value={password}
+          onChange={(e) => setPassWord(e.currentTarget.value)}
+        />
+        <TextInputGroup
+          label="Passwordagain"
+          type="password"
+          name="Passwordagain"
+          placeholder="Type password again"
+          value={passwordAgain}
+          onChange={(e) => setPassWordAgain(e.currentTarget.value)}
+        />
+        <TextInputGroup
+          label="country"
+          type="text"
+          name="country"
+          placeholder="Your country"
+          value={country}
+          onChange={(e) => setCountry(e.currentTarget.value)}
+        />
+        <TextInputGroup
+          label="Dance"
+          type="text"
+          name="dance"
+          placeholder="Dance name"
+          value={dance}
+          onChange={(e) => setDance(e.currentTarget.value)}
+        />
         <input
           type="file"
           accept="video/*"

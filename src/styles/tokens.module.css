@@ -1,0 +1,15 @@
+@value background: #24305E;
+@value colorTitle: #F8E9A1;
+@value colorText: #F2F2F2;
+@value colorSecondary: #A8D0E6;
+@value colorTertiary: #BDBDBD;
+@value colorAlert: #EB5757;
+
+@value spacer1: 1rem;
+@value spacer2: 2rem;
+
+@value fontSizeXSmall: 1.4rem;
+@value fontSizeSmall: 1.6rem;
+@value fontSizeMedium: 2rem;
+@value fontSizeLarge: 3rem;
+@value fontSizeXLarge: 4rem;

@@ -1,0 +1,19 @@
+@value tokens: "./tokens.module.css";
+@value colorTitle, colorText, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge from tokens;
+
+.title {
+  font-size: fontSizeXLarge;
+  font-weight: bold;
+  color: colorTitle;
+  margin-top: 1rem;
+}
+
+.subtitle {
+  font-size: fontSizeMedium;
+  margin-top: 1rem;
+}
+
+.largeText {
+  font-size: fontSizeMedium;
+  font-weight: bold;
+}

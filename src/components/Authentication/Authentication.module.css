@@ -1,32 +1,78 @@
 @value tokens: "../../styles/tokens.module.css";
-@value colorPrimary,darkPrimary,solight, spacer1, spacer2 from tokens;
+@value background, colorSecondary, colorAlert, fontSizeXSmall, fontSizeSmall, spacer2, colorTertiary from tokens;
 
-.container {
-  composes: content from "../../styles/layouts.module.css";
-  grid-template-columns: 1fr;
-}
-a.textlink,
-a.textlink:link,
-a.textlink:visited,
-a.textlink:active {
-  text-align: center;
-  color: colorPrimary;
-  margin-bottom: spacer2;
-}
-a.textlink:hover {
-  color: darkPrimary;
-}
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  background-color: solight;
-}
-.form {
-  composes: column from "../../styles/layouts.module.css";
-  display: grid;
-  grid-auto-rows: max-content;
-}
 .button {
-  composes: button from "../../styles/components.module.css";
-  margin: spacer1 0;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  font-family: futura, sans-serif;
+  font-size: fontSizeSmall;
+  font-weight: bold;
+  margin-top: spacer2;
+  border: none;
+  color: background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: colorSecondary;
+}
+
+.button__secondary{
+  background: colorTertiary;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 20px auto 20px;
+  height: 50px;
+}
+
+.main {
+  margin: 0 2rem;
+}
+
+.title {
+  composes: title from "../../styles/typo.module.css";
+}
+
+.subtitle {
+  composes: subtitle from "../../styles/typo.module.css";
+}
+
+.hidden {
+  display:none;
+}
+
+.return {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  width: 2rem;
+}
+
+.header__title {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.signup {
+  padding: 1rem 10rem;
+}
+
+.smallText {
+  margin-top: 1rem;
+  font-size: fontSizeXSmall;
+  line-height: 140%;
+}
+
+.terms_of_use {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.error {
+  margin: 2rem 0 -1rem;
+  color:colorAlert;
 }

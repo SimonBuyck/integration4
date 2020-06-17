@@ -19,6 +19,7 @@ class UiStore {
       userId1: match.userId1,
     });
     this.rootStore.matchStore.createMatch(newMatch)
+    return newMatch;
   }
 
   isRegisteredContact = async (user) => {

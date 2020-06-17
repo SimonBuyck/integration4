@@ -6,11 +6,16 @@ class MatchStore {
     this.rootStore = rootStore;
     this.matchService = new MatchService(rootStore.firebase)
     this.matches = [];
+    this.openMatches = []
+  }
+
+  deleteMatch = (match) => {
+    this.matchService.deleteMatch(match)
   }
 
   getMatches = async() => {
     const matches = await this.matchService.getMatch();
-    console.log(matches);
+    console.log(matches)
     return matches
   }
 
@@ -28,7 +33,7 @@ class MatchStore {
     this.matches = [];
   }
 
-  getUserByUserId = (id) =>
+  getMatchByMatchId = (id) =>
     this.matches.user.map((user) => user.find((user) => user.id === id));
 }
 

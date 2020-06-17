@@ -7,13 +7,17 @@ const HeaderNav = () => {
 
   const history = useHistory();
 
-  const createMatch = () => {
-    const match = uiStore.createMatch({
+  const newMatch = () => {
+    uiStore.createMatch({
       store: matchStore,
       userId1: uiStore.currentUser.id,
     });
-    console.log(match);
-    history.push("/swipe")
+  };
+
+  const createNewMatch = async () => {
+    const openMatches = await matchStore.getMatches();
+    openMatches.length === 0 ? newMatch() : console.log("their are matches");
+    history.push("/swipe");
   };
 
   const changeStatus = (e, status) => {
@@ -22,7 +26,7 @@ const HeaderNav = () => {
     status === "searching"
       ? userStore.getAllSearchingUsers(uiStore.currentUser) &&
         history.push("/video")
-      : createMatch();
+      : createNewMatch();
   };
 
   return (

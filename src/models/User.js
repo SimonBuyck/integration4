@@ -14,7 +14,7 @@ class User {
     email,
     viewingUser = 0,
     matches = [],
-    likes = [],
+    status = '',
     store,
   }) {
     this.id = id;
@@ -28,7 +28,7 @@ class User {
     this.email = email;
     this.viewingUser = viewingUser;
     this.matches = matches;
-    this.likes = likes;
+    this.status = status;
     if (!store) {
       throw new Error("voorzie een store");
     }

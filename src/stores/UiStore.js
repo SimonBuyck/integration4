@@ -1,6 +1,7 @@
 import { decorate, observable, action } from "mobx";
 import AuthService from "../services/AuthService";
 import User from "../models/User";
+import Match from "../models/Match";
 
 class UiStore {
   constructor(rootStore) {
@@ -9,7 +10,15 @@ class UiStore {
     this.authService = new AuthService(
       this.rootStore.firebase,
       this.onAuthStateChanged
-    );
+    ); 
+  }
+
+  createMatch = (match) => {
+    const newMatch = new Match({
+      store: match.store,
+      userId1: match.userId1,
+    });
+    this.rootStore.matchStore.createMatch(newMatch)
   }
 
   isRegisteredContact = async (user) => {
@@ -18,7 +27,7 @@ class UiStore {
 
   onAuthStateChanged = (user) => {
     if (user) {
-      console.log(`De user is ingelogd: ${user.email}`);
+      console.log(`De user is ingelogd: ${user.email}, ${user.uid}`);
       console.log(user);
       this.setCurrentUser(
         new User({
@@ -28,8 +37,8 @@ class UiStore {
           store: this.rootStore.userStore,
         })
       );
-      this.rootStore.userStore.getAll();
-      // this.rootStore.matchStore.getMatches();
+      console.log(`De user is ingelogd: ${this.currentUser.email}, ${this.currentUser.id}`);
+      this.rootStore.userStore.getAll(this.currentUser);
 
       // //inlezen van de contacten van de currentuser
       // this.rootStore.userStore.getContactsForUser();
@@ -54,7 +63,7 @@ class UiStore {
     const result = await this.authService.register(
       user.name,
       user.email,
-      user.password,
+      user.password
     );
     const newRegisteredUser = new User({
       id: result.uid,
@@ -66,7 +75,7 @@ class UiStore {
       viewingUser: user.viewingUser,
       dance: user.dance,
       duo: user.duo,
-      partner: user.partner
+      partner: user.partner,
     });
     if (result) {
       //user toevoegen aan onze users collection

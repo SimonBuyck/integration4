@@ -1,10 +1,21 @@
 import "firebase/firestore";
 import { userConverter } from "../models/User";
+import UiStore from "../stores/UiStore";
 
 class UserService {
   constructor(firebase) {
     this.db = firebase.firestore();
   }
+
+  changeStatus = (user, status) => {
+    user.status = status;
+    return this.db.collection("users").doc(user.email).set(
+      {
+        status: status,
+      },
+      { merge: true }
+    );
+  };
 
   create = async (user) => {
     return await this.db
@@ -22,24 +33,33 @@ class UserService {
     return data;
   };
 
-  getAll = async () => {
-    const snapshot = await this.db.collection("users").get();
-    const users = snapshot.docs.map((o) => {
+  getAllSearchingUsers = async () => {
+    const snapshot = await this.db
+      .collection("users")
+      .where("status", "==", "searching")
+      .get();
+    return snapshot.docs.map((o) => {
       return o.data();
     });
-    return users;
   };
 
-  getLikesForUser = async (user) => {
+  getAll = async () => {
+    const snapshot = await this.db.collection("users").get();
+    return snapshot.docs.map((o) => {
+      return o.data();
+    });
+  };
+
+  getMatchesForUser = async (user) => {
     const likes = await this.db
       .collection("users")
       .doc(user.email)
-      .collection("likes")
+      .collection("matches")
       .get();
     return likes.docs.map((u) => u.data());
   };
 
-  createLikeForUser = async (user, contactEmail) => {
+  createMatchForUser = async (user, contactEmail) => {
     const contact = await this.getUserByEmail(contactEmail);
     if (!contact) {
       throw new Error(`User ${contactEmail} does not exist`);
@@ -47,7 +67,7 @@ class UserService {
     await this.db
       .collection("users")
       .doc(user.email)
-      .collection("likes")
+      .collection("matches")
       .doc(contact.email)
       .set(contact);
 

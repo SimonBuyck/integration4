@@ -1,13 +1,21 @@
 import "firebase/firestore";
+import { matchConverter } from "../models/Match";
 
 class MatchService {
-  constructor({ firebase }) {
+  constructor(firebase) {
     this.db = firebase.firestore();
   }
 
-  getAll = async () => {
-    const snapshot = await this.db.collection("matches").get();
-    return snapshot.docs.map((o) => o.data());
+  deleteMatch = async (match) => {
+    await this.db.collection("matches").doc(match.id).delete().then(function() {console.log('match deleted')})
+  }
+
+  getMatch = async () => {
+    const snapshot = await this.db
+      .collection("matches")
+      .where("userId2", "==", "")
+      .get();
+    return snapshot.docs.map(o => {return o.data()});
   };
 
   getById = async (id) => {
@@ -15,9 +23,11 @@ class MatchService {
   };
 
   create = async (match) => {
-    const groupRef = await this.db.collection("matches").doc(match.id);
-    await groupRef.set(match);
-    return match;
+    return await this.db
+      .collection("matches")
+      .doc(match.id)
+      .withConverter(matchConverter)
+      .set(match);
   };
 
   getGroupsForUser = async (userId, onGroupAdded) => {

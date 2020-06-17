@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
 // import { Switch, Route, NavLink, Redirect } from "react-router-dom";
@@ -9,46 +9,32 @@ import React from "react";
 // import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
+import Match from "../../models/Match";
 
 const Swipe = () => {
-  const { userStore, uiStore, matchStore } = useStore();
+  const { userStore, uiStore, matchStore} = useStore();
 
-  let amount = uiStore.currentUser.viewingUser;
+  const openMatches = matchStore.getMatches() 
+  console.log(openMatches) 
+
+  const createNewMatch = () => {
+    const match = uiStore.createMatch({
+      store: matchStore,
+      userId1: uiStore.currentUser.id,
+    });
+    console.log(match);
+  }
 
   const nextUser = (e) => {
     e.preventDefault();
     console.log("next");
-    amount++;
-    console.log(amount);
-    if (amount > userStore.users.length - 1) {
-      amount = 1;
-    }
-    uiStore.currentUser.viewingUser = amount;
-    console.log(userStore.users[amount]);
+    createNewMatch()
   };
 
-  const match = (e, user) => {
+  const isMatch = (e, user) => {
     e.preventDefault();
     console.log(user);
-    if(user.likes){
-      if(user.likes.includes(uiStore.currentUser.id)){
-        
-      } else {
-        uiStore.currentUser.likes.push(user);
-        userStore.createLikeForUser(uiStore.currentUser, user.email);
-      }
-    }
-    amount++;
-    console.log(amount);
-    if (amount > userStore.users.length - 1) {
-      amount = 1;
-    }
-    uiStore.currentUser.viewingUser = amount;
-    console.log(userStore.users[amount]);
-    // console.log(matchStore.matches);
 
-    //store checken als er al een match bestaat met deze mensen
-    //anders een nieuwe match aanmaken
   };
 
   return useObserver(() => (
@@ -74,7 +60,7 @@ const Swipe = () => {
         <div>
           <button
             onClick={(e) =>
-              match(e, userStore.users[uiStore.currentUser.viewingUser])
+              isMatch(e, userStore.users[uiStore.currentUser.viewingUser])
             }
           >
             match

@@ -15,11 +15,12 @@ const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
 
-export default function VideoStartButton() {
+export default function VideoStartButton({match}) {
 
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
+  const [roomName, setRoomName] = useState('');
 
   /**
    * Creates a new call room.
@@ -27,14 +28,14 @@ export default function VideoStartButton() {
   const createCall = useCallback(() => {
     setAppState(STATE_CREATING);
     return api
-      .createRoom()
+      .createRoom(match)
       .then((room) => room.url)
       .catch((error) => {
         console.log("Error creating room", error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
       });
-  }, []);
+  }, [match]);
 
   /**
    * Starts joining an existing call.
@@ -60,7 +61,8 @@ export default function VideoStartButton() {
     if (!callObject) return;
     setAppState(STATE_LEAVING);
     callObject.leave();
-  }, [callObject]);
+    api.deleteRoom(roomName)
+  }, [callObject, roomName]);
 
   /**
    * If a room's already specified in the page's URL when the component mounts,
@@ -192,7 +194,7 @@ export default function VideoStartButton() {
         <StartButton
           disabled={!enableStartButton}
           onClick={() => {
-            createCall().then((url) => startJoiningCall(url));
+            createCall().then((url) => startJoiningCall(url) );
           }}
         />
       )}

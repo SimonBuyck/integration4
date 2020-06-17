@@ -11,8 +11,8 @@ import { useObserver } from "mobx-react-lite";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
-import Swipe from "../Swipe/Swipe";
-import VideoStartButton from "../VideoStartButton/Video";
+import Content from "../../containers/Content";
+import HeaderNav from "../../containers/HeaderNav/HeaderNav";
 
 
 const Authentication = () => {
@@ -20,7 +20,7 @@ const Authentication = () => {
 
   const history = useHistory();
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
     const result = uiStore.logoutUser();
     console.log(result);
@@ -62,8 +62,8 @@ const Authentication = () => {
               ) : (
                 <></>
               )}
-              <Swipe />
-              <VideoStartButton />
+              <HeaderNav />
+              <Content />
             </>
           ) : (
             <Redirect to="/login" />

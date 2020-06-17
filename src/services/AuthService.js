@@ -1,8 +1,10 @@
 import "firebase/auth";
 
+
 class AuthService {
   constructor(firebase, onAuthStateChanged) {
     this.auth = firebase.auth();
+    this.firebase = firebase;
     this.auth.onAuthStateChanged((user) => onAuthStateChanged(user));
   }
 
@@ -18,6 +20,7 @@ class AuthService {
         email,
         password
       );
+      console.log(this.userStatusDatabaseRef);
       return result;
     } catch (error) {
       return error.code;

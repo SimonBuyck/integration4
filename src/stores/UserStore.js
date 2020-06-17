@@ -7,15 +7,33 @@ class UserStore {
     this.rootStore = rootStore;
     this.userService = new UserService(rootStore.firebase);
     this.users = [];
+    this.onlineUsers = [];
   }
+
+  changeStatus = (user, status) => {
+    this.userService.changeStatus(user, status);
+  };
 
   createUser = async (user) => {
     return await this.userService.create(user);
   };
 
-  getAll = async () => {
+  getAllSearchingUsers = async (currentUser) => {
+    const onlineUsers = await this.userService.getAllSearchingUsers(currentUser);
+    console.log(onlineUsers);
+    onlineUsers.map((u) =>
+      u.userId === currentUser.id ? u : this.onlineUsers.push(u)
+    );
+    console.log(this.onlineUsers);
+  };
+
+  getAll = async (currentUser) => {
     const users = await this.userService.getAll();
-    users.map((u) => u.id !== this.rootStore.uiStore.currentUser.id ? new User({ store: this, ...u }): console.log('this is the current user'));
+    users.map((u) =>
+      u.userId === currentUser.id
+        ? u
+        : new User({ store: this, ...u })
+    );
   };
 
   createLikeForUser = async (user, contactEmail) => {

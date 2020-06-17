@@ -1,6 +1,5 @@
 import "firebase/firestore";
 import { userConverter } from "../models/User";
-import UiStore from "../stores/UiStore";
 
 class UserService {
   constructor(firebase) {

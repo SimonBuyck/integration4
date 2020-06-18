@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
 
 const HeaderNav = () => {
-  const { userStore, uiStore, matchStore } = useStore();
+  const { userStore, uiStore } = useStore();
 
   const history = useHistory();
 

@@ -6,6 +6,17 @@ class MatchService {
     this.db = firebase.firestore();
   }
 
+  updateMatch = async (match) => {
+    return this.db.collection("matches").doc(match.matchId).set(
+      {
+        userId2: match.userId2,
+        accepted1: match.accepted1,
+        accepted2: match.accepted2
+      },
+      { merge: true }
+    );
+  }
+
   deleteMatch = async (match) => {
     await this.db.collection("matches").doc(match.id).delete().then(function() {console.log('match deleted')})
   }

@@ -9,6 +9,10 @@ class MatchStore {
     this.openMatches = []
   }
 
+  updateMatch = (match) => {
+    this.matchService.updateMatch(match)
+  }
+
   deleteMatch = (match) => {
     this.matchService.deleteMatch(match)
   }

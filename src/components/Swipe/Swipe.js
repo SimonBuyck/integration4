@@ -11,47 +11,38 @@ import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 
 const Swipe = () => {
-  const { userStore, matchStore } = useStore();
-  // const [matchId, setMatchId] = useState("");
-
-  const openMatches = matchStore.getMatches();
-  console.log(openMatches);
-
-  // const createNewMatch = async () => {
-  //   const match = await uiStore.createMatch({
-  //     store: matchStore,
-  //     userId1: uiStore.currentUser.id,
-  //   });
-  //   setMatchId(match.id);
-  //   console.log(matchId);
-  // };
+  const { uiStore, userStore, matchStore } = useStore();
+  const [user, setUser] = useState();
 
   // const nextUser = (e) => {
   //   e.preventDefault();
   //   console.log("next");
-  //   createNewMatch();
   // };
 
-  // const isMatch = (e, user) => {
+  // const isMatch = (e, match) => {
   //   e.preventDefault();
-  //   console.log(user);
+  //   console.log(match);
   // };
 
-  const getUserById = async () =>{
+  const getMatch = async () => {
     const openMatches = await matchStore.getMatches();
-    console.log(openMatches)
-    const result = userStore.getUserById()
-    console.log(result);
-  }
+    if(openMatches.length > 0){
+      openMatches[0].userId2 = uiStore.currentUser.id;
+      const match = openMatches[0];
+      console.log(match);
+      matchStore.updateMatch(match);
+      const user = await userStore.getUserById(openMatches[0].userId1);
+      setUser(user);
+      return user;
+    } else {
+
+    }
+  };
 
   return useObserver(() => (
-    <>
-      {openMatches.length === 0 ? (
-        <p>Searching</p>
-      ) : (
-        getUserById()
-      )}
-    </>
+    <div>
+      
+    </div>
   ));
 };
 

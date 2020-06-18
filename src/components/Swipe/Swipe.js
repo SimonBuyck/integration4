@@ -13,6 +13,7 @@ import { useObserver } from "mobx-react-lite";
 const Swipe = () => {
   const { uiStore, userStore, matchStore } = useStore();
   const [searching, setSearching] = useState(false);
+  const [user, setUser] = useState(null);
 
   // const nextUser = (e) => {
   //   e.preventDefault();
@@ -63,13 +64,17 @@ const Swipe = () => {
     } else {
       console.log('get a free matchRoom')
       openMatches[0].userId2 = uiStore.currentUser.id;
+      const user = await userStore.getUserById(openMatches[0].userId1)
+      console.log(user)
+      setUser(user);
+      
     }
     setSearching(true)
   }
 
   return useObserver(() => (
     <div>
-      {searching === true ? <div><p>we are searching</p></div> : <button onClick={(e) => startSearching(e)}>start searching</button>}
+      {searching === true ? user !== null ? <p>{user.name}</p> :<div><p>we are searching</p></div> : <button onClick={(e) => startSearching(e)}>start searching</button>}
     </div>
   ));
 };

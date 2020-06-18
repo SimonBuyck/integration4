@@ -7,35 +7,21 @@ const HeaderNav = () => {
 
   const history = useHistory();
 
-  const newMatch = () => {
-    uiStore.createMatch({
-      store: matchStore,
-      userId1: uiStore.currentUser.id,
-    });
-  };
-
-  const createNewMatch = async () => {
-    const openMatches = await matchStore.getMatches();
-    if(openMatches.length === 0){
-      newMatch()
-    };
-  };
-
   const changeStatus = (e, status) => {
     e.preventDefault();
     userStore.changeStatus(uiStore.currentUser, status);
-    status === "searching"
+    status === "offline"
       ? history.push("/video")
-      : createNewMatch() && history.push("/swipe");;
+      : history.push("/swipe");
   };
 
   return (
     <section>
-      <Link to="/video" onClick={(e) => changeStatus(e, "searching")}>
+      <Link to="/video" onClick={(e) => changeStatus(e, "offline")}>
         video
       </Link>
       <p></p>
-      <Link to="/swipe" onClick={(e) => changeStatus(e, "offline")}>
+      <Link to="/swipe" onClick={(e) => changeStatus(e, "searching")}>
         swipe
       </Link>
     </section>

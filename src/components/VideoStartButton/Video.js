@@ -28,14 +28,14 @@ export default function VideoStartButton({match}) {
   const createCall = useCallback(() => {
     setAppState(STATE_CREATING);
     return api
-      .createRoom(match)
+      .createRoom()
       .then((room) => room.url)
       .catch((error) => {
         console.log("Error creating room", error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
       });
-  }, [match]);
+  }, []);
 
   /**
    * Starts joining an existing call.
@@ -61,8 +61,7 @@ export default function VideoStartButton({match}) {
     if (!callObject) return;
     setAppState(STATE_LEAVING);
     callObject.leave();
-    api.deleteRoom(roomName)
-  }, [callObject, roomName]);
+  }, [callObject]);
 
   /**
    * If a room's already specified in the page's URL when the component mounts,

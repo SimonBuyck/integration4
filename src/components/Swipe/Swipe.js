@@ -12,7 +12,7 @@ import { useObserver } from "mobx-react-lite";
 
 const Swipe = () => {
   const { uiStore, userStore, matchStore } = useStore();
-  const [user, setUser] = useState();
+  const [searching, setSearching] = useState(false);
 
   // const nextUser = (e) => {
   //   e.preventDefault();
@@ -24,24 +24,52 @@ const Swipe = () => {
   //   console.log(match);
   // };
 
-  const getMatch = async () => {
-    const openMatches = await matchStore.getMatches();
-    if(openMatches.length > 0){
-      openMatches[0].userId2 = uiStore.currentUser.id;
-      const match = openMatches[0];
-      console.log(match);
-      matchStore.updateMatch(match);
-      const user = await userStore.getUserById(openMatches[0].userId1);
-      setUser(user);
-      return user;
-    } else {
-
-    }
+  const newMatch = async() => {
+    return await uiStore.createMatch({
+      store: matchStore,
+      userId1: uiStore.currentUser.id,
+    });
   };
+
+  const createNewMatch = async () => {
+    const openMatches = await matchStore.getMatches();
+    let match = {};
+    if(openMatches.length === 0){
+      match = newMatch()
+    };
+    return match;
+  };
+
+  // const getMatch = async () => {
+  //   const openMatches = await matchStore.getMatches();
+  //   if(openMatches.length > 0){
+  //     openMatches[0].userId2 = uiStore.currentUser.id;
+  //     const match = openMatches[0];
+  //     console.log(match);
+  //     matchStore.updateMatch(match);
+  //     const user = await userStore.getUserById(openMatches[0].userId1);
+  //     return user;
+  //   } else {
+
+  //   }
+  // };
+
+  const startSearching = async (e) => {
+    e.preventDefault();
+    const openMatches = await matchStore.getMatches();
+    if(openMatches.length === 0){
+      console.log('new match created')
+      console.log(createNewMatch());
+    } else {
+      console.log('get a free matchRoom')
+      openMatches[0].userId2 = uiStore.currentUser.id;
+    }
+    setSearching(true)
+  }
 
   return useObserver(() => (
     <div>
-      
+      {searching === true ? <div><p>we are searching</p></div> : <button onClick={(e) => startSearching(e)}>start searching</button>}
     </div>
   ));
 };

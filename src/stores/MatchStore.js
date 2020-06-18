@@ -24,7 +24,6 @@ class MatchStore {
   }
 
   createMatch = async (match) => {
-    console.log(match)
     return await this.matchService.create(match);
   }
 

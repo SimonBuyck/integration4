@@ -5,6 +5,7 @@ import { useStore } from "../../hooks/useStore";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import firebase from "firebase";
 import style from "./Authentication.module.css";
+import { useObserver } from "mobx-react-lite";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ const RegisterForm = () => {
   const [country, setCountry] = useState("");
   const [duo, setDuo] = useState("");
   const [partner, setPartner] = useState("");
+  const [step, setStep] = useState("1");
 
   const { uiStore, userStore } = useStore();
   const history = useHistory();
@@ -64,93 +66,117 @@ const RegisterForm = () => {
     }
   };
 
-  return (
+  return useObserver(() => (
     <div>
       <form onSubmit={handleSubmit}>
-    <p className={style.error}>*This email address is already registered</p>
-      <TextInputGroup
-          label="Email"
-          name="email"
-          type="email"
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.currentTarget.value)}
-        />
-        <p className={style.smallText}>By continuing, you agree to uDance's <span className={style.terms_of_use}>Terms of Use</span>.</p>
-
-        <label>
-          duo
-          <input
-            label="duo"
-            type="checkbox"
-            name="duo"
-            placeholder="check for duo."
-            value={duo}
-            onChange={(e) => setDuo(e.currentTarget.value)}
-          />
-        </label>
-        <label>
-        duo
-          <TextInputGroup //Dit is aangepast van input naar TextInputGroup
-            label="partner"
-            type="text"
-            name="partner"
-            placeholder="Partners name"
-            value={partner}
-            onChange={(e) => setPartner(e.currentTarget.value)}
-          />
-        </label>
-        <TextInputGroup
-          label="Name"
-          name="name"
-          type="name"
-          placeholder="Your name"
-          value={Uname}
-          onChange={(e) => setUName(e.currentTarget.value)}
-        />
-        
-        <TextInputGroup
-          label="Password"
-          type="password"
-          name="Password"
-          placeholder="Choose password"
-          value={password}
-          onChange={(e) => setPassWord(e.currentTarget.value)}
-        />
-        <TextInputGroup
-          label="Passwordagain"
-          type="password"
-          name="Passwordagain"
-          placeholder="Type password again"
-          value={passwordAgain}
-          onChange={(e) => setPassWordAgain(e.currentTarget.value)}
-        />
-        <TextInputGroup
-          label="country"
-          type="text"
-          name="country"
-          placeholder="Your country"
-          value={country}
-          onChange={(e) => setCountry(e.currentTarget.value)}
-        />
-        <TextInputGroup
-          label="Dance"
-          type="text"
-          name="dance"
-          placeholder="Dance name"
-          value={dance}
-          onChange={(e) => setDance(e.currentTarget.value)}
-        />
-        <input
-          type="file"
-          accept="video/*"
-          onChange={(e) => getVideoURL(e, e.target.files[0])}
-        ></input>
-        <video src={videoSource} width="200" autoPlay></video>
-        <input type="submit" value="Register" />
+        {step !== "1" ? (
+          step !== "2" ? (
+            step !== "3" ? (
+              <>
+                <input
+                  type="file"
+                  accept="video/*"
+                  onChange={(e) => getVideoURL(e, e.target.files[0])}
+                ></input>
+                <video src={videoSource} width="200" autoPlay></video>
+                <input type="submit" value="Register" />
+              </>
+            ) : (
+              <>
+                <TextInputGroup
+                  label="Name"
+                  name="name"
+                  type="name"
+                  placeholder="Your name"
+                  value={Uname}
+                  onChange={(e) => setUName(e.currentTarget.value)}
+                />
+                <TextInputGroup
+                  label="Password"
+                  type="password"
+                  name="Password"
+                  placeholder="Choose password"
+                  value={password}
+                  onChange={(e) => setPassWord(e.currentTarget.value)}
+                />
+                <TextInputGroup
+                  label="Passwordagain"
+                  type="password"
+                  name="Passwordagain"
+                  placeholder="Type password again"
+                  value={passwordAgain}
+                  onChange={(e) => setPassWordAgain(e.currentTarget.value)}
+                />
+                <TextInputGroup
+                  label="country"
+                  type="text"
+                  name="country"
+                  placeholder="Your country"
+                  value={country}
+                  onChange={(e) => setCountry(e.currentTarget.value)}
+                />
+                <button onClick={(e) => setStep("4")}>next</button>
+              </>
+            )
+          ) : (
+            <>
+              <div>
+                <TextInputGroup
+                  label="Dance"
+                  type="text"
+                  name="dance"
+                  placeholder="Dance name"
+                  value={dance}
+                  onChange={(e) => setDance(e.currentTarget.value)}
+                />
+              </div>
+              <label>
+                duo
+                <input
+                  label="duo"
+                  type="checkbox"
+                  name="duo"
+                  placeholder="check for duo."
+                  value={duo}
+                  onChange={(e) => setDuo(e.currentTarget.value)}
+                />
+              </label>
+              <label>
+                <TextInputGroup //Dit is aangepast van input naar TextInputGroup
+                  label="partner"
+                  type="text"
+                  name="partner"
+                  placeholder="Partners name"
+                  value={partner}
+                  onChange={(e) => setPartner(e.currentTarget.value)}
+                />
+              </label>
+              <button onClick={(e) => setStep("3")}>next</button>
+            </>
+          )
+        ) : (
+          <>
+            <p className={style.error}>
+              *This email address is already registered
+            </p>
+            <TextInputGroup
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
+            />
+            <p className={style.smallText}>
+              By continuing, you agree to uDance's{" "}
+              <span className={style.terms_of_use}>Terms of Use</span>.
+            </p>
+            <button onClick={(e) => setStep("2")}>next</button>
+          </>
+        )}
       </form>
     </div>
-  );
+  ));
 };
 
 export default RegisterForm;

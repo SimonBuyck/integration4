@@ -56,7 +56,7 @@ const Authentication = () => {
           ) : (
             <>
             <header className={style.header}>
-            <NavLink className={style.return} to="/login"><img class="return__img" src="back_arrow.svg" alt="Sign up" height="20px"></img>
+            <NavLink className={style.return} to="/login"><img src="../../assets/back_arrow.svg" alt="Sign up" height="20px"></img>
             </NavLink>
         <h1 className={style.header__title}>Sign Up</h1>
         <span></span>

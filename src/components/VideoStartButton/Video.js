@@ -20,7 +20,6 @@ export default function VideoStartButton({match}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
-  const [roomName, setRoomName] = useState('');
 
   /**
    * Creates a new call room.

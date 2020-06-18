@@ -7,6 +7,14 @@ import firebase from "firebase";
 import style from "./Authentication.module.css";
 import { useObserver } from "mobx-react-lite";
 
+// TO DO
+// Validatie op input fields
+// Zorgen dat Duo wordt opgeslaan wnr we naar de volgende pagina gaan
+// Controleren als duo is gechecked, in dit geval ook aanpassingen doen aan classNames
+// (Staat al klaar met commentaar erbij, line 148)
+
+// De gebruiker zelf een opname kunnen laten maken ipv enkel de mogelijkheid te geven om een video te uploaden.
+
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [Uname, setUName] = useState("");
@@ -66,6 +74,53 @@ const RegisterForm = () => {
     }
   };
 
+  // const handleValidate = event => {
+  //   event.preventDefault();
+  //   const isValid = this.validate();
+  //   console.log(validate());
+  //   if (isValid) {
+  //     console.log(this.state);
+  //     // clear form
+  //     this.setState(initialState);
+  //   }
+  // };
+
+  // const initialState = {
+  //   email:"",
+  //   password:"",
+  //   name:"",
+  //   partner:"",
+  //   country:"",
+  //   dance:""
+  // };
+
+  // const state = initialState;
+
+  // const validate = () => {
+  //   let nameError = "";
+  //   let emailError = "";
+  //   let passwordError = "";
+
+  //   if (!this.state.name) {
+  //     nameError = "name cannot be blank";
+  //   }
+
+  //   if (!this.state.email.includes("@")) {
+  //     emailError = "invalid email";
+  //   }
+
+  //   if (!this.state.password) {
+  //     passwordError = "password cannot be blank";
+  //   }
+
+  //   if (emailError || nameError || passwordError) {
+  //     this.setState({ emailError, nameError, passwordError });
+  //     return false;
+  //   }
+
+  //   return true;
+  // };
+
   return useObserver(() => (
     <div>
       <form onSubmit={handleSubmit}>
@@ -73,16 +128,31 @@ const RegisterForm = () => {
           step !== "2" ? (
             step !== "3" ? (
               <>
+              <h2 className={style.title}>Let's dance</h2>
+              <TextInputGroup
+                  label="Dance"
+                  type="text"
+                  name="dance"
+                  placeholder="Dance name"
+                  value={dance}
+                  onChange={(e) => setDance(e.currentTarget.value)}
+                />
+                <p className={style.subtitle}>Show a preview of your dance</p>
+                <label className={style.button}>{/*<img src="../../assets/upload.svg"></img>*/}Select a video...
                 <input
                   type="file"
                   accept="video/*"
                   onChange={(e) => getVideoURL(e, e.target.files[0])}
                 ></input>
+                </label>
                 <video src={videoSource} width="200" autoPlay></video>
-                <input type="submit" value="Register" />
+                <input className={style.button} type="submit" value="Create Account" />
+                <p className={style.previous} onClick={(e) => setStep("3")}>Previous step</p>
               </>
             ) : (
               <>
+              <h2 className={style.title}>Nice to meet you!</h2>
+              <div /*if duo is checked: className={style.grid2}*/>
                 <TextInputGroup
                   label="Name"
                   name="name"
@@ -90,6 +160,25 @@ const RegisterForm = () => {
                   placeholder="Your name"
                   value={Uname}
                   onChange={(e) => setUName(e.currentTarget.value)}
+                />
+                <div /*if duo is not checked: */ className={style.hidden}>
+                <TextInputGroup
+                  label="partner"
+                  type="text"
+                  name="partner"
+                  placeholder="Partners name"
+                  value={partner}
+                  onChange={(e) => setPartner(e.currentTarget.value)}
+                />
+                </div>
+                </div>
+                <TextInputGroup
+                  label="country"
+                  type="text"
+                  name="country"
+                  placeholder="Your country"
+                  value={country}
+                  onChange={(e) => setCountry(e.currentTarget.value)}
                 />
                 <TextInputGroup
                   label="Password"
@@ -107,57 +196,39 @@ const RegisterForm = () => {
                   value={passwordAgain}
                   onChange={(e) => setPassWordAgain(e.currentTarget.value)}
                 />
-                <TextInputGroup
-                  label="country"
-                  type="text"
-                  name="country"
-                  placeholder="Your country"
-                  value={country}
-                  onChange={(e) => setCountry(e.currentTarget.value)}
-                />
-                <button onClick={(e) => setStep("4")}>next</button>
+          
+                <button className={style.button} onClick={(e) => setStep("4")}>Next</button>
+                <p className={style.previous} onClick={(e) => setStep("2")}>Previous step</p>
               </>
             )
           ) : (
             <>
-              <div>
-                <TextInputGroup
-                  label="Dance"
-                  type="text"
-                  name="dance"
-                  placeholder="Dance name"
-                  value={dance}
-                  onChange={(e) => setDance(e.currentTarget.value)}
-                />
-              </div>
-              <label>
-                duo
+            <h2 className={style.title}>What's your kind of dance?</h2>
+            <div className={style.grid2 + ' ' + style.couple}>
+              <img onClick={(e) => setStep("3")} alt="solo" width="100%" src="../../assets/img/signup/solo.svg"></img>
+              <label onClick={(e) => setStep("3")}>
+                <img alt="couple" width="100%" src="../../assets/img/signup/couple.svg"></img>
                 <input
+                  //className={style.hidden}
                   label="duo"
                   type="checkbox"
                   name="duo"
                   placeholder="check for duo."
                   value={duo}
-                  onChange={(e) => setDuo(e.currentTarget.value)}
+                  //dit werkt nog niet (ik denk dat de duo niet wordt opgeslaan)
+                  onChange={(e) => setDuo(e.currentTarget.value) /*&& setStep("3")*/ }
                 />
               </label>
-              <label>
-                <TextInputGroup //Dit is aangepast van input naar TextInputGroup
-                  label="partner"
-                  type="text"
-                  name="partner"
-                  placeholder="Partners name"
-                  value={partner}
-                  onChange={(e) => setPartner(e.currentTarget.value)}
-                />
-              </label>
-              <button onClick={(e) => setStep("3")}>next</button>
+              </div>
+              <p className={style.previous} onClick={(e) => setStep("1")}>Previous step</p>
             </>
           )
         ) : (
           <>
+          <h2 className={style.title}>Welcome</h2>
             <p className={style.error}>
               *This email address is already registered
+              {/* {this.state.emailError} */}
             </p>
             <TextInputGroup
               label="Email"
@@ -171,7 +242,7 @@ const RegisterForm = () => {
               By continuing, you agree to uDance's{" "}
               <span className={style.terms_of_use}>Terms of Use</span>.
             </p>
-            <button onClick={(e) => setStep("2")}>next</button>
+            <button className={style.button} onClick={(e) => setStep("2")/*, handleValidate()*/}>Next</button>
           </>
         )}
       </form>

@@ -2,7 +2,7 @@ import { v4 } from "uuid";
 import { decorate, observable, action } from "mobx";
 
 class Match {
-  constructor({ id = v4(), accepted1 = false, accepted2 = false, userId1, userId2 = '', roomUrl = '', store }) {
+  constructor({ id = v4(), accepted1 = '', accepted2 = '', userId1, userId2 = '', roomUrl = '', store }) {
     this.id = id;
     this.accepted1 = accepted1;
     this.accepted2 = accepted2
@@ -14,7 +14,7 @@ class Match {
     }
     this.store = store;
     this.store.addMatch(this);
-    if(accepted1 && accepted2 === true){
+    if(accepted1 && accepted2 === 'true'){
       this.linkUser(userId1);
       this.linkUser(userId2);
     }

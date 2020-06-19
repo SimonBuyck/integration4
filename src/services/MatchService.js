@@ -11,12 +11,10 @@ class MatchService {
       .collection("matches")
       .doc(`${match.id}`)
       .onSnapshot(function (doc) {
-        console.log(doc.data())
         const data = doc.data();
         if(data){
           if (data.userId2) {
             const user = userStore.getUserById(data.userId2);
-            console.log(user);
             currentUser.viewingUser = user;
           }
         }
@@ -25,14 +23,31 @@ class MatchService {
   }
 
   updateMatch = async (match) => {
-    return this.db.collection("matches").doc(match.matchId).set(
-      {
-        userId2: match.userId2,
-        accepted1: match.accepted1,
-        accepted2: match.accepted2
-      },
-      { merge: true }
-    );
+    if(match.userId2 !== ''){
+      this.db.collection("matches").doc(match.matchId).set(
+        {
+          userId2: match.userId2
+        },
+        { merge: true }
+      );
+    }
+    if(match.accepted1 !== ''){
+      this.db.collection("matches").doc(match.matchId).set(
+        {
+          accepted1: match.accepted1
+        },
+        { merge: true }
+      );
+    }
+    if(match.accepted2 !== ''){
+      this.db.collection("matches").doc(match.matchId).set(
+        {
+          accepted2: match.accepted2
+        },
+        { merge: true }
+      );
+    }
+    
   }
 
   deleteMatch = async (match) => {

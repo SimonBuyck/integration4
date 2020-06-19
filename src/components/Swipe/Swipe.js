@@ -14,7 +14,19 @@ const Swipe = () => {
   const { uiStore, userStore, matchStore } = useStore();
   const [searching, setSearching] = useState(false);
   const [user, setUser] = useState(null);
-  const [match, setMatch] = useState(null);
+  const [match, setMatch] = useState(null)
+
+  const setAccepted = () => {
+    if (user === 1){
+      match.accepted1 = "true";
+    }else{
+      match.accepted2 = 'true'
+    }
+    console.log(match);
+    matchStore.updateMatch(match)
+  }
+
+
 
   const newMatch = async () => {
     return await uiStore.createMatch({
@@ -24,42 +36,40 @@ const Swipe = () => {
   };
 
   const createNewMatch = async () => {
-    const match = newMatch();
-    return match;
+    const nMatch = newMatch();
+    setMatch(nMatch)
+    return nMatch;
   };
 
   const startSearching = async (e) => {
     e.preventDefault();
-    uiStore.currentUser.viewingUser = '';
+    uiStore.currentUser.viewingUser = "";
+    if(match){
+
+    }
     const openMatches = await matchStore.getMatches(uiStore.currentUser);
     if (openMatches.length === 0) {
-      console.log("new match created");
       const Nmatch = await createNewMatch();
-      console.log("match created: ", Nmatch);
-      const listenMatch = matchStore.listenToMatch(Nmatch);
-      setMatch(listenMatch);
-      if (listenMatch) {
-        console.log(listenMatch);
-      }
-      console.log(listenMatch);
+      matchStore.listenToMatch(Nmatch);
       setSearching(true);
+      setUser("1");
     } else {
       openMatches.map((o) => console.log(o));
-      console.log("get a free matchRoom");
       openMatches[0].userId2 = uiStore.currentUser.id;
       matchStore.updateMatch(openMatches[0]);
       const user = await userStore.getUserById(openMatches[0].userId1);
       uiStore.currentUser.viewingUser = user;
-      console.log(uiStore.currentUser.viewingUser);
       matchStore.listenToMatch(openMatches[0]);
       setSearching(true);
+      setUser("2");
+      setMatch(openMatches[0]);
     }
   };
 
   return useObserver(() => (
     <div>
       {searching === true ? (
-        uiStore.currentUser.viewingUser !== '' ? (
+        uiStore.currentUser.viewingUser !== "" ? (
           <div>
             {uiStore.currentUser.viewingUser ? (
               <p>{uiStore.currentUser.viewingUser.id}</p>
@@ -81,7 +91,7 @@ const Swipe = () => {
             </h1>
             <p>{uiStore.currentUser.viewingUser.dance}</p>
             <div>
-              <button>match</button>
+              <button onClick={(e) =>setAccepted(e)}>match</button>
               <button onClick={(e) => startSearching(e)}>skip</button>
             </div>
           </div>

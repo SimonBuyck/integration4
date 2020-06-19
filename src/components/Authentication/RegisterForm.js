@@ -23,9 +23,10 @@ const RegisterForm = () => {
   const [videoSource, setVideoSource] = useState(null);
   const [dance, setDance] = useState("");
   const [country, setCountry] = useState("");
-  const [duo, setDuo] = useState("");
+  const [duo, setDuo] = useState(false);
   const [partner, setPartner] = useState("");
   const [step, setStep] = useState("1");
+  const [status, setStatus] = useState("");
 
   const { uiStore, userStore } = useStore();
   const history = useHistory();
@@ -45,7 +46,9 @@ const RegisterForm = () => {
       .getDownloadURL()
       .then((url) => setVideoSource(url));
 
+    setStatus("loading");
     await urls;
+    setStatus("found");
   };
 
   const handleSubmit = async (e) => {
@@ -128,8 +131,8 @@ const RegisterForm = () => {
           step !== "2" ? (
             step !== "3" ? (
               <>
-              <h2 className={style.title}>Let's dance</h2>
-              <TextInputGroup
+                <h2 className={style.title}>Let's dance</h2>
+                <TextInputGroup
                   label="Dance"
                   type="text"
                   name="dance"
@@ -138,21 +141,46 @@ const RegisterForm = () => {
                   onChange={(e) => setDance(e.currentTarget.value)}
                 />
                 <p className={style.subtitle}>Show a preview of your dance</p>
-                <label className={style.button}>{/*<img src="../../assets/upload.svg"></img>*/}Select a video...
-                <input
-                  type="file"
-                  accept="video/*"
-                  onChange={(e) => getVideoURL(e, e.target.files[0])}
-                ></input>
+                <label className={style.button}>
+                  {/*<img src="../../assets/upload.svg"></img>*/}Select a video
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={(e) => getVideoURL(e, e.target.files[0])}
+                  ></input>
                 </label>
-                <video src={videoSource} width="200" autoPlay></video>
-                <input className={style.button} type="submit" value="Create Account" />
-                <p className={style.previous} onClick={(e) => setStep("3")}>Previous step</p>
+                {videoSource !== null ? (
+                  status === "loading" ? (
+                    <p>video is loading</p>
+                  ) : (
+                    <video src={videoSource} width="200" autoPlay></video>
+                  )
+                ) : (
+                  <p>
+                    quotum is overschreden geen video's vandaag{" "}
+                    <span role="img">
+                      😢
+                    </span>
+                  </p>
+                )}
+                <input
+                  className={style.button}
+                  type="submit"
+                  value="Create Account"
+                />
+                <button
+                  className={style.previous}
+                  onClick={function (e) {
+                    e.preventDefault();
+                    setStep("3");
+                  }}
+                >
+                  Previous step
+                </button>
               </>
             ) : (
               <>
-              <h2 className={style.title}>Nice to meet you!</h2>
-              <div /*if duo is checked: className={style.grid2}*/>
+                <h2 className={style.title}>Nice to meet you!</h2>
                 <TextInputGroup
                   label="Name"
                   name="name"
@@ -161,17 +189,6 @@ const RegisterForm = () => {
                   value={Uname}
                   onChange={(e) => setUName(e.currentTarget.value)}
                 />
-                <div /*if duo is not checked: */ className={style.hidden}>
-                <TextInputGroup
-                  label="partner"
-                  type="text"
-                  name="partner"
-                  placeholder="Partners name"
-                  value={partner}
-                  onChange={(e) => setPartner(e.currentTarget.value)}
-                />
-                </div>
-                </div>
                 <TextInputGroup
                   label="country"
                   type="text"
@@ -196,39 +213,89 @@ const RegisterForm = () => {
                   value={passwordAgain}
                   onChange={(e) => setPassWordAgain(e.currentTarget.value)}
                 />
-          
-                <button className={style.button} onClick={(e) => setStep("4")}>Next</button>
-                <p className={style.previous} onClick={(e) => setStep("2")}>Previous step</p>
+
+                <button
+                  className={style.button}
+                  onClick={function (e) {
+                    e.preventDefault();
+                    setStep("4");
+                  }}
+                >
+                  Next
+                </button>
+                <button
+                  className={style.previous}
+                  onClick={function (e) {
+                    e.preventDefault();
+                    setStep("2");
+                  }}
+                >
+                  Previous step
+                </button>
               </>
             )
           ) : (
             <>
-            <h2 className={style.title}>What's your kind of dance?</h2>
-            <div className={style.grid2 + ' ' + style.couple}>
-              <img onClick={(e) => setStep("3")} alt="solo" width="100%" src="../../assets/img/signup/solo.svg"></img>
-              <label onClick={(e) => setStep("3")}>
-                <img alt="couple" width="100%" src="../../assets/img/signup/couple.svg"></img>
-                <input
-                  //className={style.hidden}
-                  label="duo"
-                  type="checkbox"
-                  name="duo"
-                  placeholder="check for duo."
-                  value={duo}
-                  //dit werkt nog niet (ik denk dat de duo niet wordt opgeslaan)
-                  onChange={(e) => setDuo(e.currentTarget.value) /*&& setStep("3")*/ }
-                />
-              </label>
+              <h2 className={style.title}>What's your kind of dance?</h2>
+              <div className={style.grid2 + " " + style.couple}>
+                <button
+                  onClick={function (e) {
+                    e.preventDefault();
+                    setDuo(false);
+                  }}
+                >
+                  <img
+                    alt="solo"
+                    width="100%"
+                    src="../../assets/img/signup/solo.svg"
+                  ></img>
+                </button>
+                <button onClick={() => setDuo(true)}>
+                  <img
+                    alt="couple"
+                    width="100%"
+                    src="../../assets/img/signup/couple.svg"
+                  ></img>
+                </button>
               </div>
-              <p className={style.previous} onClick={(e) => setStep("1")}>Previous step</p>
+              {duo ? (
+                <TextInputGroup
+                  label="partner"
+                  type="text"
+                  name="partner"
+                  placeholder="Partners name"
+                  value={partner}
+                  onChange={(e) => setPartner(e.currentTarget.value)}
+                />
+              ) : (
+                ""
+              )}
+              {console.log(duo)}
+              <button
+                className={style.button}
+                onClick={function (e) {
+                  e.preventDefault();
+                  setStep("3");
+                }}
+              >
+                Next
+              </button>
+              <button
+                className={style.previous}
+                onClick={function (e) {
+                  e.preventDefault();
+                  setStep("1");
+                }}
+              >
+                Previous step
+              </button>
             </>
           )
         ) : (
           <>
-          <h2 className={style.title}>Welcome</h2>
+            <h2 className={style.title}>Welcome</h2>
             <p className={style.error}>
               *This email address is already registered
-              {/* {this.state.emailError} */}
             </p>
             <TextInputGroup
               label="Email"
@@ -242,7 +309,15 @@ const RegisterForm = () => {
               By continuing, you agree to uDance's{" "}
               <span className={style.terms_of_use}>Terms of Use</span>.
             </p>
-            <button className={style.button} onClick={(e) => setStep("2")/*, handleValidate()*/}>Next</button>
+            <button
+              className={style.button}
+              onClick={function (e) {
+                e.preventDefault();
+                setStep("2");
+              }}
+            >
+              Next
+            </button>
           </>
         )}
       </form>

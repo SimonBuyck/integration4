@@ -26,13 +26,11 @@ body {
 }
 
 .header {
-  display: grid;
-  grid-template-columns: 20px auto 20px;
-  height: 50px;
+  composes: header from "../../styles/layout.module.css"
 }
 
 .main {
-  margin: 0 2rem;
+  composes: main from "../../styles/layout.module.css";
 }
 
 .title {
@@ -55,10 +53,7 @@ body {
 }
 
 .header__title {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  composes: header__title from "../../styles/typo.module.css"
 }
 
 .signup {
@@ -104,3 +99,4 @@ body {
 input[type="file"] {
   display: none;
 }
+

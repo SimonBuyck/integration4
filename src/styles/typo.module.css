@@ -17,3 +17,10 @@
   font-size: fontSizeMedium;
   font-weight: bold;
 }
+
+.header__title {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}

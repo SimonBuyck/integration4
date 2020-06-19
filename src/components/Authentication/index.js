@@ -18,15 +18,6 @@ import HeaderNav from "../../containers/HeaderNav/HeaderNav";
 const Authentication = () => {
   const { uiStore } = useStore();
   
-  const history = useHistory();
-
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    const result = uiStore.logoutUser();
-    console.log(result);
-    history.push("/login");
-  };
-  
   return useObserver(() => (
     <>
     <Switch>
@@ -38,8 +29,8 @@ const Authentication = () => {
         <header className={style.header}>
         </header>
         <main className={style.main}>
-          <h1 className={style.title}>uDance</h1>
-          <h2 className={style.subtitle}>Login</h2>
+        <h1 className={style.title}>uDance</h1>
+        <h2 className={style.subtitle}>Login</h2>
         <LoginForm />
         <div className={style.button + ' ' + style.button__secondary}>
         <NavLink to="/register">
@@ -50,6 +41,7 @@ const Authentication = () => {
         </>
         )}
         </Route>
+        
         <Route exact path="/register">
         {uiStore.currentUser ? (
           <Redirect to="/" />
@@ -58,8 +50,8 @@ const Authentication = () => {
             <header className={style.header}>
             <NavLink className={style.return} to="/login"><img src="../../assets/back_arrow.svg" alt="Sign up" height="20px"></img>
             </NavLink>
-        <h1 className={style.header__title}>Sign Up</h1>
-        <span></span>
+            <h1 className={style.header__title}>Sign Up</h1>
+            <span></span>
             </header>
             <main className={style.main}>
             <RegisterForm />
@@ -67,24 +59,26 @@ const Authentication = () => {
             </>
             )}
             </Route>
-            <Route path="/">
-            {uiStore.currentUser ? (
-              <>
-              {uiStore.currentUser ? (
-                <button onClick={handleLogout}>Logout</button>
-              ) : (
-                <></>
+            {//<Route path="/">
+          }
+          {uiStore.currentUser ? (
+           
+            
+            
+            <Content />
+            
+            
+              //<HeaderNav />
+            
+            ) : (
+              <Redirect to="/login" />
               )}
-              <HeaderNav />
-              <Content />
-            </>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-      </Switch>
-    </>
-  ));
-};
-
-export default Authentication;
+              {//</Route>
+              }
+              </Switch>
+              </>
+              ));
+            };
+            
+            export default Authentication;
+            

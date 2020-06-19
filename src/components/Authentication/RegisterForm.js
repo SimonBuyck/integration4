@@ -238,7 +238,7 @@ const RegisterForm = () => {
             <>
               <h2 className={style.title}>What's your kind of dance?</h2>
               <div className={style.grid2 + " " + style.couple}>
-                <button
+                <button className={style.button__reset}
                   onClick={function (e) {
                     e.preventDefault();
                     setDuo(false);
@@ -250,7 +250,7 @@ const RegisterForm = () => {
                     src="../../assets/img/signup/solo.svg"
                   ></img>
                 </button>
-                <button onClick={() => setDuo(true)}>
+                <button className={style.button__reset} onClick={() => setDuo(true)}>
                   <img
                     alt="couple"
                     width="100%"

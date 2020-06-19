@@ -1,5 +1,5 @@
 @value tokens: "../../styles/tokens.module.css";
-@value background, colorSecondary, colorAlert, fontSizeXSmall, fontSizeSmall, spacer2, colorTertiary from tokens;
+@value background, colorSecondary, colorAlert, colorText, fontSizeXSmall, fontSizeSmall, spacer2, colorTertiary from tokens;
 
 body {
   background-image: url("background_image.svg");
@@ -80,6 +80,10 @@ body {
   width: 100%;
   text-align: center;
   margin-top: 1rem;
+  border: none;
+  background:none;
+  color: colorText;
+  font-size: fontSizeSmall;
 }
 
 .grid2 {
@@ -100,3 +104,7 @@ input[type="file"] {
   display: none;
 }
 
+.button__reset {
+  background: none;
+  border: none;
+}

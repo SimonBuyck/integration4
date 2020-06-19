@@ -6,7 +6,6 @@ import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import firebase from "firebase";
 import style from "./Authentication.module.css";
 import { useObserver } from "mobx-react-lite";
-import { set } from "mobx";
 
 // TO DO
 // Validatie op input fields
@@ -27,6 +26,7 @@ const RegisterForm = () => {
   const [duo, setDuo] = useState(false);
   const [partner, setPartner] = useState("");
   const [step, setStep] = useState("1");
+  const [status, setStatus] = useState("");
 
   const { uiStore, userStore } = useStore();
   const history = useHistory();
@@ -46,7 +46,9 @@ const RegisterForm = () => {
       .getDownloadURL()
       .then((url) => setVideoSource(url));
 
+    setStatus("loading");
     await urls;
+    setStatus("found");
   };
 
   const handleSubmit = async (e) => {
@@ -140,15 +142,27 @@ const RegisterForm = () => {
                 />
                 <p className={style.subtitle}>Show a preview of your dance</p>
                 <label className={style.button}>
-                  {/*<img src="../../assets/upload.svg"></img>*/}Select a
-                  video...
+                  {/*<img src="../../assets/upload.svg"></img>*/}Select a video
                   <input
                     type="file"
                     accept="video/*"
                     onChange={(e) => getVideoURL(e, e.target.files[0])}
                   ></input>
                 </label>
-                <video src={videoSource} width="200" autoPlay></video>
+                {videoSource !== null ? (
+                  status === "loading" ? (
+                    <p>video is loading</p>
+                  ) : (
+                    <video src={videoSource} width="200" autoPlay></video>
+                  )
+                ) : (
+                  <p>
+                    quotum is overschreden geen video's vandaag{" "}
+                    <span role="img">
+                      😢
+                    </span>
+                  </p>
+                )}
                 <input
                   className={style.button}
                   type="submit"
@@ -227,7 +241,7 @@ const RegisterForm = () => {
                 <button
                   onClick={function (e) {
                     e.preventDefault();
-                    setDuo(false)
+                    setDuo(false);
                   }}
                 >
                   <img

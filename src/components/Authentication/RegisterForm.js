@@ -227,7 +227,7 @@ const RegisterForm = () => {
                 <button
                   onClick={function (e) {
                     e.preventDefault();
-                    setStep("3");
+                    setDuo(false)
                   }}
                 >
                   <img

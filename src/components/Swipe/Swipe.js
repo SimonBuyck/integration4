@@ -14,18 +14,9 @@ const Swipe = () => {
   const { uiStore, userStore, matchStore } = useStore();
   const [searching, setSearching] = useState(false);
   const [user, setUser] = useState(null);
+  const [match, setMatch] = useState(null);
 
-  // const nextUser = (e) => {
-  //   e.preventDefault();
-  //   console.log("next");
-  // };
-
-  // const isMatch = (e, match) => {
-  //   e.preventDefault();
-  //   console.log(match);
-  // };
-
-  const newMatch = async() => {
+  const newMatch = async () => {
     return await uiStore.createMatch({
       store: matchStore,
       userId1: uiStore.currentUser.id,
@@ -33,74 +24,78 @@ const Swipe = () => {
   };
 
   const createNewMatch = async () => {
-    const openMatches = await matchStore.getMatches();
-    let match = {};
-    if(openMatches.length === 0){
-      match = newMatch()
-    };
+    const match = newMatch();
     return match;
   };
 
-  // const getMatch = async () => {
-  //   const openMatches = await matchStore.getMatches();
-  //   if(openMatches.length > 0){
-  //     openMatches[0].userId2 = uiStore.currentUser.id;
-  //     const match = openMatches[0];
-  //     console.log(match);
-  //     matchStore.updateMatch(match);
-  //     const user = await userStore.getUserById(openMatches[0].userId1);
-  //     return user;
-  //   } else {
-
-  //   }
-  // };
-
   const startSearching = async (e) => {
     e.preventDefault();
-    const openMatches = await matchStore.getMatches();
-    if(openMatches.length === 0){
-      console.log('new match created')
-      console.log(createNewMatch());
+    uiStore.currentUser.viewingUser = '';
+    const openMatches = await matchStore.getMatches(uiStore.currentUser);
+    if (openMatches.length === 0) {
+      console.log("new match created");
+      const Nmatch = await createNewMatch();
+      console.log("match created: ", Nmatch);
+      const listenMatch = matchStore.listenToMatch(Nmatch);
+      setMatch(listenMatch);
+      if (listenMatch) {
+        console.log(listenMatch);
+      }
+      console.log(listenMatch);
+      setSearching(true);
     } else {
-      console.log('get a free matchRoom')
+      openMatches.map((o) => console.log(o));
+      console.log("get a free matchRoom");
       openMatches[0].userId2 = uiStore.currentUser.id;
-      const user = await userStore.getUserById(openMatches[0].userId1)
-      console.log(user)
-      setUser(user);
-      
+      matchStore.updateMatch(openMatches[0]);
+      const user = await userStore.getUserById(openMatches[0].userId1);
+      uiStore.currentUser.viewingUser = user;
+      console.log(uiStore.currentUser.viewingUser);
+      matchStore.listenToMatch(openMatches[0]);
+      setSearching(true);
     }
-    setSearching(true)
-  }
+  };
 
   return useObserver(() => (
     <div>
-      {searching === true ? user !== null ? <p>{user.name}</p> :<div><p>we are searching</p></div> : <button onClick={(e) => startSearching(e)}>start searching</button>}
+      {searching === true ? (
+        uiStore.currentUser.viewingUser !== '' ? (
+          <div>
+            {uiStore.currentUser.viewingUser ? (
+              <p>{uiStore.currentUser.viewingUser.id}</p>
+            ) : (
+              <p>no match userId2</p>
+            )}
+            <video
+              src={uiStore.currentUser.viewingUser.video}
+              width="375"
+              autoPlay
+            ></video>
+            <h1>
+              {uiStore.currentUser.viewingUser.name}
+              {uiStore.currentUser.viewingUser.duo ? (
+                <span> & {uiStore.currentUser.viewingUser.partner}</span>
+              ) : (
+                ""
+              )}
+            </h1>
+            <p>{uiStore.currentUser.viewingUser.dance}</p>
+            <div>
+              <button>match</button>
+              <button onClick={(e) => startSearching(e)}>skip</button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <p>we are searching</p>
+          </div>
+        )
+      ) : (
+        <button onClick={(e) => startSearching(e)}>start searching</button>
+      )}
     </div>
   ));
 };
 
 export default Swipe;
-// {/* <div>
-//   <video
-//     src={openMatches[uiStore.currentUser.viewingUser].video}
-//     width="375"
-//     autoPlay
-//   ></video>
-//   <h1>
-//     {openMatches[uiStore.currentUser.viewingUser].name}
-//     {openMatches[uiStore.currentUser.viewingUser].duo ? (
-//       <span> & {openMatches[uiStore.currentUser.viewingUser].partner}</span>
-//     ) : (
-//       ""
-//     )}
-//   </h1>
-//   <p>{openMatches[uiStore.currentUser.viewingUser].dance}</p>
-//   <div>
-//     <button
-//       onClick={(e) => isMatch(e, openMatches[uiStore.currentUser.viewingUser])}
-//     >
-//       match
-//     </button>
-//     <button onClick={nextUser}>skip</button>
-//   </div>
-// </div>; */}
+// {/*  */}

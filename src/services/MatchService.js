@@ -6,6 +6,24 @@ class MatchService {
     this.db = firebase.firestore();
   }
 
+  listenToMatch = async (match, userStore, currentUser) => {
+    return await this.db
+      .collection("matches")
+      .doc(`${match.id}`)
+      .onSnapshot(function (doc) {
+        console.log(doc.data())
+        const data = doc.data();
+        if(data){
+          if (data.userId2) {
+            const user = userStore.getUserById(data.userId2);
+            console.log(user);
+            currentUser.viewingUser = user;
+          }
+        }
+        return doc.data();
+      });
+  }
+
   updateMatch = async (match) => {
     return this.db.collection("matches").doc(match.matchId).set(
       {
@@ -18,7 +36,7 @@ class MatchService {
   }
 
   deleteMatch = async (match) => {
-    await this.db.collection("matches").doc(match.id).delete().then(function() {console.log('match deleted')})
+    await this.db.collection("matches").doc(match.id).delete()
   }
 
   getMatch = async () => {

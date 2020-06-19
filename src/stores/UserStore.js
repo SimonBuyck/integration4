@@ -32,7 +32,7 @@ class UserStore {
     users.map((u) =>
       u.userId === currentUser.id
         ? u
-        : new User({ store: this, ...u })
+        : new User({ store: this, id: u.userId, ...u })
     );
   };
 

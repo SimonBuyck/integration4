@@ -80,3 +80,27 @@ body {
   margin: 2rem 0 0;
   color:colorAlert;
 }
+
+.previous {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.couple {
+  grid-gap: 1rem;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  padding-right: 2rem;
+  background: background;
+}
+
+input[type="file"] {
+  display: none;
+}

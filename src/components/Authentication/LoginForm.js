@@ -4,6 +4,7 @@ import { useObserver } from "mobx-react-lite";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import User from "../../models/User";
 import style from "./Authentication.module.css";
+// import validate from "../../validate"
 
 const LoginForm = () => {
   const { uiStore, userStore } = useStore();

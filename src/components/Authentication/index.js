@@ -62,7 +62,6 @@ const Authentication = () => {
         <span></span>
             </header>
             <main className={style.main}>
-            <h1 className={style.title}>Welcome</h1>
             <RegisterForm />
             </main>
             </>

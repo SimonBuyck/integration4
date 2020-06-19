@@ -13,6 +13,9 @@ const Content = () => {
         <Route path="/swipe">
           <Swipe />
         </Route>
+        <Route path="/profile">
+          <VideoStartButton />
+        </Route>
       </Switch>
     </section>
   );

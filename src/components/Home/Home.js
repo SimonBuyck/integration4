@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import style from "./Home.module.css";
 import { useObserver } from "mobx-react-lite";
-import { useStore } from "../../hooks/useStore";
+// import { useStore } from "../../hooks/useStore";
 
 const Home = () => {
     
@@ -48,7 +48,10 @@ const Home = () => {
                 <h2 className={style.subtitle}>Your Last Dances</h2>
                 <Link to="/dances">View All</Link>
             </div>
-            <section className={style.items}>
+            {
+                //if there are previous dances:
+            }
+            {/* <section className={style.items}>
                 <div className={style.item}>
                         <img className={style.item__img} src="../../assets/img/placeholders/placeholder2.jpeg" alt="dancer"></img>
                     <p className={style.item__country}>Kenia</p>
@@ -65,7 +68,12 @@ const Home = () => {
                         <p className={style.item__info__dance}>Cha Cha</p>
                     </div>
                 </div>
-            </section>
+            </section> */}
+            {
+                //else:
+            }
+            <p className={style.p}>You haven't done any dances yet.</p>
+            <Link to="/swipe" className={style.button}>Find a Dancer</Link>
         </article>
     </main>
         </>

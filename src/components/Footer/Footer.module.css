@@ -8,6 +8,14 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.footer__inactive {
+    opacity: .5;
+}
+
+.footer__active {
+    opacity: 1;
+}
+
 .footer > a {
     display: flex;
     align-items: center;

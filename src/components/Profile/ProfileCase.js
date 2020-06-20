@@ -25,7 +25,7 @@ const Profile = () => {
         </header>
         <main className={style.main + ' ' + style.main__footer}>
         <div className={style.preview}>
-        <img src="../../assets/img/placeholder.jpeg" alt="preview"></img>
+        <img src="../../assets/img/placeholders/placeholder.jpeg" alt="preview"></img>
         <Link to="/preview" className={style.link}>View Preview</Link>
         </div>
         <form>

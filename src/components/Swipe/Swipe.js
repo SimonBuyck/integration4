@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
-// import { Switch, Route, NavLink, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { ROUTES } from "../../consts";
 // import LoginForm from "./LoginForm";
 // import AppHeader from "../../containers/Sidebar/AppHeader";
 // import style from "./Authentication.module.css";
 // import RegisterForm from "./RegisterForm";
+import style from "./Swipe.module.css";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 
@@ -67,7 +68,15 @@ const Swipe = () => {
   };
 
   return useObserver(() => (
-    <div>
+    <>
+      <header className={style.header}>
+        <span></span>
+        <h1 className={style.header__title}>Online Dancers</h1>
+        <Link className={style.cancel} to="/login">
+          <img src="../../assets/img/icons/cross.svg" alt="Cancel" height="20px"></img>
+        </Link>
+      </header>
+      <main className={style.main + ' ' + style.main__nofooter}>
       {searching === true ? (
         uiStore.currentUser.viewingUser !== "" ? (
           <div>
@@ -101,9 +110,13 @@ const Swipe = () => {
           </div>
         )
       ) : (
-        <button onClick={(e) => startSearching(e)}>start searching</button>
+        <article className={style.searching__wrapper}>
+          <h2 className={style.title}>Start Searching</h2>
+        <button className={style.button} onClick={(e) => startSearching(e)}>Find Dance</button>
+        </article>
       )}
-    </div>
+      </main>
+    </>
   ));
 };
 

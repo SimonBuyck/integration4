@@ -11,6 +11,7 @@ const Content = () => {
   return (
     <section>
     <Switch>
+      
       <Route exact path="/">
         <Home />
         <Footer/>
@@ -34,7 +35,6 @@ const Content = () => {
         <Swipe />
       </Route>
     
-      
     </Switch>
     </section>
     );

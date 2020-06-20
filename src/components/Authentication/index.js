@@ -12,7 +12,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import Content from "../../containers/Content";
-import HeaderNav from "../../containers/HeaderNav/HeaderNav";
+// import HeaderNav from "../../containers/HeaderNav/HeaderNav";
 
 
 const Authentication = () => {
@@ -20,65 +20,57 @@ const Authentication = () => {
   
   return useObserver(() => (
     <>
-    <Switch>
-    <Route exact path="/login">
     {uiStore.currentUser ? (
-      <Redirect to="/" />
+      <Content />
       ) : (
-        <>
-        <header className={style.header}>
-        </header>
-        <main className={style.main}>
-        <h1 className={style.title}>uDance</h1>
-        <h2 className={style.subtitle}>Login</h2>
-        <LoginForm />
-        <div className={style.button + ' ' + style.button__secondary}>
-        <NavLink to="/register">
-        <span className={style.signup}>Sign up</span>
-        </NavLink>
-        </div>
-        </main>
-        </>
+        <Redirect to="/login" />
         )}
-        </Route>
-        
-        <Route exact path="/register">
+        <Switch>
+        <Route exact path="/login">
         {uiStore.currentUser ? (
           <Redirect to="/" />
           ) : (
             <>
             <header className={style.header}>
-            <NavLink className={style.return} to="/login"><img src="../../assets/back_arrow.svg" alt="Sign up" height="20px"></img>
-            </NavLink>
-            <h1 className={style.header__title}>Sign Up</h1>
-            <span></span>
             </header>
             <main className={style.main}>
-            <RegisterForm />
+            <h1 className={style.title}>uDance</h1>
+            <h2 className={style.subtitle}>Login</h2>
+            <LoginForm />
+            <div className={style.button + ' ' + style.button__secondary}>
+            <NavLink to="/register">
+            <span className={style.signup}>Sign up</span>
+            </NavLink>
+            </div>
             </main>
             </>
             )}
             </Route>
-            {//<Route path="/">
-          }
-          {uiStore.currentUser ? (
-           
             
-            
-            <Content />
-            
-            
-              //<HeaderNav />
-            
-            ) : (
-              <Redirect to="/login" />
-              )}
-              {//</Route>
-              }
-              </Switch>
-              </>
-              ));
-            };
-            
-            export default Authentication;
-            
+            <Route exact path="/register">
+            {uiStore.currentUser ? (
+              <Redirect to="/" />
+              ) : (
+                <>
+                <header className={style.header}>
+                <NavLink className={style.return} to="/login"><img src="../../assets/img/icons/back_arrow.svg" alt="Sign up" height="20px"></img>
+                </NavLink>
+                <h1 className={style.header__title}>Sign Up</h1>
+                <span></span>
+                </header>
+                <main className={style.main}>
+                <RegisterForm />
+                </main>
+                </>
+                )}
+                </Route>
+                
+                
+                
+                </Switch>
+                </>
+                ));
+              };
+              
+              export default Authentication;
+              

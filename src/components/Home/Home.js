@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import style from "./Home.module.css";
 import { useObserver } from "mobx-react-lite";
 // import { useStore } from "../../hooks/useStore";
 
+import lottie from "lottie-web"
+
 const Home = () => {
-    
+    let animationContainer = React.createRef()
+    console.log(animationContainer)
+
+    React.useEffect(() => {
+        lottie.loadAnimation({
+            container: animationContainer.current,
+            // animationData: animation
+            path: "../../assets/animations/header.json"
+        })
+    }, []);
+
+
     return useObserver(() => (
         <>
         <header className={style.home__header}>
@@ -16,9 +29,11 @@ const Home = () => {
     <main className={style.main + ' ' + style.main__footer}>
         <article>
             <h2 className={style.subtitle}>Dance Around the World</h2>
-            <section className={style.main__header}>
+            <div className={style.main__header} ref={animationContainer}>
+            <section className={style.main__header__subcontainer}>
                 <Link to="/swipe" className={style.main__header__button}>Dance Now <img src="../../assets/img/icons/search.svg" alt="search"></img></Link>
             </section>
+            </div>
         </article>
         <article>
             <div className={style.subtitle__wrapper}>

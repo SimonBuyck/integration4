@@ -20,7 +20,7 @@ const RegisterForm = () => {
   const [Uname, setUName] = useState("");
   const [password, setPassWord] = useState("");
   const [passwordAgain, setPassWordAgain] = useState("");
-  const [videoSource, setVideoSource] = useState(null);
+  const [videoSource, setVideoSource] = useState('https://firebasestorage.googleapis.com/v0/b/int4-2020.appspot.com/o/videos%2Fdrummer_black.mp4?alt=media&token=a9080e43-e171-45a4-a8b8-65cf36788395');
   const [dance, setDance] = useState("");
   const [country, setCountry] = useState("");
   const [duo, setDuo] = useState(false);

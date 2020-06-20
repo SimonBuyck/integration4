@@ -9,29 +9,27 @@ import Profile from "../components/Profile/Profile";
 const Content = () => {
   return (
     <section>
-    <Switch>
-    <Route exact path="/">
-    <Home />
-    <Footer/>
-    </Route>
-    
-    <Route path="/video">
-    <VideoStartButton />
-    </Route>
-    
-    <Route path="/swipe">
-    <Swipe />
-    </Route>
-    
-    <Route path="/profile">
-    <Profile />
-    <Footer />
-    </Route>
-    
-    </Switch>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+          <Footer />
+        </Route>
+
+        <Route path="/video">
+          <VideoStartButton />
+        </Route>
+
+        <Route path="/swipe">
+          <Swipe />
+        </Route>
+
+        <Route path="/profile">
+          <Profile />
+          <Footer />
+        </Route>
+      </Switch>
     </section>
-    );
-  };
-  
-  export default Content;
-  
+  );
+};
+
+export default Content;

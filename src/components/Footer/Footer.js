@@ -25,7 +25,7 @@ const Footer = () => {
         <Route path="/profile">
         <Link to="/" className={style.footer__item}><img className={style.footer__inactive} src="../../assets/img/footer/home.svg" alt="Home"></img></Link>
         <Link to="/dances" className={style.footer__item}><img className={style.footer__inactive} src="../../assets/img/footer/dances.svg" alt="Dances"></img></Link>
-        <Link to="/profile" className={style.footer__item}><img className={style.footer__inactive} className={style.footer__active} src="../../assets/img/footer/profile.svg" alt="Profile"></img></Link>
+        <Link to="/profile" className={style.footer__item}><img className={style.footer__inactive} src="../../assets/img/footer/profile.svg" alt="Profile"></img></Link>
         </Route>
         </Switch>
         </footer>

@@ -40,7 +40,7 @@ class MatchService {
       );
     }
     if(match.accepted2 !== ''){
-      this.db.collection("matches").doc(match.matchId).set(
+      this.db.collection("matches").doc(match.id).set(
         {
           accepted2: match.accepted2
         },

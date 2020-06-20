@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./Home.module.css";
 import { useObserver } from "mobx-react-lite";
 // import { useStore } from "../../hooks/useStore";

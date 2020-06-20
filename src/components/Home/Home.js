@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./Home.module.css";
 import { useObserver } from "mobx-react-lite";
 // import { useStore } from "../../hooks/useStore";
@@ -8,15 +8,14 @@ import lottie from "lottie-web"
 
 const Home = () => {
     let animationContainer = React.createRef()
-    console.log(animationContainer)
 
-    React.useEffect(() => {
-        lottie.loadAnimation({
-            container: animationContainer.current,
-            // animationData: animation
-            path: "../../assets/animations/header.json"
-        })
-    }, []);
+    useEffect(() => {
+      lottie.loadAnimation({
+        container: animationContainer.current,
+        // animationData: animation
+        path: "../../assets/animations/header.json",
+      });
+    }, [animationContainer]);
 
 
     return useObserver(() => (

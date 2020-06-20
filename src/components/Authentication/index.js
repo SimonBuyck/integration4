@@ -1,7 +1,7 @@
 import React from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
-import { Switch, Route, NavLink, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 // import { ROUTES } from "../../consts";
 // import LoginForm from "./LoginForm";
 // import AppHeader from "../../containers/Sidebar/AppHeader";

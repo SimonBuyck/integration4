@@ -17,6 +17,11 @@ class MatchService {
             const user = userStore.getUserById(data.userId2);
             currentUser.viewingUser = user;
           }
+          if(data.accepted1 && data.accepted2 === 'true'){
+            console.log('match accepted')
+            match.accepted1 = data.accepted1;
+            match.accepted2 = data.accepted2;
+          }
         }
         return doc.data();
       });

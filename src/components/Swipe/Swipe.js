@@ -11,18 +11,18 @@ import style from "./Swipe.module.css";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 import Match from "../../models/Match";
-import lottie from "lottie-web"
+import lottie from "lottie-web";
+import VideoStartButton from "../VideoStartButton/Video";
 
 const Swipe = () => {
+  let animationCon = React.createRef();
 
-  let animationCon = React.createRef()
-
-    useEffect(() => {
-      lottie.loadAnimation({
-        container: animationCon.current,
-        path: "../../assets/animations/header.json",
-      });
-    }, [animationCon]);
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: animationCon.current,
+      path: "../../assets/animations/header.json",
+    });
+  }, [animationCon]);
 
   const { uiStore, userStore, matchStore } = useStore();
   const [searching, setSearching] = useState(false);
@@ -30,7 +30,7 @@ const Swipe = () => {
   const [match, setMatch] = useState(null);
 
   const setAccepted = () => {
-    if (user === '1') {
+    if (user === "1") {
       match.accepted1 = "true";
     } else {
       match.accepted2 = "true";
@@ -74,7 +74,7 @@ const Swipe = () => {
       const user = await userStore.getUserById(newMatch.userId1);
       uiStore.currentUser.viewingUser = user;
       matchStore.listenToMatch(newMatch);
-      console.log(newMatch)
+      console.log(newMatch);
       setSearching(true);
       setUser("2");
       setMatch(newMatch);
@@ -97,12 +97,16 @@ const Swipe = () => {
       {searching === true ? (
         uiStore.currentUser.viewingUser !== "" ? (
           <main className={style.swipe__main}>
-            {/*
-            {uiStore.currentUser.viewingUser ? (
-              <p>{uiStore.currentUser.viewingUser.id}</p>
+            {match !== null ? (
+              match.accepted1 === "true" && match.accepted2 === "true" ? (
+                <VideoStartButton />
+              ) : (
+                <p>no match userId2</p>
+              )
             ) : (
-              <p>no match userId2</p>
-            )}*/}
+              ""
+            )}
+
             <div className={style.video__wrapper}>
               <video
                 className={style.video}
@@ -156,18 +160,20 @@ const Swipe = () => {
           </main>
         ) : (
           <>
-          <div className={style.main__nofooter + ' ' + style.searching}>
-            <article className={style.searching__wrapper + ' ' + style.grid__child}>
-              <p>Searching for Matches...</p>
-              <div className={style.load_wrapp}>
-                <div className={style.load3}>
-                  <div className={style.line}></div>
-                  <div className={style.line}></div>
-                  <div className={style.line}></div>
+            <div className={style.main__nofooter + " " + style.searching}>
+              <article
+                className={style.searching__wrapper + " " + style.grid__child}
+              >
+                <p>Searching for Matches...</p>
+                <div className={style.load_wrapp}>
+                  <div className={style.load3}>
+                    <div className={style.line}></div>
+                    <div className={style.line}></div>
+                    <div className={style.line}></div>
+                  </div>
                 </div>
-              </div>
-            </article>
-          </div>
+              </article>
+            </div>
           </>
         )
       ) : (

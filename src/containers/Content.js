@@ -17,10 +17,10 @@ const Content = () => {
         <Footer/>
       </Route>
 
-      <Route path="/dances">
-        <Dances />
-        <Footer />
-      </Route>
+        <Route path="/dances">
+          <Dances />
+          <Footer />
+        </Route>
 
       <Route path="/profile">
         <Profile />
@@ -37,8 +37,7 @@ const Content = () => {
     
     </Switch>
     </section>
-    );
-  };
-  
-  export default Content;
-  
+  );
+};
+
+export default Content;

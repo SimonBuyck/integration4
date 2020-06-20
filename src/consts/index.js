@@ -2,7 +2,8 @@ const ROUTES = {
   home: "/",
   swipe: "/swipe",
   video: "/video",
-  profile: "/profile"
+  profile: "/profile",
+  dances: "/dances"
 };
 
 export { ROUTES };

@@ -112,9 +112,6 @@
 .searching {
     display: grid;
     background: background;
-    -webkit-animation: Cycle 2s ease infinite;
-    -moz-animation: Cycle 2s ease infinite;
-    animation: Cycle 2s ease infinite;
 }
 
 .searching > svg, .grid__child {
@@ -154,17 +151,5 @@
     }
     100% {
         transform: translate(0, 0);
-    }
-}
-  
-  @keyframes Cycle{
-	0% {
-		background: #2E3E7C;
-	}
-	50% {
-		background: background;
-    }
-    100% {
-		background: #2E3E7C;
     }
 }

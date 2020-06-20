@@ -32,69 +32,73 @@ const Profile = () => {
         <p className={style.link + ' ' + style.change}>Change Preview</p>
         <div className={style.line}></div>
         <div className={style.profile__content}>
-        <label className={style.label}>Your Name</label>
+
+        <label for="name" className={style.label}>Your Name</label>
         <input
         className={style.input + ' ' + style.profile__input}
         type="text"
-        name="{name}"
-        placeholder="Email address"
-        onChange="{onChange}"
-        required="required"
-        autoComplete="off"
-        value="John"
+        name="name"
+        placeholder="Your name"
+        value={uiStore.currentUser.name}
         />
-        <label className={style.label}>Partner</label>
+
+        <label for="partner" className={style.label}>Partner</label>
         <input
         className={style.input + ' ' + style.profile__input}
         type="text"
-        name="{name}"
-        placeholder="Password"
-        onChange="{onChange}"
-        required="required"
-        autoComplete="off"
-        value="Johanna"
+        name="partner"
+        placeholder="Partner"
+        value={uiStore.currentUser.partner}
         />
-        <label className={style.label}>Country</label>
+
+        <label for="country" className={style.label}>Country</label>
         <input
         className={style.input + ' ' + style.profile__input}
         type="text"
-        name="{name}"
-        placeholder="Password"
-        onChange="{onChange}"
-        required="required"
-        autoComplete="off"
-        value="Spain"
+        name="country"
+        placeholder="Country"
+        value={uiStore.currentUser.country}
         />
-        <label className={style.label}>Dance Name</label>
+
+        <label for="dance" className={style.label}>Dance Name</label>
         <input
         className={style.input + ' ' + style.profile__input}
         type="text"
-        name="{name}"
-        placeholder="Password"
+        name="dance"
+        placeholder="Dance name"
         onChange="{onChange}"
         required="required"
         autoComplete="off"
-        value="Flamenco"
+        value={uiStore.currentUser.dance}
         />
         <p className={style.label}>Couple dance</p>
         <span>
-        <input className={style.input + ' ' + style.switch} type="checkbox" id="switch"/>
+        <input 
+        className={style.input + ' ' + style.switch} 
+        type="checkbox" 
+        id="switch"
+        name="duo"
+        value="duo"
+        // {uiStore.currentUser.duo ? "checked" : ""}
+        />
+
         <label className={style.label__checkbox} for="switch"></label>
         </span>
         </div>
         <div className={style.line}></div>
         <p className={style.profile__subtitle}>Private Data</p>
         <div className={style.profile__content}>
-        <label className={style.label}>Email</label>
+
+        <label for="email" className={style.label}>Email</label>
         <input
         className={style.input + ' ' + style.profile__input + ' ' + style.profile__input__noline}
         type="text"
-        name="{name}"
+        name="email"
         placeholder="Email"
         onChange="{onChange}"
         required="required"
         autoComplete="off"
-        value="john.doe@gmail.com"
+        value={uiStore.currentUser.email}
         />
         </div>
         <div className={style.line}></div>

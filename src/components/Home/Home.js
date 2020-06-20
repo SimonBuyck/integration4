@@ -8,12 +8,10 @@ import lottie from "lottie-web"
 
 const Home = () => {
     let animationContainer = React.createRef()
-    console.log(animationContainer)
 
     React.useEffect(() => {
         lottie.loadAnimation({
             container: animationContainer.current,
-            // animationData: animation
             path: "../../assets/animations/header.json"
         })
     }, []);

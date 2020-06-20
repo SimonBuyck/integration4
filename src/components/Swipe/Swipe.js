@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
 import { Link } from "react-router-dom";
@@ -10,8 +10,19 @@ import { Link } from "react-router-dom";
 import style from "./Swipe.module.css";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
+import lottie from "lottie-web"
 
 const Swipe = () => {
+
+  let animationCon = React.createRef()
+
+    React.useEffect(() => {
+        lottie.loadAnimation({
+            container: animationCon.current,
+            path: "../../assets/animations/header.json"
+        })
+    }, []);
+
   const { uiStore, userStore, matchStore } = useStore();
   const [searching, setSearching] = useState(false);
   const [user, setUser] = useState(null);
@@ -109,9 +120,20 @@ const Swipe = () => {
             </div>
           </main>
         ) : (
-          <div>
-            <p>we are searching</p>
+          <>
+          <div className={style.main__nofooter + ' ' + style.searching}>
+            <article className={style.searching__wrapper + ' ' + style.grid__child}>
+              <p>Searching for Matches...</p>
+              <div className={style.load_wrapp}>
+                <div className={style.load3}>
+                  <div className={style.line}></div>
+                  <div className={style.line}></div>
+                  <div className={style.line}></div>
+                </div>
+              </div>
+            </article>
           </div>
+          </>
         )
       ) : (
         <main className={style.main + ' ' + style.main__nofooter}>

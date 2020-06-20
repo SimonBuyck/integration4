@@ -24,7 +24,7 @@ class MatchService {
 
   updateMatch = async (match) => {
     if(match.userId2 !== ''){
-      this.db.collection("matches").doc(match.matchId).set(
+      this.db.collection("matches").doc(match.id).set(
         {
           userId2: match.userId2
         },
@@ -32,7 +32,7 @@ class MatchService {
       );
     }
     if(match.accepted1 !== ''){
-      this.db.collection("matches").doc(match.matchId).set(
+      this.db.collection("matches").doc(match.id).set(
         {
           accepted1: match.accepted1
         },
@@ -47,7 +47,6 @@ class MatchService {
         { merge: true }
       );
     }
-    
   }
 
   deleteMatch = async (match) => {

@@ -1,39 +1,39 @@
 @value tokens: "../../styles/tokens.module.css";
 @value background, backgroundGradient, colorTitle, colorText, colorSecondary, colorTertiary, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge, spacer2 from tokens;
 
-.main  {
-    composes: main from "../../styles/layout.module.css";
+.main {
+  composes: main from "../../styles/layout.module.css";
 }
 
 .main__nofooter {
-    composes: main__nofooter from "../../styles/layout.module.css";
+  composes: main__nofooter from "../../styles/layout.module.css";
 }
 
 .header {
-    height: 5rem;
-    width: calc(100%-4rem);
-    padding: 0 spacer2;
-    display: grid;
-    grid-template-columns: 2rem auto 2rem;
+  height: 5rem;
+  width: calc(100%-4rem);
+  padding: 0 spacer2;
+  display: grid;
+  grid-template-columns: 2rem auto 2rem;
 }
 
 .header__title {
-    composes: header__title from "../../styles/typo.module.css"
+  composes: header__title from "../../styles/typo.module.css";
 }
 
 .cancel {
-    display: flex;
-    align-items: center;
-    width: 2rem;
+  display: flex;
+  align-items: center;
+  width: 2rem;
 }
 
 .button {
-    composes: button from "../../styles/typo.module.css";
+  composes: button from "../../styles/typo.module.css";
 }
 
 .title {
-    composes: subtitle from "../../styles/typo.module.css";
-    text-align: center;
+  composes: subtitle from "../../styles/typo.module.css";
+  text-align: center;
 }
 
 .searching__wrapper {
@@ -45,7 +45,7 @@
 }
 
 .swipe__main {
-    display: grid;
+  display: grid;
 }
 
 .video__wrapper {
@@ -60,39 +60,42 @@
 }
 
 .video {
-    width: 100%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .info__wrapper {
-    height: calc(100vh - 5rem);
-    width: 100vw;
-    display: flex;
-    align-items: flex-end;
-    grid-row: 1;
-    grid-column: 1;
+  height: calc(100vh - 5rem);
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  grid-row: 1;
+  grid-column: 1;
 }
 
 .info {
-    background: backgroundGradient;
-    width: 100%;
-    padding:0 2rem 2rem;
+  background: backgroundGradient;
+  width: 100%;
+  padding: 0 2rem 2rem;
 }
 
 .info__title {
-    color: colorTitle;
-    font-size: fontSizeXLarge;
-    font-weight: bold;
+  color: colorTitle;
+  font-size: fontSizeXLarge;
+  font-weight: bold;
 }
 
-.info__title__country, .info__user {
-    font-size: fontSizeMedium;
+.info__title__country,
+.info__user {
+  font-size: fontSizeMedium;
 }
 
 .buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: calc(100% - 4rem);
-    margin: 2rem 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: calc(100% - 4rem);
+  margin: 2rem 2rem 0;
 }
 
 .button__reset {

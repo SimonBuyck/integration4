@@ -28,8 +28,6 @@ class UiStore {
 
   onAuthStateChanged = (user) => {
     if (user) {
-      console.log(`De user is ingelogd: ${user.email}, ${user.uid}`);
-      console.log(user);
       this.setCurrentUser(
         new User({
           id: user.uid,
@@ -38,7 +36,6 @@ class UiStore {
           store: this.rootStore.userStore,
         })
       );
-      console.log(`De user is ingelogd: ${this.currentUser.email}, ${this.currentUser.id}`);
       this.rootStore.userStore.getAll(this.currentUser);
 
       // //inlezen van de contacten van de currentuser

@@ -76,46 +76,51 @@ const Swipe = () => {
           <img src="../../assets/img/icons/cross.svg" alt="Cancel" height="20px"></img>
         </Link>
       </header>
-      <main className={style.main + ' ' + style.main__nofooter}>
       {searching === true ? (
         uiStore.currentUser.viewingUser !== "" ? (
-          <div>
+          <main className={style.swipe__main}>
+            {/*
             {uiStore.currentUser.viewingUser ? (
               <p>{uiStore.currentUser.viewingUser.id}</p>
             ) : (
               <p>no match userId2</p>
-            )}
-            <video
-              src={uiStore.currentUser.viewingUser.video}
-              width="375"
-              autoPlay
-            ></video>
-            <h1>
-              {uiStore.currentUser.viewingUser.name}
-              {uiStore.currentUser.viewingUser.duo ? (
-                <span> & {uiStore.currentUser.viewingUser.partner}</span>
-              ) : (
-                ""
-              )}
-            </h1>
-            <p>{uiStore.currentUser.viewingUser.dance}</p>
-            <div>
-              <button onClick={(e) =>setAccepted(e)}>match</button>
-              <button onClick={(e) => startSearching(e)}>skip</button>
+            )}*/
+            }
+            <div className={style.video__wrapper}>
+              <video className={style.video} src={uiStore.currentUser.viewingUser.video} autoPlay loop></video>
             </div>
-          </div>
+            <div className={style.info__wrapper}>
+              <div className={style.info}>
+                <h2 className={style.info__title}>{uiStore.currentUser.viewingUser.dance} <span className={style.info__title__country}>({uiStore.currentUser.viewingUser.country})</span></h2>
+                <p className={style.info__user}>{uiStore.currentUser.viewingUser.name}
+
+                {uiStore.currentUser.viewingUser.duo ? (
+                  <span> & {uiStore.currentUser.viewingUser.partner}</span>
+                ) : (
+                  ""
+                )}
+                </p>
+
+                <div className={style.buttons}>
+                  <button className={style.button__reset} onClick={(e) => startSearching(e)}><img className={style.button__img} src="../../assets/img/icons/skip.svg" alt="skip"></img></button>
+                  <button className={style.button__reset} onClick={(e) =>setAccepted(e)}><img className={style.button__img} src="../../assets/img/icons/accept.svg" alt="accept"></img></button>
+                </div>
+              </div>
+            </div>
+          </main>
         ) : (
           <div>
             <p>we are searching</p>
           </div>
         )
       ) : (
+        <main className={style.main + ' ' + style.main__nofooter}>
         <article className={style.searching__wrapper}>
           <h2 className={style.title}>Start Searching</h2>
         <button className={style.button} onClick={(e) => startSearching(e)}>Find Dance</button>
         </article>
+        </main>
       )}
-      </main>
     </>
   ));
 };

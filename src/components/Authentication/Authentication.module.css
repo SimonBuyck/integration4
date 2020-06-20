@@ -96,3 +96,9 @@ input[type="file"] {
   background: none;
   border: none;
 }
+
+.video {
+  width: 100%;
+  margin-top: spacer2;
+  border-radius: .5rem;
+}

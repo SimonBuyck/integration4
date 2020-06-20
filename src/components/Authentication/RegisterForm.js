@@ -151,9 +151,9 @@ const RegisterForm = () => {
                 </label>
                 {videoSource !== null ? (
                   status === "loading" ? (
-                    <p>video is loading</p>
+                    <p>Video is loading</p>
                   ) : (
-                    <video src={videoSource} width="200" autoPlay></video>
+                    <video className={style.video} src={videoSource} autoPlay loop></video>
                   )
                 ) : (
                   <p>

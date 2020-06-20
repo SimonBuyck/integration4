@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import VideoStartButton from "../components/VideoStartButton/Video";
 import Swipe from "../components/Swipe/Swipe";
-import Profile from "../components/Profile/ProfileCase";
+import Profile from "../components/Profile/Profile";
 import Footer from "../components/Footer/Footer";
 import Home from "../components/Home/Home";
 import Dances from "../components/Dances/Dances";

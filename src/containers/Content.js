@@ -4,6 +4,7 @@ import VideoStartButton from "../components/VideoStartButton/Video";
 import Swipe from "../components/Swipe/Swipe";
 import Footer from "../components/Footer/Footer";
 import Home from "../components/Home/Home";
+import Dances from "../components/Dances/Dances";
 import Profile from "../components/Profile/Profile";
 
 const Content = () => {
@@ -15,17 +16,22 @@ const Content = () => {
           <Footer />
         </Route>
 
+        <Route path="/dances">
+          <Dances />
+          <Footer />
+        </Route>
+
+        <Route path="/profile">
+          <Profile />
+          <Footer />
+        </Route>
+
         <Route path="/video">
           <VideoStartButton />
         </Route>
 
         <Route path="/swipe">
           <Swipe />
-        </Route>
-
-        <Route path="/profile">
-          <Profile />
-          <Footer />
         </Route>
       </Switch>
     </section>

@@ -9,63 +9,12 @@
     composes: main__footer from "../../styles/layout.module.css";
 }
 
-.home__header {
-    width: calc(100% - 4rem);
-    height: 5rem;
-    margin: 0 2rem;
-    
-    display: flex;
-    align-items: center;
+.header {
+    composes: header from "../../styles/layout.module.css"
 }
 
-.home__header__title {
-    color: colorTitle;
-    font-size: fontSizeLarge;
-    font-weight: bold;
-}
-
-.main__header {
-    width: 100%;
-    height: 15rem;
-    background: green;
-    margin: 1rem 0;
-    
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
-.main__header__button {
-    height: 3rem;
-    width: 16rem;
-    margin: 1rem;
-    background: colorSecondary;
-    border-radius: 5px;
-    font-weight: bold;
-    color: background;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.main__header__button > img {
-    margin-left: .5rem;
-    width: 1.5rem;
-}
-
-.subtitle {
-    composes: subtitle from "../../styles/typo.module.css";
-}
-
-.subtitle__wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.subtitle__wrapper > p {
-    font-size: fontSizeSmall;
+.header__title {
+    composes: header__title from "../../styles/typo.module.css"
 }
 
 .items {

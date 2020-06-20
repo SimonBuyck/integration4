@@ -6,19 +6,7 @@ body {
 }
 
 .button {
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
-  font-family: futura, sans-serif;
-  font-size: fontSizeSmall;
-  font-weight: bold;
-  margin-top: spacer2;
-  border: none;
-  color: background;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: colorSecondary;
+  composes: button from "../../styles/typo.module.css";
 }
 
 .button__secondary{

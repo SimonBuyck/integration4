@@ -65,6 +65,7 @@ const Swipe = () => {
       matchStore.listenToMatch(Nmatch);
       setSearching(true);
       setUser("1");
+      setMatch(Nmatch)
     } else {
       openMatches.map((o) => console.log(o));
       openMatches[0].userId2 = uiStore.currentUser.id;

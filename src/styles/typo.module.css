@@ -1,5 +1,5 @@
 @value tokens: "./tokens.module.css";
-@value background, colorSecondary, colorTitle, colorText, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge from tokens;
+@value background, colorSecondary, colorTitle, colorText, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge, spacer2 from tokens;
 
 .title {
   font-size: fontSizeXLarge;

@@ -4,7 +4,8 @@ const ROUTES = {
   video: "/video",
   profile: "/profile",
   preview: "/preview",
-  dances: "/dances"
+  dances: "/dances",
+  videocss: "/videocss"
 };
 
 export { ROUTES };
@@ -28,13 +29,15 @@ export { ROUTES };
 -Match
   -Gebruiker die geskipt wordt krijgt automatisch het 'searching' scherm te zien
 
--Alle matches renderen op de '/dances' page
+-Alle previous matches renderen op de '/dances' page
 
 -Laatste 2 matches renderen op homepage
 
 -2 online gebruikers renderen op homepage
 
 -App startup loading screen
+
+-Gebruiker kan gegevens aanpassen op profile page
 
 -Videos kunnen herbekijken van laatste videocall
 

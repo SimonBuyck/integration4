@@ -87,6 +87,7 @@ const Home = () => {
             }
             <p className={style.p}>You haven't done any dances yet.</p>
             <Link to="/swipe" className={style.button}>Find a Dancer</Link>
+            <Link to="/videocss" className={style.button}>Ga naar videoCSS</Link>
         </article>
     </main>
         </>

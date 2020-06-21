@@ -7,6 +7,7 @@ import Home from "../components/Home/Home";
 import Dances from "../components/Dances/Dances";
 import Profile from "../components/Profile/Profile";
 import Preview from "../components/Preview/Preview";
+import Videocss from "../components/Videocss/Videocss";
 
 const Content = () => {
   return (
@@ -38,6 +39,10 @@ const Content = () => {
     
       <Route path="/swipe">
         <Swipe />
+      </Route>
+
+      <Route path="/videocss">
+        <Videocss />
       </Route>
     
     </Switch>

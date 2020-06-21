@@ -1,0 +1,134 @@
+@value tokens: "../../styles/tokens.module.css";
+@value background, backgroundGradient, colorSecondary, colorTertiary, colorText, colorAlert, colorTitle, fontSizeXSmall, fontSizeSmall, fontSizeLarge, spacer1, spacer2 from tokens;
+
+.call__wrapper {
+    display: grid;
+}
+
+.call__alerts, .call__bottom__wrapper, .camera__wrapper, .video__wrapper {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.call__wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
+.video__wrapper {
+    z-index: -2;
+    width: 100vw;
+    display: flex;
+    align-items:center;
+}
+
+.video__wrapper > img {
+    width: 100%; 
+}
+
+.camera__wrapper {
+    z-index: -1;
+    display:flex;
+    justify-content: flex-end;
+    width: 100vw;
+    height: 100vh;
+}
+
+.camera {
+    margin:2rem;
+    width: 10rem;
+    height: 15rem;
+}
+
+.camera > img {
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.call__bottom__wrapper {
+    display: flex;
+    align-items: flex-end;
+}
+
+.call__bottom {
+    background: backgroundGradient;
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.buttons {
+    margin: 2rem 0;
+}
+
+.button {
+    margin-right:2rem;
+}
+
+.button:last-child {
+    margin-right: 0;
+}
+
+.call__bottom__timer {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.call__alerts {
+    background: rgba(0,0,0,.5);
+    width: 100vw ;
+    height: 100vh;
+    z-index: 0;
+    padding: 2rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.call__alert {
+    width: calc(100% - 4rem);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: background;
+}
+
+.call__alert__header {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+}
+
+.call__alert__title {
+    font-size: fontSizeLarge;
+    color: colorTitle;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.call__alert__text {
+    color: colorText;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.call__alert__buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+}
+
+.call__alert__buttons__nogrid {
+    display: block;
+    padding: 0 20%;
+}
+
+.call__alert__button {
+    composes: button from "../../styles/typo.module.css";
+}
+
+.call__alert__previous {
+    composes: button from "../../styles/typo.module.css";
+    background: colorTertiary;
+  }

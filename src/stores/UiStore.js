@@ -26,7 +26,7 @@ class UiStore {
     return this.authService.isRegistered(user.email);
   };
 
-  onAuthStateChanged = (user) => {
+  onAuthStateChanged = async (user) => {
     if (user) {
       this.setCurrentUser(
         new User({
@@ -36,6 +36,9 @@ class UiStore {
           store: this.rootStore.userStore,
         })
       );
+      const newUser = await this.rootStore.userStore.getUserByEmail(this.currentUser.email);
+      console.log('login user : ', newUser.name)
+      this.setCurrentUser(newUser);
       this.rootStore.userStore.getAll(this.currentUser);
 
       // //inlezen van de contacten van de currentuser
@@ -49,9 +52,8 @@ class UiStore {
   };
 
   loginUser = async (user) => {
-    //service aanspreken
     const result = await this.authService.login(user.email, user.password);
-    return result;
+    return result; 
   };
   logoutUser = async () => {
     const result = await this.authService.logout();

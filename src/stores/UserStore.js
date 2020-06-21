@@ -18,14 +18,9 @@ class UserStore {
     return await this.userService.create(user);
   };
 
-  getAllSearchingUsers = async (currentUser) => {
-    const onlineUsers = await this.userService.getAllSearchingUsers(currentUser);
-    console.log(onlineUsers);
-    onlineUsers.map((u) =>
-      u.userId === currentUser.id ? u : this.onlineUsers.push(u)
-    );
-    console.log(this.onlineUsers);
-  };
+  getUserByEmail = async (email) => {
+    return await this.userService.getUserByEmail(email);
+  }
 
   getAll = async (currentUser) => {
     const users = await this.userService.getAll();
@@ -75,7 +70,7 @@ decorate(UserStore, {
   getAll: action,
   searchUser: action,
   getUserById: action,
-  createUser: action,
+  createUser: action, 
   empty: action,
   addUser: action,
 });

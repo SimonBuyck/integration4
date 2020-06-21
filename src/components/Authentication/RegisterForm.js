@@ -68,6 +68,7 @@ const RegisterForm = () => {
       const result = await uiStore.registerUser(user);
       if (result.uid) {
         console.log(result);
+        uiStore.setCurrentUser(user);
         //gebruiker is correct geregistreerd
         history.push("/");
       } else {

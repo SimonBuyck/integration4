@@ -115,6 +115,8 @@
 .searching {
     display: grid;
     background: background;
+    background-image: url(background_image2.svg);
+    background-size: cover;
 }
 
 .searching > svg, .grid__child {

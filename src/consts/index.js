@@ -3,6 +3,7 @@ const ROUTES = {
   swipe: "/swipe",
   video: "/video",
   profile: "/profile",
+  preview: "/preview",
   dances: "/dances"
 };
 

@@ -1,0 +1,76 @@
+@value tokens: "../../styles/tokens.module.css";
+@value background, backgroundGradient, colorTitle, colorText, colorSecondary, colorTertiary, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge, spacer2 from tokens;
+
+.main {
+    composes: main from "../../styles/layout.module.css";
+}
+
+.main__nofooter {
+    composes: main__nofooter from "../../styles/layout.module.css";
+}
+
+.header {
+    height: 5rem;
+    width: calc(100%-4rem);
+    padding: 0 spacer2;
+    display: grid;
+    grid-template-columns: 2rem auto 2rem;
+}
+
+.header__title {
+    composes: header__title from "../../styles/typo.module.css";
+}
+
+.cancel {
+    display: flex;
+    align-items: center;
+    width: 2rem;
+}
+
+.swipe__main {
+    display: grid;
+}
+
+.video__wrapper {
+    height: calc(100vh - 5rem);
+    display: flex;
+    align-items: center;
+    z-index: -1;
+    grid-row: 1;
+    grid-column: 1;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.info__wrapper {
+    height: calc(100vh - 5rem);
+    width: 100vw;
+    display: flex;
+    align-items: flex-end;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.info {
+    background: backgroundGradient;
+    width: 100%;
+    height: 15rem;
+    padding: 0 2rem 2rem;
+}
+
+.info__title {
+    color: colorTitle;
+    font-size: fontSizeXLarge;
+    font-weight: bold;
+}
+
+.info__title__country,
+.info__user {
+    font-size: fontSizeMedium;
+}

@@ -6,6 +6,7 @@ import Footer from "../components/Footer/Footer";
 import Home from "../components/Home/Home";
 import Dances from "../components/Dances/Dances";
 import Profile from "../components/Profile/Profile";
+import Preview from "../components/Preview/Preview";
 
 const Content = () => {
   return (
@@ -25,6 +26,10 @@ const Content = () => {
       <Route path="/profile">
         <Profile />
         <Footer />
+      </Route>
+
+      <Route path="/preview">
+        <Preview />
       </Route>
     
       <Route path="/video">

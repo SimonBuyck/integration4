@@ -24,13 +24,6 @@ const HeaderNav = () => {
       <Link to="/swipe" onClick={(e) => changeStatus(e, "searching")}>
         swipe
       </Link>
-<<<<<<< HEAD
-=======
-      <p></p>
-      <Link to="/profile" /*onClick={(e) => changeStatus(e, "searching")}*/>
-        profile
-      </Link>
->>>>>>> develop
     </section>
   );
 };

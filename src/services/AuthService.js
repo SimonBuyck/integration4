@@ -20,7 +20,7 @@ class AuthService {
         email,
         password
       );
-      console.log(this.userStatusDatabaseRef);
+      console.log('user :', result)
       return result;
     } catch (error) {
       return error.code;

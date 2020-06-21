@@ -68,6 +68,7 @@ const RegisterForm = () => {
       const result = await uiStore.registerUser(user);
       if (result.uid) {
         console.log(result);
+        uiStore.setCurrentUser(user);
         //gebruiker is correct geregistreerd
         history.push("/");
       } else {
@@ -151,9 +152,9 @@ const RegisterForm = () => {
                 </label>
                 {videoSource !== null ? (
                   status === "loading" ? (
-                    <p>video is loading</p>
+                    <p>Video is loading</p>
                   ) : (
-                    <video src={videoSource} width="200" autoPlay></video>
+                    <video className={style.video} src={videoSource} autoPlay loop></video>
                   )
                 ) : (
                   <p>
@@ -238,7 +239,7 @@ const RegisterForm = () => {
             <>
               <h2 className={style.title}>What's your kind of dance?</h2>
               <div className={style.grid2 + " " + style.couple}>
-                <button
+                <button className={style.button__reset}
                   onClick={function (e) {
                     e.preventDefault();
                     setDuo(false);
@@ -250,7 +251,7 @@ const RegisterForm = () => {
                     src="../../assets/img/signup/solo.svg"
                   ></img>
                 </button>
-                <button onClick={() => setDuo(true)}>
+                <button className={style.button__reset} onClick={() => setDuo(true)}>
                   <img
                     alt="couple"
                     width="100%"

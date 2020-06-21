@@ -17,6 +17,11 @@ class MatchService {
             const user = userStore.getUserById(data.userId2);
             currentUser.viewingUser = user;
           }
+          if(data.accepted1 && data.accepted2 === 'true'){
+            console.log('match accepted')
+            match.accepted1 = data.accepted1;
+            match.accepted2 = data.accepted2;
+          }
         }
         return doc.data();
       });
@@ -24,7 +29,7 @@ class MatchService {
 
   updateMatch = async (match) => {
     if(match.userId2 !== ''){
-      this.db.collection("matches").doc(match.matchId).set(
+      this.db.collection("matches").doc(match.id).set(
         {
           userId2: match.userId2
         },
@@ -32,7 +37,7 @@ class MatchService {
       );
     }
     if(match.accepted1 !== ''){
-      this.db.collection("matches").doc(match.matchId).set(
+      this.db.collection("matches").doc(match.id).set(
         {
           accepted1: match.accepted1
         },
@@ -40,14 +45,13 @@ class MatchService {
       );
     }
     if(match.accepted2 !== ''){
-      this.db.collection("matches").doc(match.matchId).set(
+      this.db.collection("matches").doc(match.id).set(
         {
           accepted2: match.accepted2
         },
         { merge: true }
       );
     }
-    
   }
 
   deleteMatch = async (match) => {

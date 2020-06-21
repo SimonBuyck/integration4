@@ -1,0 +1,35 @@
+.footer {
+  /*width: calc(100vw - 100px);*/
+  padding: 0 50px;
+  background: white;
+  height: 45px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footer__inactive {
+    opacity: .5;
+}
+
+.footer__active {
+    opacity: 1;
+}
+
+.footer > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__footer {
+  height: calc(100vh - 50px - 45px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.main__footer::-webkit-scrollbar {
+  display: none;
+}

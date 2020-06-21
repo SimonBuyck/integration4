@@ -1,6 +1,9 @@
 const ROUTES = {
   home: "/",
-  video: '/video'
+  swipe: "/swipe",
+  video: "/video",
+  profile: "/profile",
+  dances: "/dances"
 };
 
 export { ROUTES };

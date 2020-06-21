@@ -1,9 +1,17 @@
+/*Dark blue*/
 @value background: #24305E;
+/*Yellow*/
 @value colorTitle: #F8E9A1;
+/*White*/
 @value colorText: #F2F2F2;
+/*Light blue*/
 @value colorSecondary: #A8D0E6;
+/*Gray*/
 @value colorTertiary: #BDBDBD;
+/*Red*/
 @value colorAlert: #EB5757;
+/*Background gradient*/
+@value backgroundGradient: linear-gradient(0deg, rgba(36,48,94,.75) 0%, rgba(36,48,94,0) 75%);
 
 @value spacer1: 1rem;
 @value spacer2: 2rem;

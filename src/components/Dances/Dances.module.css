@@ -1,0 +1,79 @@
+@value tokens: "../../styles/tokens.module.css";
+@value background, backgroundGradient, colorTitle, colorText, colorSecondary, colorTertiary, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge, spacer2 from tokens;
+
+.main  {
+    composes: main from "../../styles/layout.module.css";
+}
+
+.main__footer {
+    composes: main__footer from "../../styles/layout.module.css";
+}
+
+.header {
+    composes: header from "../../styles/layout.module.css"
+}
+
+.header__title {
+    composes: header__title from "../../styles/typo.module.css"
+}
+
+.items {
+    display:flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    flex-flow: wrap;
+}
+
+.item {
+    height:calc(20vh - 1rem);
+    width: 42vw;
+    border-radius: .5rem;
+    margin-bottom: 2rem;
+    overflow:hidden;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.item__img, .item__country, .item__info {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.item__img {
+    width: 100%;
+}
+
+.item__country {
+    margin: 0 0 auto auto;
+    background: background;
+    border-bottom-left-radius: .5rem;
+    padding: 0 0 .5rem .5rem;
+    color: colorSecondary;
+}
+
+.item__info {
+    background: background;
+    background: backgroundGradient;
+    height: calc(20vh - 1rem);
+    padding: 0 0 1rem 1rem;
+
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.item__info__dance {
+    color: colorTitle;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.button {
+    composes: button from "../../styles/typo.module.css";
+}
+
+.p {
+    margin: spacer2 0;
+}

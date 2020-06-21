@@ -1,0 +1,158 @@
+@value tokens: "../../styles/tokens.module.css";
+@value background, backgroundGradient, colorTitle, colorText, colorSecondary, colorTertiary, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge, spacer2 from tokens;
+
+.main {
+  composes: main from "../../styles/layout.module.css";
+}
+
+.main__nofooter {
+  composes: main__nofooter from "../../styles/layout.module.css";
+}
+
+.header {
+  height: 5rem;
+  width: calc(100%-4rem);
+  padding: 0 spacer2;
+  display: grid;
+  grid-template-columns: 2rem auto 2rem;
+}
+
+.header__title {
+  composes: header__title from "../../styles/typo.module.css";
+}
+
+.cancel {
+  display: flex;
+  align-items: center;
+  width: 2rem;
+}
+
+.button {
+  composes: button from "../../styles/typo.module.css";
+}
+
+.title {
+  composes: subtitle from "../../styles/typo.module.css";
+  text-align: center;
+}
+
+.searching__wrapper {
+    height: calc(100vh - 10rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.swipe__main {
+  display: grid;
+}
+
+.video__wrapper {
+    height: calc(100vh - 5rem);
+    display: flex;
+    align-items: center;
+    z-index: -1;
+    grid-row: 1;
+    grid-column: 1;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.info__wrapper {
+  height: calc(100vh - 5rem);
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.info {
+  background: backgroundGradient;
+  width: 100%;
+  padding: 0 2rem 2rem;
+}
+
+.info__title {
+  color: colorTitle;
+  font-size: fontSizeXLarge;
+  font-weight: bold;
+}
+
+.info__title__country,
+.info__user {
+  font-size: fontSizeMedium;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: calc(100% - 4rem);
+  margin: 2rem 2rem 0;
+}
+
+.button__reset {
+    background: none;
+    border: none;
+    width: 100%;
+    
+    display:flex;
+    justify-content: center;
+}
+
+.button__img {
+    height: 5rem;
+    width: 5rem;
+}
+
+.searching {
+    display: grid;
+    background: background;
+}
+
+.searching > svg, .grid__child {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.load3 {
+    margin-top: 1rem;
+}
+
+.line {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: .2rem;
+    border-radius: 15px;
+    background-color: colorSecondary;
+}
+
+.load3 .line:nth-last-child(1) {
+    animation: loading 0.6s 0.1s linear infinite;
+}
+.load3 .line:nth-last-child(2) {
+    animation: loading 0.6s 0.2s linear infinite;
+}
+.load3 .line:nth-last-child(3) {
+    animation: loading 0.6s 0.3s linear infinite;
+}
+
+@keyframes loading {
+    0 {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(0, 15px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}

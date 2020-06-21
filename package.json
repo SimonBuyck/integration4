@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.15.0",
+    "lottie-web": "^5.6.10",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.0-alpha.5",
     "react": "^16.12.0",

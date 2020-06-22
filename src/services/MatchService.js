@@ -143,6 +143,18 @@ class MatchService {
       });
   };
 
+  getMatchesForUser = async (userId) => {
+    const matches = []
+    const matches1 = await this.db.collection('matches').where('userId1', '==', userId).get();
+    matches1.docs.map(m => m.data().accepted1 === 'true' && m.data().accepted2 === 'true' ? matches.push(m.data()) : '')
+    console.log(matches1)
+    const matches2 = await this.db.collection('matches').where('userId2', '==', userId).get();
+    matches2.docs.map(m => m.data().accepted1 === 'true' && m.data().accepted2 === 'true' ? matches.push(m.data()) : '')
+    console.log(matches2)
+    console.log(matches)
+    return matches;
+  }
+
   getUsersForMatch = async (matchId) => {
     const members = await this.db
       .collection("matches")

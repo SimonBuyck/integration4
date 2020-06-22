@@ -32,6 +32,11 @@ class MatchStore {
     return matches;
   };
 
+  getMatchesForUser = async (userId) =>{
+    const matches =  await this.matchService.getMatchesForUser(userId);
+    matches.map(m => this.rootStore.uiStore.currentUser.matches.push(m));
+  }
+
   createMatch = async (match) => {
     return await this.matchService.create(match);
   };

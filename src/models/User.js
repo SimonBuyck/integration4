@@ -34,7 +34,6 @@ class User {
     }
     this.store = store;
     this.store.addUser(this);
-    this.RootStore = 
     this.matches.map(match => match.linkUser(this))
   }
 

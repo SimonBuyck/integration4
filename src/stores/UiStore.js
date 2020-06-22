@@ -37,12 +37,11 @@ class UiStore {
         })
       );
       const newUser = await this.rootStore.userStore.getUserByEmail(this.currentUser.email);
-      console.log('login user : ', newUser.name)
-      this.setCurrentUser(newUser);
+      const loggedInUser = new User({ store: this.rootStore.userStore ,...newUser})
+      console.log('login user : ', loggedInUser.name)
+      this.setCurrentUser(loggedInUser);
       this.rootStore.userStore.getAll(this.currentUser);
-
-      // //inlezen van de contacten van de currentuser
-      // this.rootStore.userStore.getContactsForUser();
+      this.rootStore.matchStore.getMatchesForUser(this.currentUser.id);
     } else {
       console.log(`De user is uitgelogd.`);
       this.rootStore.userStore.empty();

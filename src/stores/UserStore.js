@@ -31,10 +31,6 @@ class UserStore {
     );
   };
 
-  createLikeForUser = async (user, contactEmail) => {
-    this.userService.createLikeForUser(user, contactEmail);
-  };
-
   addUser = (user) => {
     this.users.push(user);
   };
@@ -42,24 +38,6 @@ class UserStore {
   empty() {
     this.users = [];
   }
-
-  searchUser = (search, groupMembers) => {
-    const intersection = [];
-    for (const member of groupMembers) {
-      for (const user of this.users) {
-        if (user.id === member.id) {
-          intersection.push(user);
-        }
-      }
-    }
-    const uniques = this.users.filter(
-      (obj) => intersection.indexOf(obj) === -1
-    );
-    const searchResult = uniques.filter((user) =>
-      user.name.toLowerCase().includes(search.toLowerCase())
-    );
-    return searchResult;
-  };
 
   getUserById = (id) => this.users.find((user) => user.id === id);
 }

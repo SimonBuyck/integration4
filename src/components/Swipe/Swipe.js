@@ -118,8 +118,8 @@ const Swipe = () => {
           <main className={style.swipe__main}>
             {match !== null ? (
               match.accepted1 === "true" && match.accepted2 === "true" ? (
-                match.roomUrl !== undefined || match.roomUrl !== "" ? (
-                  <button>join call</button>
+                match.roomUrl !== "" ? (
+                  <VideoStartButton match={match} roomUrlMatch={match.roomUrl}/>
                 ) : (
                   <VideoStartButton match={match} />
                 )

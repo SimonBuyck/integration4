@@ -22,32 +22,32 @@ const Content = () => {
           <Dances />
           <Footer />
         </Route>
-
         <Route path="/profile">
-          <Profile />
-          <Footer />
-        </Route>
+        <Profile />
+        <Footer />
+      </Route>
 
-        <Route path="/preview">
-          <Preview />
-        </Route>
+      <Route path="/preview">
+        <Preview />
+      </Route>
+    
+      <Route path="/video">
+        <VideoStartButton />
+      </Route>
+    
+      <Route path="/swipe">
+        <Swipe />
+      </Route>
 
-        <Route path="/video">
-          <VideoStartButton />
-        </Route>
+      <Route path="/videocss">
+        <Videocss />
+      </Route>
 
-        <Route path="/swipe">
-          <Swipe />
-        </Route>
-
-        <Route path="/videocss">
-          <Videocss />
-        </Route>
-
-        <Route path="/feedback">
-          <Feedback />
-        </Route>
-      </Switch>
+      <Route path="/feedback">
+        <Feedback />
+      </Route>
+    
+    </Switch>
     </section>
   );
 };

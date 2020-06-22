@@ -21,6 +21,7 @@ const Preview = () => {
     console.log(currentUser);
     uiStore.currentUser = currentUser;
   };
+  console.log(getUser)
 
   return useObserver(() => (
     <>

@@ -113,36 +113,47 @@ const Swipe = () => {
           ></img>
         </Link>
       </header>
-
       {searching === true ? (
         uiStore.currentUser.viewingUser !== null ? (
-            match !== null ? (
+          <main className={style.swipe__main}>
+            {match !== null ? (
               match.accepted1 === "true" && match.accepted2 === "true" ? (
                 match.roomUrl !== undefined || match.roomUrl !== "" ? (
-                  <main className={`${style.main} ${style.main__nofooter}`}>
-                    <article className={style.searching__wrapper}>
-                      <h2 className={style.title}>It's a match!</h2>
-                      <button className={style.button}>
-                      Join 
-                      </button>
-                    </article>
-                  </main>
+                  <button>join call</button>
                 ) : (
                   <VideoStartButton match={match} />
                 )
               ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
-                <main className={`${style.main} ${style.main__nofooter}`}>
-                  <article className={style.searching__wrapper}>
-                    <h2 className={style.title}>There wasn't a match</h2>
-                    <button className={style.button} onClick={(e) => startSearching(e)}>
-                    Find New Dance
-                    </button>
-                  </article>
-                </main>
+                <>
+                  <p>This was not the right match for you.</p>
+                  <button onClick={(e) => startSearching(e)}>
+                    Search new match
+                  </button>
+                </>
               ) : (
-                <main className={style.swipe__main}>
-              <div className={style.video__wrapper}>
+                ""
+              )
+            ) : (
+              ""
+            )}
+            <div className={style.video__wrapper}>
+            {/* {match !== null ? (
+              match.accepted1 === "true" && match.accepted2 === "true" ? (
+                match.roomUrl !== undefined || match.roomUrl !== "" ? (
+                  <p className={style.hidden}>Er is een match</p>
+                ) : (
+                  ""
+                )
+              ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
+                <p className={style.video__wrapper}>Er is geen match</p>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )} */}
               <video
+                muted
                 className={style.video}
                 src={uiStore.currentUser.viewingUser.video}
                 autoPlay
@@ -192,10 +203,6 @@ const Swipe = () => {
               </div>
             </div>
           </main>
-              )
-            ) : (
-              ""
-            )  
         ) : (
           <>
             <div className={style.main__nofooter + " " + style.searching}>
@@ -215,7 +222,7 @@ const Swipe = () => {
           </>
         )
       ) : (
-        <main className={`${style.main} ${style.main__nofooter}`}>
+        <main className={style.main + " " + style.main__nofooter}>
           <article className={style.searching__wrapper}>
             <h2 className={style.title}>Start Searching</h2>
             <button className={style.button} onClick={(e) => startSearching(e)}>

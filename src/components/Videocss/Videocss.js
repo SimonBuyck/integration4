@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React/*, { useState, useEffect }*/ from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import { ROUTES } from "../../consts";
 // import LoginForm from "./LoginForm";
 // import AppHeader from "../../containers/Sidebar/AppHeader";
 // import style from "./Authentication.module.css";
 // import RegisterForm from "./RegisterForm";
 import style from "./Videocss.module.css";
-import { useStore } from "../../hooks/useStore";
+// import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 
 const Videocss = () => {
@@ -70,11 +70,11 @@ const Videocss = () => {
             </section>
             <section className={style.camera__wrapper}>
                 <div className={style.camera}>
-                   <img src="../../assets/img/placeholders/placeholder.jpeg"></img>
+                   <img alt="placeholder" src="../../assets/img/placeholders/placeholder.jpeg"></img>
                 </div>
             </section>
             <section className={style.video__wrapper}>
-                <img src="../../assets/img/placeholders/placeholder.jpeg"></img>
+                <img alt="placeholder" src="../../assets/img/placeholders/placeholder.jpeg"></img>
             </section>
         </main>
         ));

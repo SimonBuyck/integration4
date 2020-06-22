@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 // import style from "./Authentication.module.css";
 // import RegisterForm from "./RegisterForm";
 import style from "./Feedback.module.css";
-import { useStore } from "../../hooks/useStore";
+// import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 import lottie from "lottie-web"
 

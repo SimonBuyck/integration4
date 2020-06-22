@@ -22,21 +22,7 @@ const Content = () => {
           <Dances />
           <Footer />
         </Route>
-<<<<<<< HEAD
         <Route path="/profile">
-          <Profile />
-          <Footer />
-        </Route>
-        <Route path="/video">
-          <VideoStartButton />
-        </Route>
-        <Route path="/swipe">
-          <Swipe />
-        </Route>
-      </Switch>
-=======
-
-      <Route path="/profile">
         <Profile />
         <Footer />
       </Route>
@@ -62,7 +48,6 @@ const Content = () => {
       </Route>
     
     </Switch>
->>>>>>> b16e1c80ab45144f371a5ebb32558caf6f7b0431
     </section>
   );
 };

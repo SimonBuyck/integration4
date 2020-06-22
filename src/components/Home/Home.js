@@ -9,18 +9,13 @@ import lottie from "lottie-web"
 const Home = () => {
     let animationContainer = React.createRef()
 
-<<<<<<< HEAD
     useEffect(() => {
-      lottie.loadAnimation({
-=======
-    React.useEffect(() => {
       const anim = lottie.loadAnimation({
->>>>>>> b16e1c80ab45144f371a5ebb32558caf6f7b0431
         container: animationContainer.current,
         path: "../../assets/animations/header.json"
       });
       anim.setSpeed(.3);
-    }, []);
+    }, [animationContainer]);
 
 
     return useObserver(() => (

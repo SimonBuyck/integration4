@@ -52,7 +52,6 @@ const Swipe = () => {
     }
     console.log(match);
     matchStore.updateMatch(match);
-    startSearching(e);
   };
 
   const newMatch = async () => {

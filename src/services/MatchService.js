@@ -35,7 +35,6 @@ class MatchService {
           }
           if (data.accepted1 === "false" || data.accepted2 === "false") {
             console.log("match declined");
-            uiStore.currentUser.viewingUser = null;
             match.accepted1 = data.accepted1;
             match.accepted2 = data.accepted2;
           }

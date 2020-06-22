@@ -13,7 +13,7 @@ class MatchStore {
     const updatedMatch = await this.matchService.listenToMatch(
       match,
       this.rootStore.userStore,
-      this.rootStore.uiStore.currentUser
+      this.rootStore.uiStore
     );
     return updatedMatch;
   };

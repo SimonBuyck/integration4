@@ -21,7 +21,6 @@ const LoginForm = () => {
       password: password
     });
     const result = await uiStore.loginUser(user);
-    const newUser = await userStore.getUserByEmail(user.email);
     console.log(result); 
   }
 

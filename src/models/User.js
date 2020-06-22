@@ -12,7 +12,7 @@ class User {
     partner = "",
     duo = false,
     email,
-    viewingUser = 0,
+    viewingUser = null,
     matches = [],
     status = '',
     store,

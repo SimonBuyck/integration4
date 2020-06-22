@@ -5,7 +5,7 @@ import { useObserver } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 
 const Profile = () => {
-  const { uiStore, userStore } = useStore();
+  const { uiStore } = useStore();
 
   const history = useHistory();
 
@@ -14,14 +14,6 @@ const Profile = () => {
     const result = uiStore.logoutUser();
     console.log(result);
     history.push("/login");
-  };
-
-  const getUser = async () => {
-    const currentUser = await userStore.getUserByEmail(
-      uiStore.currentUser.email
-    );
-    console.log(currentUser);
-    uiStore.currentUser = currentUser;
   };
 
   return useObserver(() => (

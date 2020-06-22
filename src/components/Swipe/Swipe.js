@@ -29,6 +29,11 @@ const Swipe = () => {
   const [user, setUser] = useState(null);
   const [match, setMatch] = useState(null);
 
+  const deleteMatch = (e) => {
+    e.preventDefault();
+    matchStore.deleteMatch(match);
+  };
+
   const setAccepted = () => {
     if (user === "1") {
       match.accepted1 = "true";
@@ -37,6 +42,17 @@ const Swipe = () => {
     }
     console.log(match);
     matchStore.updateMatch(match);
+  };
+
+  const setDecline = (e) => {
+    if (user === "1") {
+      match.accepted1 = "false";
+    } else {
+      match.accepted2 = "false";
+    }
+    console.log(match);
+    matchStore.updateMatch(match);
+    startSearching(e);
   };
 
   const newMatch = async () => {
@@ -54,7 +70,7 @@ const Swipe = () => {
 
   const startSearching = async (e) => {
     e.preventDefault();
-    uiStore.currentUser.viewingUser = "";
+    uiStore.currentUser.viewingUser = null;
     const openMatches = await matchStore.getMatches(uiStore.currentUser);
     if (openMatches.length === 0) {
       const Nmatch = await createNewMatch();
@@ -86,7 +102,11 @@ const Swipe = () => {
       <header className={style.header}>
         <span></span>
         <h1 className={style.header__title}>Online Dancers</h1>
-        <Link className={style.cancel} to="/login">
+        <Link
+          className={style.cancel}
+          onClick={(e) => deleteMatch(e)}
+          to="/login"
+        >
           <img
             src="../../assets/img/icons/cross.svg"
             alt="Cancel"
@@ -95,13 +115,24 @@ const Swipe = () => {
         </Link>
       </header>
       {searching === true ? (
-        uiStore.currentUser.viewingUser !== "" ? (
+        uiStore.currentUser.viewingUser !== null ? (
           <main className={style.swipe__main}>
             {match !== null ? (
               match.accepted1 === "true" && match.accepted2 === "true" ? (
-                <VideoStartButton />
+                match.roomUrl !== undefined || match.roomUrl !== "" ? (
+                  <button>join call</button>
+                ) : (
+                  <VideoStartButton match={match} />
+                )
+              ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
+                <>
+                  <p>The other user has declined</p>
+                  <button onClick={(e) => startSearching(e)}>
+                    Search new match
+                  </button>
+                </>
               ) : (
-                <p>no match userId2</p>
+                ""
               )
             ) : (
               ""
@@ -109,6 +140,7 @@ const Swipe = () => {
 
             <div className={style.video__wrapper}>
               <video
+                muted
                 className={style.video}
                 src={uiStore.currentUser.viewingUser.video}
                 autoPlay
@@ -136,7 +168,7 @@ const Swipe = () => {
                 <div className={style.buttons}>
                   <button
                     className={style.button__reset}
-                    onClick={(e) => startSearching(e)}
+                    onClick={(e) => setDecline(e)}
                   >
                     <img
                       className={style.button__img}

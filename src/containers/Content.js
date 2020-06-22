@@ -10,32 +10,26 @@ import Profile from "../components/Profile/Profile";
 const Content = () => {
   return (
     <section>
-    <Switch>
-      
-      <Route exact path="/">
-        <Home />
-        <Footer/>
-      </Route>
-
+      <Switch>
+        <Route exact path="/">
+          <Home />
+          <Footer />
+        </Route>
         <Route path="/dances">
           <Dances />
           <Footer />
         </Route>
-
-      <Route path="/profile">
-        <Profile />
-        <Footer />
-      </Route>
-    
-      <Route path="/video">
-        <VideoStartButton />
-      </Route>
-    
-      <Route path="/swipe">
-        <Swipe />
-      </Route>
-    
-    </Switch>
+        <Route path="/profile">
+          <Profile />
+          <Footer />
+        </Route>
+        <Route path="/video">
+          <VideoStartButton />
+        </Route>
+        <Route path="/swipe">
+          <Swipe />
+        </Route>
+      </Switch>
     </section>
   );
 };

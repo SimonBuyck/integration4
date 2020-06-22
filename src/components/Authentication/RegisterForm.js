@@ -20,7 +20,7 @@ const RegisterForm = () => {
   const [Uname, setUName] = useState("");
   const [password, setPassWord] = useState("");
   const [passwordAgain, setPassWordAgain] = useState("");
-  const [videoSource, setVideoSource] = useState('https://firebasestorage.googleapis.com/v0/b/int4-2020.appspot.com/o/videos%2Fdrummer_black.mp4?alt=media&token=a9080e43-e171-45a4-a8b8-65cf36788395');
+  const [videoSource, setVideoSource] = useState("");
   const [dance, setDance] = useState("");
   const [country, setCountry] = useState("");
   const [duo, setDuo] = useState(false);
@@ -154,14 +154,17 @@ const RegisterForm = () => {
                   status === "loading" ? (
                     <p>Video is loading</p>
                   ) : (
-                    <video className={style.video} src={videoSource} autoPlay loop></video>
+                    <video
+                      className={style.video}
+                      src={videoSource}
+                      autoPlay
+                      loop
+                    ></video>
                   )
                 ) : (
                   <p>
                     quotum is overschreden geen video's vandaag{" "}
-                    <span role="img">
-                      😢
-                    </span>
+                    <span role="img">😢</span>
                   </p>
                 )}
                 <input
@@ -239,7 +242,8 @@ const RegisterForm = () => {
             <>
               <h2 className={style.title}>What's your kind of dance?</h2>
               <div className={style.grid2 + " " + style.couple}>
-                <button className={style.button__reset}
+                <button
+                  className={style.button__reset}
                   onClick={function (e) {
                     e.preventDefault();
                     setDuo(false);
@@ -251,7 +255,10 @@ const RegisterForm = () => {
                     src="../../assets/img/signup/solo.svg"
                   ></img>
                 </button>
-                <button className={style.button__reset} onClick={() => setDuo(true)}>
+                <button
+                  className={style.button__reset}
+                  onClick={() => setDuo(true)}
+                >
                   <img
                     alt="couple"
                     width="100%"

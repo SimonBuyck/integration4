@@ -6,6 +6,9 @@ import Footer from "../components/Footer/Footer";
 import Home from "../components/Home/Home";
 import Dances from "../components/Dances/Dances";
 import Profile from "../components/Profile/Profile";
+import Preview from "../components/Preview/Preview";
+import Videocss from "../components/Videocss/Videocss";
+import Feedback from "../components/Feedback/Feedback";
 
 const Content = () => {
   return (
@@ -19,6 +22,7 @@ const Content = () => {
           <Dances />
           <Footer />
         </Route>
+<<<<<<< HEAD
         <Route path="/profile">
           <Profile />
           <Footer />
@@ -30,6 +34,35 @@ const Content = () => {
           <Swipe />
         </Route>
       </Switch>
+=======
+
+      <Route path="/profile">
+        <Profile />
+        <Footer />
+      </Route>
+
+      <Route path="/preview">
+        <Preview />
+      </Route>
+    
+      <Route path="/video">
+        <VideoStartButton />
+      </Route>
+    
+      <Route path="/swipe">
+        <Swipe />
+      </Route>
+
+      <Route path="/videocss">
+        <Videocss />
+      </Route>
+
+      <Route path="/feedback">
+        <Feedback />
+      </Route>
+    
+    </Switch>
+>>>>>>> b16e1c80ab45144f371a5ebb32558caf6f7b0431
     </section>
   );
 };

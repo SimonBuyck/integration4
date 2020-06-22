@@ -23,12 +23,17 @@ const Profile = () => {
         <h1 className={style.header__title}>Your Profile</h1>
         <span></span>
       </header>
-      <main className={style.main && style.main__footer}>
+      <main className={`${style.main} ${style.main__footer}`}>
         <div className={style.preview}>
-          <video
-            src={uiStore.currentUser.video}
-            alt="preview"
-          ></video>
+            <div className={style.video__wrapper}>
+                <video
+                className={style.video}
+                    src={uiStore.currentUser.video}
+                    alt="preview"
+                    autoPlay
+                    loop
+                ></video>
+            </div>
           <Link to="/preview" className={style.link}>
             View Preview
           </Link>
@@ -91,7 +96,7 @@ const Profile = () => {
                 id="switch"
                 name="duo"
                 value="duo"
-                // {uiStore.currentUser.duo ? "checked" : ""}
+                checked={uiStore.currentUser.duo ? "checked" : "unchecked"}
               />
 
               <label className={style.label__checkbox} for="switch"></label>

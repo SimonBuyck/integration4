@@ -9,12 +9,18 @@ import lottie from "lottie-web"
 const Home = () => {
     let animationContainer = React.createRef()
 
+<<<<<<< HEAD
     useEffect(() => {
       lottie.loadAnimation({
+=======
+    React.useEffect(() => {
+      const anim = lottie.loadAnimation({
+>>>>>>> b16e1c80ab45144f371a5ebb32558caf6f7b0431
         container: animationContainer.current,
-        path: "../../assets/animations/header.json",
+        path: "../../assets/animations/header.json"
       });
-    }, [animationContainer]);
+      anim.setSpeed(.3);
+    }, []);
 
 
     return useObserver(() => (
@@ -87,6 +93,8 @@ const Home = () => {
             }
             <p className={style.p}>You haven't done any dances yet.</p>
             <Link to="/swipe" className={style.button}>Find a Dancer</Link>
+            <Link to="/videocss" className={style.button}>Ga naar videoCSS</Link>
+            <Link to="/feedback" className={style.button}>Ga naar Feedback</Link>
         </article>
     </main>
         </>

@@ -164,7 +164,7 @@ const RegisterForm = () => {
                 ) : (
                   <p>
                     quotum is overschreden geen video's vandaag{" "}
-                    <span role="img">😢</span>
+                    <span role="img" aria-label="sad">😢</span>
                   </p>
                 )}
                 <input

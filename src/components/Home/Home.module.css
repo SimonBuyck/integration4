@@ -42,8 +42,8 @@
     grid-row: 1;
     grid-column: 1;
 
-    box-sizing: content-box;
-    border-top: 5px solid background;
+    /* box-sizing: content-box;
+    border-top: 5px solid background; */
     
     display: flex;
     align-items: flex-end;

@@ -1,0 +1,77 @@
+@value tokens: "../../styles/tokens.module.css";
+@value background, colorTitle, colorSecondary, colorTertiary, colorText, colorAlert, fontSizeXSmall, fontSizeSmall, fontSizeXLarge, spacer1, spacer2 from tokens;
+
+.main {
+    padding: 0 2rem;
+    display: grid;
+}
+
+.feedback__wrapper {
+    height: 100vh;
+    width: calc(100vw - 4rem);
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.feedback__wrapper, video {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.video {
+    width: 100vw;
+    margin-left: -2rem;
+    z-index: -1;
+}
+
+.feedback__title {
+    composes: title from "../../styles/typo.module.css";
+    margin-bottom: 3rem;
+}
+
+.rating__wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.rating{
+    transform:rotateY(180deg);
+    display:flex;
+}
+
+.rating > input {
+    display: none;
+}
+
+.rating > label {
+    display: block;
+    cursor: pointer;
+    width:5rem
+}
+
+.rating > label:before {
+    content: url('./star_unchecked.svg');
+    position: relative;
+    display: block;
+    font-size:5rem;
+}
+
+.rating > label:after {
+    content: url('./star_checked.svg');
+    position: absolute;
+    display: block;
+    font-size:5rem;
+    top: 0;
+    opacity: 0;
+    width: 5rem;
+}
+
+.rating > label:hover:after,
+.rating > input:checked ~ label:after{
+    opacity: 1;
+}
+
+.button {
+    composes: button from "../../styles/typo.module.css";
+}

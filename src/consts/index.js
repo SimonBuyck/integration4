@@ -5,7 +5,8 @@ const ROUTES = {
   profile: "/profile",
   preview: "/preview",
   dances: "/dances",
-  videocss: "/videocss"
+  videocss: "/videocss",
+  feedback: "/feedback"
 };
 
 export { ROUTES };

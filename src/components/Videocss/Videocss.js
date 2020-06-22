@@ -16,8 +16,8 @@ const Videocss = () => {
     
     return useObserver(() => (
         <main className={style.call__wrapper}>
-            
-{/* DEZE STATES STAAN OOK IN CONTACT MET DE BUTTONS DIE DE GEBRRUIKER TE ZIEN KRIJGT
+
+{/* DEZE STATES STAAN OOK IN CONTACT MET DE BUTTONS DIE DE GEBRRUIKER TE ZIEN KRIJGT (ZIE FIGMA)
 
             <section className={style.call__alerts}>
 

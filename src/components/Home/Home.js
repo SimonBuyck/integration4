@@ -10,11 +10,12 @@ const Home = () => {
     let animationContainer = React.createRef()
 
     React.useEffect(() => {
-      lottie.loadAnimation({
+      const anim = lottie.loadAnimation({
         container: animationContainer.current,
-        path: "../../assets/animations/header.json",
+        path: "../../assets/animations/header.json"
       });
-    }, [animationContainer]);
+      anim.setSpeed(.3);
+    }, []);
 
 
     return useObserver(() => (
@@ -88,6 +89,7 @@ const Home = () => {
             <p className={style.p}>You haven't done any dances yet.</p>
             <Link to="/swipe" className={style.button}>Find a Dancer</Link>
             <Link to="/videocss" className={style.button}>Ga naar videoCSS</Link>
+            <Link to="/feedback" className={style.button}>Ga naar Feedback</Link>
         </article>
     </main>
         </>

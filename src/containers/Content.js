@@ -8,6 +8,7 @@ import Dances from "../components/Dances/Dances";
 import Profile from "../components/Profile/Profile";
 import Preview from "../components/Preview/Preview";
 import Videocss from "../components/Videocss/Videocss";
+import Feedback from "../components/Feedback/Feedback";
 
 const Content = () => {
   return (
@@ -43,6 +44,10 @@ const Content = () => {
 
       <Route path="/videocss">
         <Videocss />
+      </Route>
+
+      <Route path="/feedback">
+        <Feedback />
       </Route>
     
     </Switch>

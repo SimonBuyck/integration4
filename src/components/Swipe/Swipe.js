@@ -106,7 +106,7 @@ const Swipe = () => {
         <Link
           className={style.cancel}
           onClick={(e) => deleteMatch(e)}
-          to="/login"
+          to="/home"
         >
           <img
             src="../../assets/img/icons/cross.svg"
@@ -125,9 +125,7 @@ const Swipe = () => {
                     <article className={style.searching__wrapper}>
                       <h2 className={style.title}>It's a match!</h2>
                       <img className={style.illustration} alt="match" src="../../assets/img/illustrations/match.svg"></img>
-                      <button className={style.button}>
-                      Join 
-                      </button>
+                      <VideoStartButton match={match} />
                     </article>
                   </main>
                 ) : (
@@ -198,7 +196,7 @@ const Swipe = () => {
             )  
         ) : (
           <>
-            <div className={style.main__nofooter + " " + style.searching} ref={animationCon}>
+            <div className={style.main__nofooter + " " + style.searching}>
               <article className={style.searching__wrapper + " " + style.grid__child}>
               <img className={style.illustration} alt="searching" src="../../assets/img/illustrations/searching.svg"></img>
                 <p className={style.title}>Searching for Matches...</p>

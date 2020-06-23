@@ -26,8 +26,6 @@ const MatchPartner = ({ match }) => {
           <video
             className={style.item__img}
             src={user.video}
-            autoPlay
-            loop
           ></video>
           <p className={style.item__country}>{user.country}</p>
           <div className={style.item__info}>

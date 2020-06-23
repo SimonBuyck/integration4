@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./StartButton.module.css";
 
 /**
  * Props:
@@ -8,11 +9,11 @@ import React from "react";
 export default function StartButton(props) {
   return (
     <button
-      className="start-button"
       disabled={props.disabled}
       onClick={props.onClick}
+      className={style.button}
     >
-      Click to join the call
+      Join Video Call
     </button>
   );
 }

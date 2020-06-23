@@ -8,6 +8,8 @@ import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../../urlUtils";
 import DailyIframe from "@daily-co/daily-js";
 import { logDailyEvent } from "../../logUtils";
 import { useStore } from "../../hooks/useStore";
+import style from "./Video.module.css";
+
 
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
@@ -115,7 +117,7 @@ export default function VideoStartButton({ match, roomUrlMatch }) {
   const enableStartButton = appState === STATE_IDLE;
 
   return (
-    <div className="app">
+    <div className={style.main}>
       {showCall ? (
           <CallObjectContext.Provider value={callObject}>
             <Call roomUrl={roomUrl} />

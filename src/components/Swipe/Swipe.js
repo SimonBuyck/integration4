@@ -112,7 +112,6 @@ const Swipe = () => {
 
       {searching === true ? (
         uiStore.currentUser.viewingUser !== null ? (
-<<<<<<< HEAD
           match !== null ? (
             match.accepted1 === "true" && match.accepted2 === "true" ? (
               match.roomUrl !== undefined || match.roomUrl !== "" ? (
@@ -137,83 +136,6 @@ const Swipe = () => {
                   </button>
                 </article>
               </main>
-=======
-            match !== null ? (
-              match.accepted1 === "true" && match.accepted2 === "true" ? (
-                match.roomUrl !== undefined || match.roomUrl !== "" ? (
-                  <main className={`${style.main} ${style.main__nofooter}`}>
-                    <article className={style.searching__wrapper}>
-                      <h2 className={style.title}>It's a match!</h2>
-                      <img className={style.illustration} alt="match" src="../../assets/img/illustrations/match.svg"></img>
-                      <button className={style.button}>
-                      Join 
-                      </button>
-                    </article>
-                  </main>
-                ) : (
-                  <VideoStartButton match={match} />
-                )
-              ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
-                <main className={`${style.main} ${style.main__nofooter}`}>
-                  <article className={style.searching__wrapper}>
-                    <h2 className={style.title}>There wasn't a match</h2>
-                    <img className={style.illustration} alt="Not a match" src="../../assets/img/illustrations/no_match.svg"></img>
-                    <button className={style.button} onClick={(e) => startSearching(e)}>
-                    Find New Dance
-                    </button>
-                  </article>
-                </main>
-              ) : (
-                <main className={style.swipe__main}>
-              <div className={style.video__wrapper}>
-              <video
-                className={style.video}
-                src={uiStore.currentUser.viewingUser.video}
-                autoPlay
-                loop
-              ></video>
-            </div>
-            <div className={style.info__wrapper}>
-              <div className={style.info}>
-                <h2 className={style.info__title}>
-                  {uiStore.currentUser.viewingUser.dance}{" "}
-                  <span className={style.info__title__country}>
-                    ({uiStore.currentUser.viewingUser.country})
-                  </span>
-                </h2>
-                <p className={style.info__user}>
-                  {uiStore.currentUser.viewingUser.name}
-
-                  {uiStore.currentUser.viewingUser.duo ? (
-                    <span> & {uiStore.currentUser.viewingUser.partner}</span>
-                  ) : (
-                    ""
-                  )}
-                </p>
-
-                <div className={style.buttons}>
-                  <div className={style.button__wrapper}>
-                  <button
-                    className={`${style.button__reset} ${style.button__skip}`}
-                    onClick={(e) => setDecline(e)}
-                  >
-          
-                  </button>
-                  </div>
-                  <div className={style.button__wrapper}>
-                  <button
-                    className={`${style.button__reset} ${style.button__accept}`}
-                    onClick={(e) => setAccepted(e)}
-                  >
-          
-                  </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </main>
-              )
->>>>>>> dc7420a25ad832714da73ceaab9a93f44f0e3929
             ) : (
               <main className={style.swipe__main}>
                 <div className={style.video__wrapper}>

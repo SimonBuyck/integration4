@@ -23,11 +23,18 @@ const MatchPartner = ({ match }) => {
     <>
       {user !== null ? (
         <div className={style.item}>
-          <img
+          <video
             className={style.item__img}
+<<<<<<< HEAD
             src="../../assets/img/placeholders/placeholder3.jpg"
             alt="dancer"
           ></img>
+=======
+            src={user.video}
+            autoPlay
+            loop
+          ></video>
+>>>>>>> dc7420a25ad832714da73ceaab9a93f44f0e3929
           <p className={style.item__country}>{user.country}</p>
           <div className={style.item__info}>
             <p>{user.duo ? `${user.name} & ${user.partner}` : user.name}</p>

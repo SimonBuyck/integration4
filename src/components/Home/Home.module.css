@@ -9,6 +9,10 @@
     composes: main__footer from "../../styles/layout.module.css";
 }
 
+.main::-webkit-scrollbar {
+    display: none;
+  }
+
 .home__header {
     width: calc(100% - 4rem);
     height: 5rem;
@@ -109,6 +113,8 @@
 
 .item__img {
     width: 100%;
+    z-index: -1;
+    border-radius: .5rem;
 }
 
 .item__country {

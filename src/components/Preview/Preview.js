@@ -3,25 +3,12 @@ import React from "react";
 // import Content from "../../containers/Content/Content";
 import { Link } from "react-router-dom";
 // import { ROUTES } from "../../consts";
-// import LoginForm from "./LoginForm";
-// import AppHeader from "../../containers/Sidebar/AppHeader";
-// import style from "./Authentication.module.css";
-// import RegisterForm from "./RegisterForm";
 import style from "./Preview.module.css";
-import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
+import { useStore } from "../../hooks/useStore";
 
 const Preview = () => {
-  const { uiStore, userStore } = useStore();
-
-  const getUser = async () => {
-    const currentUser = await userStore.getUserByEmail(
-      uiStore.currentUser.email
-    );
-    console.log(currentUser);
-    uiStore.currentUser = currentUser;
-  };
-  console.log(getUser)
+  const {uiStore} = useStore();
 
   return useObserver(() => (
     <>

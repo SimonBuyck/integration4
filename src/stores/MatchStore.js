@@ -42,7 +42,7 @@ class MatchStore {
   };
 
   addMatch = async (match) => {
-    this.matches.push(match);
+    this.matches.push(match); 
   };
 
   empty() {

@@ -28,7 +28,7 @@ const MatchPartner = ({ match }) => {
             src="../../assets/img/placeholders/placeholder3.jpg"
             alt="dancer"
           ></img>
-          <p className={style.item__country}>{user.dance}</p>
+          <p className={style.item__country}>{user.country}</p>
           <div className={style.item__info}>
             <p>{user.duo ? `${user.name} & ${user.partner}` : user.name}</p>
             <p className={style.item__info__dance}>{user.dance}</p>

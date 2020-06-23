@@ -32,16 +32,6 @@ class UserService {
     return data;
   };
 
-  getAllSearchingUsers = async () => {
-    const snapshot = await this.db
-      .collection("users")
-      .where("status", "==", "searching")
-      .get();
-    return snapshot.docs.map((o) => {
-      return o.data();
-    });
-  };
-
   getAll = async () => {
     const snapshot = await this.db.collection("users").get();
     return snapshot.docs.map((o) => {

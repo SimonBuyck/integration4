@@ -39,6 +39,7 @@
     filter: brightness(50%);
     opacity: .7;
     border-radius: .5rem;
+    object-fit: cover;
 }
 
 .preview > a {

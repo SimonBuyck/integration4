@@ -4,6 +4,7 @@ import style from "./Dances.module.css";
 import { useObserver } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 import MatchPartner from "../MatchPartner/MatchPartner";
+import { v4 } from "uuid";
 
 const Profile = () => {
   const { uiStore } = useStore();
@@ -19,7 +20,7 @@ const Profile = () => {
         {uiStore.currentUser.matches.length !== 0 ? (
           <section className={style.items}>
             {uiStore.currentUser.matches.map((m) => (
-            <MatchPartner match={m} />
+            <MatchPartner key={v4()} match={m} />
             ))}
           </section>
         ) : (

@@ -77,14 +77,35 @@ const Home = () => {
               ""
             )}
           </div>
-          <section className={style.items}>
-            <MatchPartner match={uiStore.currentUser.matches[0]}/>
-            <MatchPartner match={uiStore.currentUser.matches[1]}/>
-          </section>
-          <p className={style.p}>You haven't done any dances yet.</p>
-          <Link to="/swipe" className={style.button}>
-            Find a Dancer
-          </Link>
+          {uiStore.currentUser.matches.length !== 0 ? (
+            <section className={style.items}>
+              <MatchPartner
+                match={
+                  uiStore.currentUser.matches[
+                    Math.floor(
+                      Math.random() * uiStore.currentUser.matches.length
+                    )
+                  ]
+                }
+              />
+              <MatchPartner
+                match={
+                  uiStore.currentUser.matches[
+                    Math.floor(
+                      Math.random() * uiStore.currentUser.matches.length
+                    )
+                  ]
+                }
+              />
+            </section>
+          ) : (
+            <>
+              <p className={style.p}>You haven't done any dances yet.</p>
+              <Link to="/swipe" className={style.button}>
+                Find a Dancer
+              </Link>
+            </>
+          )}
           <Link to="/videocss" className={style.button}>
             Ga naar videoCSS
           </Link>

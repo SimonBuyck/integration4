@@ -13,8 +13,6 @@ export { ROUTES };
 
 /* TO DO:
 
--Video call
-  -Gebruikers laten connecten dmv match
   -Bepaalde states instellen
     1/2:
       gebruiker is leerling
@@ -29,10 +27,6 @@ export { ROUTES };
 
 -Match
   -Gebruiker die geskipt wordt krijgt automatisch het 'searching' scherm te zien
-
--Alle previous matches renderen op de '/dances' page
-
--Laatste 2 matches renderen op homepage
 
 -2 online gebruikers renderen op homepage
 

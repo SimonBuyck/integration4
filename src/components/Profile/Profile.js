@@ -30,8 +30,6 @@ const Profile = () => {
                 className={style.video}
                     src={uiStore.currentUser.video}
                     alt="preview"
-                    autoPlay
-                    loop
                 ></video>
             </div>
           <Link to="/preview" className={style.link}>

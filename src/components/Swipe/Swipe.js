@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import Sidebar from "../../containers/Sidebar/Sidebar";
-// import Content from "../../containers/Content/Content";
 import { Link } from "react-router-dom";
-// import { ROUTES } from "../../consts";
-// import LoginForm from "./LoginForm";
-// import AppHeader from "../../containers/Sidebar/AppHeader";
-// import style from "./Authentication.module.css";
-// import RegisterForm from "./RegisterForm";
+import { ROUTES } from "../../consts";
 import style from "./Swipe.module.css";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
@@ -106,7 +100,7 @@ const Swipe = () => {
         <Link
           className={style.cancel}
           onClick={(e) => deleteMatch(e)}
-          to="/home"
+          to="/"
         >
           <img
             src="../../assets/img/icons/cross.svg"
@@ -118,82 +112,90 @@ const Swipe = () => {
 
       {searching === true ? (
         uiStore.currentUser.viewingUser !== null ? (
-            match !== null ? (
-              match.accepted1 === "true" && match.accepted2 === "true" ? (
-                match.roomUrl !== undefined || match.roomUrl !== "" ? (
-                  <main className={`${style.main} ${style.main__nofooter}`}>
-                    <article className={style.searching__wrapper}>
-                      <h2 className={style.title}>It's a match!</h2>
-                      <img className={style.illustration} alt="match" src="../../assets/img/illustrations/match.svg"></img>
-                      <VideoStartButton match={match} />
-                    </article>
-                  </main>
-                ) : (
-                  <VideoStartButton match={match} />
-                )
-              ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
+          match !== null ? (
+            match.accepted1 === "true" && match.accepted2 === "true" ? (
+              match.roomUrl !== undefined || match.roomUrl !== "" ? (
                 <main className={`${style.main} ${style.main__nofooter}`}>
                   <article className={style.searching__wrapper}>
-                    <h2 className={style.title}>There wasn't a match</h2>
-                    <img className={style.illustration} alt="Not a match" src="../../assets/img/illustrations/no_match.svg"></img>
-                    <button className={style.button} onClick={(e) => startSearching(e)}>
-                    Find New Dance
-                    </button>
+                    <h2 className={style.title}>It's a match!</h2>
+                    <button className={style.button}>Join</button>
                   </article>
                 </main>
               ) : (
-                <main className={style.swipe__main}>
-              <div className={style.video__wrapper}>
-              <video
-                className={style.video}
-                src={uiStore.currentUser.viewingUser.video}
-                autoPlay
-                loop
-              ></video>
-            </div>
-            <div className={style.info__wrapper}>
-              <div className={style.info}>
-                <h2 className={style.info__title}>
-                  {uiStore.currentUser.viewingUser.dance}{" "}
-                  <span className={style.info__title__country}>
-                    ({uiStore.currentUser.viewingUser.country})
-                  </span>
-                </h2>
-                <p className={style.info__user}>
-                  {uiStore.currentUser.viewingUser.name}
-
-                  {uiStore.currentUser.viewingUser.duo ? (
-                    <span> & {uiStore.currentUser.viewingUser.partner}</span>
-                  ) : (
-                    ""
-                  )}
-                </p>
-
-                <div className={style.buttons}>
-                  <div className={style.button__wrapper}>
+                <VideoStartButton match={match} />
+              )
+            ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
+              <main className={`${style.main} ${style.main__nofooter}`}>
+                <article className={style.searching__wrapper}>
+                  <h2 className={style.title}>There wasn't a match</h2>
                   <button
-                    className={`${style.button__reset} ${style.button__skip}`}
-                    onClick={(e) => setDecline(e)}
+                    className={style.button}
+                    onClick={(e) => startSearching(e)}
                   >
-          
+                    Find New Dance
                   </button>
-                  </div>
-                  <div className={style.button__wrapper}>
-                  <button
-                    className={`${style.button__reset} ${style.button__accept}`}
-                    onClick={(e) => setAccepted(e)}
-                  >
-          
-                  </button>
+                </article>
+              </main>
+            ) : (
+              <main className={style.swipe__main}>
+                <div className={style.video__wrapper}>
+                  <video
+                    className={style.video}
+                    src={uiStore.currentUser.viewingUser.video}
+                    autoPlay
+                    loop
+                  ></video>
+                </div>
+                <div className={style.info__wrapper}>
+                  <div className={style.info}>
+                    <h2 className={style.info__title}>
+                      {uiStore.currentUser.viewingUser.dance}{" "}
+                      <span className={style.info__title__country}>
+                        ({uiStore.currentUser.viewingUser.country})
+                      </span>
+                    </h2>
+                    <p className={style.info__user}>
+                      {uiStore.currentUser.viewingUser.name}
+
+                      {uiStore.currentUser.viewingUser.duo ? (
+                        <span>
+                          {" "}
+                          & {uiStore.currentUser.viewingUser.partner}
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </p>
+
+                    <div className={style.buttons}>
+                      <button
+                        className={style.button__reset}
+                        onClick={(e) => setDecline(e)}
+                      >
+                        <img
+                          className={style.button__img}
+                          src="../../assets/img/icons/skip.svg"
+                          alt="skip"
+                        ></img>
+                      </button>
+                      <button
+                        className={style.button__reset}
+                        onClick={(e) => setAccepted(e)}
+                      >
+                        <img
+                          className={style.button__img}
+                          src="../../assets/img/icons/accept.svg"
+                          alt="accept"
+                        ></img>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </main>
-              )
-            ) : (
-              ""
-            )  
+              </main>
+            )
+          ) : (
+            ""
+          )
         ) : (
           <>
             <div className={style.main__nofooter + " " + style.searching}>

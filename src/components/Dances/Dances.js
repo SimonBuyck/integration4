@@ -5,6 +5,7 @@ import { useObserver } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 import MatchPartner from "../MatchPartner/MatchPartner";
 import { v4 } from "uuid";
+import { ROUTES } from "../../consts";
 
 const Profile = () => {
   const { uiStore } = useStore();
@@ -26,30 +27,11 @@ const Profile = () => {
         ) : (
           <>
             <p className={style.p}>You haven't done any dances yet.</p>
-            <Link to="/swipe" className={style.button}>
+            <Link to={ROUTES.swipe} className={style.button}>
               Find a Dancer
             </Link>
           </>
         )}
-        {
-          //if there are previous dances:
-        }
-        {/* 
-
-            //for each van last dances
-                <div className={style.item}>
-                        <img className={style.item__img} src="../../assets/img/placeholders/placeholder2.jpeg" alt="dancer"></img>
-                    <p className={style.item__country}>Kenia</p>
-                    <div className={style.item__info}>
-                        <p>Fiza</p> 
-                        <p className={style.item__info__dance}>Adumu</p>
-                    </div>
-                </div>
-
-            </section> */}
-        {
-          //else:
-        }
       </main>
     </>
   ));

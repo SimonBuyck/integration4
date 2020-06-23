@@ -1,11 +1,6 @@
 import React from "react";
 import style from "./StartButton.module.css";
 
-/**
- * Props:
- * - disabled: boolean
- * - onClick: () => ()
- */
 export default function StartButton(props) {
   return (
     <button

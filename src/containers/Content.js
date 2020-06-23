@@ -9,45 +9,45 @@ import Profile from "../components/Profile/Profile";
 import Preview from "../components/Preview/Preview";
 import Videocss from "../components/Videocss/Videocss";
 import Feedback from "../components/Feedback/Feedback";
+import { ROUTES } from "../consts";
 
 const Content = () => {
   return (
     <section>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={ROUTES.home}>
           <Home />
           <Footer />
         </Route>
-        <Route path="/dances">
+        <Route path={ROUTES.dances}>
           <Dances />
           <Footer />
         </Route>
-        <Route path="/profile">
-        <Profile />
-        <Footer />
-      </Route>
+        <Route path={ROUTES.profile}>
+          <Profile />
+          <Footer />
+        </Route>
 
-      <Route path="/preview">
-        <Preview />
-      </Route>
-    
-      <Route path="/video">
-        <VideoStartButton />
-      </Route>
-    
-      <Route path="/swipe">
-        <Swipe />
-      </Route>
+        <Route path={ROUTES.preview}>
+          <Preview />
+        </Route>
 
-      <Route path="/videocss">
-        <Videocss />
-      </Route>
+        <Route path={ROUTES.video}>
+          <VideoStartButton />
+        </Route>
 
-      <Route path="/feedback">
-        <Feedback />
-      </Route>
-    
-    </Switch>
+        <Route path={ROUTES.swipe}>
+          <Swipe />
+        </Route>
+
+        <Route path={ROUTES.videocss}>
+          <Videocss />
+        </Route>
+
+        <Route path={ROUTES.feedback}>
+          <Feedback />
+        </Route>
+      </Switch>
     </section>
   );
 };

@@ -25,7 +25,8 @@ const MatchPartner = ({ match }) => {
         <div className={style.item}>
           <video
             className={style.item__img}
-            src={user.video}
+            src="../../assets/img/placeholders/placeholder3.jpg"
+            alt="dancer"
           ></video>
           <p className={style.item__country}>{user.country}</p>
           <div className={style.item__info}>

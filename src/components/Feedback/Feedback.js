@@ -1,21 +1,14 @@
-import React from "react";
-// import Sidebar from "../../containers/Sidebar/Sidebar";
-// import Content from "../../containers/Content/Content";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { ROUTES } from "../../consts";
-// import LoginForm from "./LoginForm";
-// import AppHeader from "../../containers/Sidebar/AppHeader";
-// import style from "./Authentication.module.css";
-// import RegisterForm from "./RegisterForm";
+import { ROUTES } from "../../consts";
 import style from "./Feedback.module.css";
-// import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";
 import lottie from "lottie-web"
 
 const Feedback = () => {
     let animationContainer = React.createRef()
 
-    React.useEffect(() => {
+    useEffect(() => {
       lottie.loadAnimation({
         container: animationContainer.current,
         path: "../../assets/animations/background.json"
@@ -37,7 +30,7 @@ const Feedback = () => {
                             <input type="radio" id="star1" name="star" value="1"></input><label for="star1"></label>
                         </div>
                     </section>
-                    <Link to="/" className={style.button}>Send Feedback</Link>
+                    <Link to={ROUTES.home} className={style.button}>Send Feedback</Link>
                 </article>
             </div>
             <video className={style.video} src="../../assets/animations/firework.mp4" alt="firework" autoPlay></video>

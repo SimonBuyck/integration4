@@ -1,5 +1,7 @@
 const ROUTES = {
   home: "/",
+  login: "/login",
+  register: "/register",
   swipe: "/swipe",
   video: "/video",
   profile: "/profile",

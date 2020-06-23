@@ -100,7 +100,6 @@ export default function VideoStartButton({ match, roomUrlMatch }) {
       callObject.on(event, handleNewMeetingState);
     }
 
-    // Stop listening for changes in state
     return function cleanup() {
       for (const event of events) {
         callObject.off(event, handleNewMeetingState);

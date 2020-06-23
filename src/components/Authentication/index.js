@@ -2,28 +2,24 @@ import React from "react";
 // import Sidebar from "../../containers/Sidebar/Sidebar";
 // import Content from "../../containers/Content/Content";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
-// import { ROUTES } from "../../consts";
-// import LoginForm from "./LoginForm";
-// import AppHeader from "../../containers/Sidebar/AppHeader";
 import style from "./Authentication.module.css";
-// import RegisterForm from "./RegisterForm";
 import { useObserver } from "mobx-react-lite";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import Content from "../../containers/Content";
-// import HeaderNav from "../../containers/HeaderNav/HeaderNav";
+import { ROUTES } from "../../consts";
 
 const Authentication = () => {
   const { uiStore } = useStore();
 
   return useObserver(() => (
     <>
-      {uiStore.currentUser ? <Content /> : <Redirect to="/login" />}
+      {uiStore.currentUser ? <Content /> : <Redirect to={ROUTES.Login} />}
       <Switch>
-        <Route exact path="/login">
+        <Route exact path={ROUTES.login}>
           {uiStore.currentUser ? (
-            <Redirect to="/" />
+            <Redirect to={ROUTES.home} />
           ) : (
             <>
               <header className={style.header}></header>
@@ -32,7 +28,7 @@ const Authentication = () => {
                 <h2 className={style.subtitle}>Login</h2>
                 <LoginForm />
                 <div className={style.button + " " + style.button__secondary}>
-                  <NavLink to="/register">
+                  <NavLink to={ROUTES.register}>
                     <span className={style.signup}>Sign up</span>
                   </NavLink>
                 </div>
@@ -41,13 +37,13 @@ const Authentication = () => {
           )}
         </Route>
 
-        <Route exact path="/register">
+        <Route exact path={ROUTES.register}>
           {uiStore.currentUser ? (
-            <Redirect to="/" />
+            <Redirect to={ROUTES.home} />
           ) : (
             <>
               <header className={style.header}>
-                <NavLink className={style.return} to="/login">
+                <NavLink className={style.return} to={ROUTES.login}>
                   <img
                     src="../../assets/img/icons/back_arrow.svg"
                     alt="Sign up"

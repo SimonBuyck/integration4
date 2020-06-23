@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
+import { ROUTES } from "../../consts";
 
 const HeaderNav = () => {
   const { userStore, uiStore } = useStore();
@@ -17,11 +18,11 @@ const HeaderNav = () => {
 
   return (
     <section>
-      <Link to="/video" onClick={(e) => changeStatus(e, "offline")}>
+      <Link to={ROUTES.login} onClick={(e) => changeStatus(e, "offline")}>
         video
       </Link>
       <p></p>
-      <Link to="/swipe" onClick={(e) => changeStatus(e, "searching")}>
+      <Link to={ROUTES.swipe} onClick={(e) => changeStatus(e, "searching")}>
         swipe
       </Link>
     </section>

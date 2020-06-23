@@ -5,6 +5,7 @@ import { useObserver } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 import lottie from "lottie-web";
 import MatchPartner from "../MatchPartner/MatchPartner";
+import { ROUTES } from "../../consts";
 
 const Home = () => {
   const { uiStore } = useStore();
@@ -30,7 +31,7 @@ const Home = () => {
           <h2 className={style.subtitle}>Dance Around the World</h2>
           <div className={style.main__header} ref={animationContainer}>
             <section className={style.main__header__subcontainer}>
-              <Link to="/swipe" className={style.main__header__button}>
+              <Link to={ROUTES.swipe} className={style.main__header__button}>
                 Dance Now{" "}
                 <img src="../../assets/img/icons/search.svg" alt="search"></img>
               </Link>
@@ -72,7 +73,7 @@ const Home = () => {
           <div className={style.subtitle__wrapper}>
             <h2 className={style.subtitle}>Your Last Dances</h2>
             {uiStore.currentUser.matches.length !== 0 ? (
-              <Link to="/dances">View All</Link>
+              <Link to={ROUTES.dances}>View All</Link>
             ) : (
               ""
             )}
@@ -101,15 +102,15 @@ const Home = () => {
           ) : (
             <>
               <p className={style.p}>You haven't done any dances yet.</p>
-              <Link to="/swipe" className={style.button}>
+              <Link to={ROUTES.swipe} className={style.button}>
                 Find a Dancer
               </Link>
             </>
           )}
-          <Link to="/videocss" className={style.button}>
+          <Link to={ROUTES.videocss} className={style.button}>
             Ga naar videoCSS
           </Link>
-          <Link to="/feedback" className={style.button}>
+          <Link to={ROUTES.feedback} className={style.button}>
             Ga naar Feedback
           </Link>
         </article>

@@ -7,11 +7,6 @@ import TrayButton, {
 import CallObjectContext from "../../CallObjectContext";
 import { logDailyEvent } from "../../logUtils";
 
-/**
- * Gets [isCameraMuted, isMicMuted, isSharingScreen].
- * This function is declared outside Tray() so it's not recreated every render
- * (which would require us to declare it as a useEffect dependency).
- */
 function getStreamStates(callObject) {
   let isCameraMuted,
     isMicMuted = false;
@@ -27,11 +22,6 @@ function getStreamStates(callObject) {
   return [isCameraMuted, isMicMuted];
 }
 
-/**
- * Props:
- * - onClickLeaveCall: () => ()
- * - disabled: boolean
- */
 export default function Tray(props) {
   const callObject = useContext(CallObjectContext);
   const [isCameraMuted, setCameraMuted] = useState(false);
@@ -49,10 +39,6 @@ export default function Tray(props) {
     props.onClickLeaveCall && props.onClickLeaveCall();
   }
 
-  /**
-   * Start listening for participant changes when callObject is set (i.e. when the component mounts).
-   * This event will capture any changes to your audio/video mute state.
-   */
   useEffect(() => {
     if (!callObject) return;
 
@@ -65,13 +51,10 @@ export default function Tray(props) {
       setMicMuted(isMicMuted);
     }
 
-    // Use initial state
     handleNewParticipantsState();
 
-    // Listen for changes in state
     callObject.on("participant-updated", handleNewParticipantsState);
 
-    // Stop listening for changes in state
     return function cleanup() {
       callObject.off("participant-updated", handleNewParticipantsState);
     };

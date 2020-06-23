@@ -6,14 +6,6 @@ import Icon, {
   TYPE_LEAVE,
 } from "../Icon/Icon";
 
-/**
- * Props:
- * - type: string
- * - disabled: boolean
- * - highlighted: boolean
- * - onClick: () => ()
- * - newButtonGroup: boolean
- */
 export default function TrayButton(props) {
   return (
     <button

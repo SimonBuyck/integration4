@@ -32,7 +32,8 @@
 }
 
 .title {
-  composes: subtitle from "../../styles/typo.module.css";
+  font-size: 2.5rem;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -179,4 +180,8 @@
   100% {
     transform: translate(0, 0);
   }
+}
+
+.illustration {
+  margin-top: 2rem;
 }

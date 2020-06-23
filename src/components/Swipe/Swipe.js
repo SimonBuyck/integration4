@@ -124,6 +124,7 @@ const Swipe = () => {
                   <main className={`${style.main} ${style.main__nofooter}`}>
                     <article className={style.searching__wrapper}>
                       <h2 className={style.title}>It's a match!</h2>
+                      <img className={style.illustration} alt="match" src="../../assets/img/illustrations/match.svg"></img>
                       <button className={style.button}>
                       Join 
                       </button>
@@ -136,6 +137,7 @@ const Swipe = () => {
                 <main className={`${style.main} ${style.main__nofooter}`}>
                   <article className={style.searching__wrapper}>
                     <h2 className={style.title}>There wasn't a match</h2>
+                    <img className={style.illustration} alt="Not a match" src="../../assets/img/illustrations/no_match.svg"></img>
                     <button className={style.button} onClick={(e) => startSearching(e)}>
                     Find New Dance
                     </button>
@@ -197,10 +199,9 @@ const Swipe = () => {
         ) : (
           <>
             <div className={style.main__nofooter + " " + style.searching} ref={animationCon}>
-              <article
-                className={style.searching__wrapper + " " + style.grid__child}
-              >
-                <p>Searching for Matches...</p>
+              <article className={style.searching__wrapper + " " + style.grid__child}>
+              <img className={style.illustration} alt="searching" src="../../assets/img/illustrations/searching.svg"></img>
+                <p className={style.title}>Searching for Matches...</p>
                 <div className={style.load_wrapp}>
                   <div className={style.load3}>
                     <div className={style.line}></div>
@@ -216,6 +217,7 @@ const Swipe = () => {
         <main className={`${style.main} ${style.main__nofooter}`}>
           <article className={style.searching__wrapper}>
             <h2 className={style.title}>Start Searching</h2>
+            <img className={style.illustration} alt="start searching" src="../../assets/img/illustrations/start_search.svg"></img>
             <button className={style.button} onClick={(e) => startSearching(e)}>
               Find Dance
             </button>

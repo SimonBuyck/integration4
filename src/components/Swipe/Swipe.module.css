@@ -37,11 +37,11 @@
 }
 
 .searching__wrapper {
-    height: calc(100vh - 10rem);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column;
+  height: calc(100vh - 10rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 }
 
 .swipe__main {
@@ -49,14 +49,14 @@
 }
 
 .video__wrapper {
-    height: calc(100vh - 5rem);
-    display: flex;
-    align-items: center;
-    z-index: -1;
-    grid-row: 1;
-    grid-column: 1;
-    width: 100vw;
-    overflow: hidden;
+  height: calc(100vh - 5rem);
+  display: flex;
+  align-items: center;
+  z-index: -1;
+  grid-row: 1;
+  grid-column: 1;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .video {
@@ -98,63 +98,85 @@
   margin: 2rem 2rem 0;
 }
 
+.button__wrapper {
+  display:flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .button__reset {
-    background: none;
-    border: none;
-    width: 100%;
-    
-    display:flex;
-    justify-content: center;
+  background: none;
+  border: none;
+  width: 5rem;
+  height: 5rem;
+}
+
+.button__skip {
+  background-image: url(./skip.svg);
+  background-size: cover;
+}
+
+.button__accept {
+  background-image: url(./accept_blue.svg);
+  background-size: cover;
+}
+
+.button__accept:focus {
+  background-image: url(./accept.svg);
+  background-size: cover;
 }
 
 .button__img {
-    height: 5rem;
-    width: 5rem;
+  height: 5rem;
+  width: 5rem;
 }
 
 .searching {
-    display: grid;
-    background: background;
-    background-image: url(background_image2.svg);
-    background-size: cover;
+  display: grid;
+  background: background;
 }
 
 .searching > svg, .grid__child {
-    grid-row: 1;
-    grid-column: 1;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.searching > svg {
+  width: calc(100vw + 6rem);
+  margin-left: -2rem;
 }
 
 .load3 {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .line {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    margin: .2rem;
-    border-radius: 15px;
-    background-color: colorSecondary;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: .2rem;
+  border-radius: 15px;
+  background-color: colorSecondary;
 }
 
 .load3 .line:nth-last-child(1) {
-    animation: loading 0.6s 0.1s linear infinite;
+  animation: loading 0.6s 0.1s linear infinite;
 }
 .load3 .line:nth-last-child(2) {
-    animation: loading 0.6s 0.2s linear infinite;
+  animation: loading 0.6s 0.2s linear infinite;
 }
 .load3 .line:nth-last-child(3) {
-    animation: loading 0.6s 0.3s linear infinite;
+  animation: loading 0.6s 0.3s linear infinite;
 }
 
 @keyframes loading {
-    0 {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(0, 15px);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
+  0 {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }

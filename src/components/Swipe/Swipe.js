@@ -18,10 +18,12 @@ const Swipe = () => {
   let animationCon = React.createRef();
 
   useEffect(() => {
-    lottie.loadAnimation({
+    const anim = lottie.loadAnimation({
       container: animationCon.current,
-      path: "../../assets/animations/header.json",
+      path: "../../assets/animations/background.json",
+      loop: true,
     });
+    anim.setSpeed(1)
   }, [animationCon]);
 
   const { uiStore, userStore, matchStore } = useStore();
@@ -168,26 +170,22 @@ const Swipe = () => {
                 </p>
 
                 <div className={style.buttons}>
+                  <div className={style.button__wrapper}>
                   <button
-                    className={style.button__reset}
+                    className={`${style.button__reset} ${style.button__skip}`}
                     onClick={(e) => setDecline(e)}
                   >
-                    <img
-                      className={style.button__img}
-                      src="../../assets/img/icons/skip.svg"
-                      alt="skip"
-                    ></img>
+          
                   </button>
+                  </div>
+                  <div className={style.button__wrapper}>
                   <button
-                    className={style.button__reset}
+                    className={`${style.button__reset} ${style.button__accept}`}
                     onClick={(e) => setAccepted(e)}
                   >
-                    <img
-                      className={style.button__img}
-                      src="../../assets/img/icons/accept.svg"
-                      alt="accept"
-                    ></img>
+          
                   </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -198,7 +196,7 @@ const Swipe = () => {
             )  
         ) : (
           <>
-            <div className={style.main__nofooter + " " + style.searching}>
+            <div className={style.main__nofooter + " " + style.searching} ref={animationCon}>
               <article
                 className={style.searching__wrapper + " " + style.grid__child}
               >

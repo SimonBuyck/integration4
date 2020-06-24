@@ -106,15 +106,16 @@
     grid-template-rows: 1fr;
 }
 
-.item__img, .item__country, .item__info {
+.video_preview, .item__country, .item__info {
     grid-row: 1;
     grid-column: 1;
 }
 
-.item__img {
+.video_preview {
     width: 100%;
     z-index: -1;
     border-radius: .5rem;
+    object-fit: cover;
 }
 
 .item__country {

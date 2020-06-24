@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../consts";
 import style from "./Swipe.module.css";
 import { useStore } from "../../hooks/useStore";
 import { useObserver } from "mobx-react-lite";

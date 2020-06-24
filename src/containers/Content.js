@@ -44,7 +44,7 @@ const Content = () => {
           <Videocss />
         </Route>
 
-        <Route path={ROUTES.feedback}>
+        <Route path='/feedback'>
           <Feedback />
         </Route>
       </Switch>

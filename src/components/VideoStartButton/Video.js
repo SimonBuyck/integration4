@@ -9,6 +9,7 @@ import DailyIframe from "@daily-co/daily-js";
 import { logDailyEvent } from "../../logUtils";
 import { useStore } from "../../hooks/useStore";
 import style from "./Video.module.css";
+import { useHistory } from "react-router-dom";
 
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
@@ -21,6 +22,7 @@ export default function VideoStartButton({ match }) {
   const { matchStore } = useStore();
 
   const roomUrlMatch = match.roomUrl;
+  const history = useHistory();
 
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -39,7 +41,7 @@ export default function VideoStartButton({ match }) {
   }, []);
 
   const startJoiningCall = useCallback((url) => {
-    console.log('joining call: ', url);
+    console.log("joining call: ", url);
     const newCallObject = DailyIframe.createCallObject();
     setRoomUrl(url);
     setCallObject(newCallObject);
@@ -47,21 +49,24 @@ export default function VideoStartButton({ match }) {
     newCallObject.join({ url });
   }, []);
 
-  const setMatchUrl = useCallback((url) => {
-    setAppState(STATE_IDLE);
-    match.roomUrl = url;
-    matchStore.updateMatch(match);
-    console.log('url created: ', url)
-  }, [match, matchStore]);
+  const setMatchUrl = useCallback(
+    (url) => {
+      setAppState(STATE_IDLE);
+      match.roomUrl = url;
+      matchStore.updateMatch(match);
+      console.log("url created: ", url);
+    },
+    [match, matchStore]
+  );
 
   const startLeavingCall = useCallback(
     (roomUrlMatch) => {
       if (!callObject) return;
       setAppState(STATE_LEAVING);
       callObject.leave();
-      api.deleteRoom(roomUrlMatch);
+      history.push('/feedback');
     },
-    [callObject]
+    [callObject, history]
   );
 
   useEffect(() => {
@@ -131,6 +136,28 @@ export default function VideoStartButton({ match }) {
             disabled={!enableCallButtons}
             onClickLeaveCall={() => startLeavingCall(roomUrlMatch)}
           />
+          <article className={style.buttons}>
+            <img
+              className={style.button}
+              src="../../assets/img/icons/call/hang_up.svg"
+              alt="Hang up"
+            ></img>
+            <img
+              className={style.button}
+              src="../../assets/img/icons/call/pause.svg"
+              alt="Pause"
+            ></img>
+            <img
+              className={style.button}
+              src="../../assets/img/icons/call/switch.svg"
+              alt="Switch"
+            ></img>
+            <img
+              className={style.button}
+              src="../../assets/img/icons/call/like.svg"
+              alt="Like"
+            ></img>
+          </article>
         </CallObjectContext.Provider>
       ) : (
         <StartButton

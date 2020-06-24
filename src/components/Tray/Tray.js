@@ -6,7 +6,6 @@ import TrayButton, {
 } from "../TrayButton/TrayButton";
 import CallObjectContext from "../../CallObjectContext";
 import { logDailyEvent } from "../../logUtils";
-import { useHistory } from "react-router-dom";
 
 function getStreamStates(callObject) {
   let isCameraMuted,
@@ -28,8 +27,6 @@ export default function Tray(props) {
   const [isCameraMuted, setCameraMuted] = useState(false);
   const [isMicMuted, setMicMuted] = useState(false);
 
-  const history = useHistory();
-
   function toggleCamera() {
     callObject.setLocalVideo(isCameraMuted);
   }
@@ -39,8 +36,7 @@ export default function Tray(props) {
   }
 
   function leaveCall() {
-    props.onClickLeaveCall && props.onClickLeaveCall();
-    history.pushState('/feedback');
+    props.onClickLeaveCall && props.onClickLeaveCall();   
   }
 
   useEffect(() => {

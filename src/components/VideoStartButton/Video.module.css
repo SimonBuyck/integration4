@@ -2,3 +2,20 @@
     composes: main from "../../styles/layout.module.css";
     width: 100%;
 }
+
+.buttons {
+    position: absolute;
+    z-index: 1;
+    margin: 2rem 0;
+    bottom: 25px;
+    left: auto;
+    right: auto;
+}
+
+.button {
+    margin-right:2rem;
+}
+
+.button:last-child {
+    margin-right: 0;
+}

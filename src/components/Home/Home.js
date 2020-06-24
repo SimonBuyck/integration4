@@ -107,12 +107,6 @@ const Home = () => {
               </Link>
             </>
           )}
-          <Link to={ROUTES.videocss} className={style.button}>
-            Ga naar videoCSS
-          </Link>
-          <Link to={ROUTES.feedback} className={style.button}>
-            Ga naar Feedback
-          </Link>
         </article>
       </main>
     </>

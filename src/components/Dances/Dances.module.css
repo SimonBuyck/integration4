@@ -9,6 +9,10 @@
     composes: main__footer from "../../styles/layout.module.css";
 }
 
+.main::-webkit-scrollbar {
+    display: none;
+  }
+
 .header {
     composes: header from "../../styles/layout.module.css"
 }

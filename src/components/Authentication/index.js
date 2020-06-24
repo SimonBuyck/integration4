@@ -8,18 +8,17 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "../../hooks/useStore";
 import Content from "../../containers/Content";
-import { ROUTES } from "../../consts";
 
 const Authentication = () => {
   const { uiStore } = useStore();
 
   return useObserver(() => (
     <>
-      {uiStore.currentUser ? <Content /> : <Redirect to={ROUTES.Login} />}
+      {uiStore.currentUser ? <Content /> : <Redirect to="/login" />}
       <Switch>
-        <Route exact path={ROUTES.login}>
+        <Route exact path="/login">
           {uiStore.currentUser ? (
-            <Redirect to={ROUTES.home} />
+            <Redirect to="/" />
           ) : (
             <>
               <header className={style.header}></header>
@@ -28,7 +27,7 @@ const Authentication = () => {
                 <h2 className={style.subtitle}>Login</h2>
                 <LoginForm />
                 <div className={style.button + " " + style.button__secondary}>
-                  <NavLink to={ROUTES.register}>
+                  <NavLink to="/register">
                     <span className={style.signup}>Sign up</span>
                   </NavLink>
                 </div>
@@ -37,13 +36,13 @@ const Authentication = () => {
           )}
         </Route>
 
-        <Route exact path={ROUTES.register}>
+        <Route exact path="/register">
           {uiStore.currentUser ? (
-            <Redirect to={ROUTES.home} />
+            <Redirect to="/" />
           ) : (
             <>
               <header className={style.header}>
-                <NavLink className={style.return} to={ROUTES.login}>
+                <NavLink className={style.return} to="/login">
                   <img
                     src="../../assets/img/icons/back_arrow.svg"
                     alt="Sign up"

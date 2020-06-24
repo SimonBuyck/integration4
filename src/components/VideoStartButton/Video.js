@@ -10,7 +10,6 @@ import { logDailyEvent } from "../../logUtils";
 import { useStore } from "../../hooks/useStore";
 import style from "./Video.module.css";
 
-
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
 const STATE_JOINING = "STATE_JOINING";
@@ -18,8 +17,10 @@ const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
 
-export default function VideoStartButton({ match, roomUrlMatch }) {
+export default function VideoStartButton({ match }) {
   const { matchStore } = useStore();
+
+  const roomUrlMatch = match.roomUrl;
 
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -37,25 +38,31 @@ export default function VideoStartButton({ match, roomUrlMatch }) {
       });
   }, []);
 
-  const startJoiningCall = useCallback(
-    (url) => {
-      const newCallObject = DailyIframe.createCallObject();
-      setRoomUrl(url);
-      setCallObject(newCallObject);
-      setAppState(STATE_JOINING);
-      newCallObject.join({ url });
-      match.roomUrl = url;
-      matchStore.updateMatch(match);
-    },
-    [match, matchStore]
-  );
+  const startJoiningCall = useCallback((url) => {
+    console.log('joining call: ', url);
+    const newCallObject = DailyIframe.createCallObject();
+    setRoomUrl(url);
+    setCallObject(newCallObject);
+    setAppState(STATE_JOINING);
+    newCallObject.join({ url });
+  }, []);
 
-  const startLeavingCall = useCallback((roomUrlMatch) => {
-    if (!callObject) return;
-    setAppState(STATE_LEAVING);
-    callObject.leave();
-    api.deleteRoom(roomUrlMatch)
-  }, [callObject]);
+  const setMatchUrl = useCallback((url) => {
+    setAppState(STATE_IDLE);
+    match.roomUrl = url;
+    matchStore.updateMatch(match);
+    console.log('url created: ', url)
+  }, [match, matchStore]);
+
+  const startLeavingCall = useCallback(
+    (roomUrlMatch) => {
+      if (!callObject) return;
+      setAppState(STATE_LEAVING);
+      callObject.leave();
+      api.deleteRoom(roomUrlMatch);
+    },
+    [callObject]
+  );
 
   useEffect(() => {
     const url = roomUrlFromPageUrl();
@@ -118,21 +125,21 @@ export default function VideoStartButton({ match, roomUrlMatch }) {
   return (
     <div className={style.main}>
       {showCall ? (
-          <CallObjectContext.Provider value={callObject}>
-            <Call roomUrl={roomUrl} />
-            <Tray
-              disabled={!enableCallButtons}
-              onClickLeaveCall={() => startLeavingCall(roomUrlMatch)}
-            />
-          </CallObjectContext.Provider>
+        <CallObjectContext.Provider value={callObject}>
+          <Call roomUrl={roomUrl} />
+          <Tray
+            disabled={!enableCallButtons}
+            onClickLeaveCall={() => startLeavingCall(roomUrlMatch)}
+          />
+        </CallObjectContext.Provider>
       ) : (
         <StartButton
           disabled={!enableStartButton}
           onClick={() => {
-            if (roomUrlMatch){
+            if (roomUrlMatch) {
               startJoiningCall(roomUrlMatch);
             } else {
-              createCall().then((url) => startJoiningCall(url));
+              createCall().then((url) => setMatchUrl(url));
             }
           }}
         />

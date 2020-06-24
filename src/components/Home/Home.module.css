@@ -1,152 +1,161 @@
 @value tokens: "../../styles/tokens.module.css";
 @value background, backgroundGradient, colorTitle, colorText, colorSecondary, colorTertiary, fontSizeSmall, fontSizeMedium, fontSizeLarge, fontSizeXLarge, spacer2 from tokens;
 
-.main  {
-    composes: main from "../../styles/layout.module.css";
+.main {
+  composes: main from "../../styles/layout.module.css";
 }
 
 .main__footer {
-    composes: main__footer from "../../styles/layout.module.css";
+  composes: main__footer from "../../styles/layout.module.css";
 }
 
 .main::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 
 .home__header {
-    width: calc(100% - 4rem);
-    height: 5rem;
-    margin: 0 2rem;
-    
-    display: flex;
-    align-items: center;
+  width: calc(100% - 4rem);
+  height: 5rem;
+  margin: 0 2rem;
+
+  display: flex;
+  align-items: center;
 }
 
 .home__header__title {
-    color: colorTitle;
-    font-size: fontSizeLarge;
-    font-weight: bold;
+  color: colorTitle;
+  font-size: fontSizeLarge;
+  font-weight: bold;
 }
 
 .main__header {
-    display: grid;
-    width: 100%;
+  display: grid;
+  width: 100%;
 }
 
 .main__header > svg {
-    grid-row: 1;
-    grid-column: 1;
-    z-index: -1;
+  grid-row: 1;
+  grid-column: 1;
+  z-index: -1;
 }
 
 .main__header__subcontainer {
-    width: 100%;
-    height: 15rem;
-    margin: 1rem 0;
-    grid-row: 1;
-    grid-column: 1;
+  width: 100%;
+  height: 15rem;
+  margin: 1rem 0;
+  grid-row: 1;
+  grid-column: 1;
 
-    /* box-sizing: content-box;
+  /* box-sizing: content-box;
     border-top: 5px solid background; */
-    
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .main__header__button {
-    height: 3rem;
-    width: 16rem;
-    margin: 1rem;
-    background: colorSecondary;
-    border-radius: 5px;
-    font-weight: bold;
-    color: background;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 3rem;
+  width: 16rem;
+  margin: 1rem;
+  background: colorSecondary;
+  border-radius: 5px;
+  font-weight: bold;
+  color: background;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main__header__button > img {
-    margin-left: .5rem;
-    width: 1.5rem;
+  margin-left: 0.5rem;
+  width: 1.5rem;
 }
 
 .subtitle {
-    composes: subtitle from "../../styles/typo.module.css";
+  composes: subtitle from "../../styles/typo.module.css";
 }
 
-.subtitle__wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.subtitle__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .subtitle__wrapper > p {
-    font-size: fontSizeSmall;
+  font-size: fontSizeSmall;
 }
 
 .items {
-    display:flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-    flex-flow: wrap;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  flex-flow: wrap;
 }
 
 .item {
-    height:calc(20vh - 1rem);
-    width: 42vw;
-    border-radius: .5rem;
-    margin-bottom: 2rem;
-    overflow:hidden;
-    
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+  height: calc(20vh - 1rem);
+  width: 42vw;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
 
-.video_preview, .item__country, .item__info {
-    grid-row: 1;
-    grid-column: 1;
+.video_preview,
+.item__img,
+.item__country,
+.item__info {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.item__img {
+  width: 100%;
+  z-index: -1;
+  border-radius: 0.5rem;
 }
 
 .video_preview {
-    width: 100%;
-    z-index: -1;
-    border-radius: .5rem;
-    object-fit: cover;
+  width: 100%;
+  z-index: -1;
+  border-radius: 0.5rem;
+  object-fit: ;
 }
 
 .item__country {
-    margin: 0 0 auto auto;
-    background: background;
-    border-bottom-left-radius: .5rem;
-    padding: 0 0 .5rem .5rem;
-    color: colorSecondary;
+  margin: 0 0 auto auto;
+  background: background;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0 0 0.5rem 0.5rem;
+  color: colorSecondary;
 }
 
 .item__info {
-    background: background;
-    background: backgroundGradient;
-    height: calc(20vh - 1rem);
-    padding: 0 0 1rem 1rem;
+  background: background;
+  background: backgroundGradient;
+  height: calc(20vh - 1rem);
+  padding: 0 0 1rem 1rem;
 
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
 .item__info__dance {
-    color: colorTitle;
-    font-size: 2rem;
-    font-weight: bold;
+  color: colorTitle;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .button {
-    composes: button from "../../styles/typo.module.css";
+  composes: button from "../../styles/typo.module.css";
 }
 
 .p {
-    margin: spacer2 0;
+  margin: spacer2 0;
 }

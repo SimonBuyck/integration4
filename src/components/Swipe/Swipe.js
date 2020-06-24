@@ -6,9 +6,12 @@ import { useObserver } from "mobx-react-lite";
 import Match from "../../models/Match";
 import lottie from "lottie-web";
 import VideoStartButton from "../VideoStartButton/Video";
+import { useHistory } from "react-router-dom";
 
 const Swipe = () => {
   let animationCon = React.createRef();
+
+  const history = useHistory();
 
   useEffect(() => {
     const anim = lottie.loadAnimation({
@@ -16,7 +19,7 @@ const Swipe = () => {
       path: "../../assets/animations/background.json",
       loop: true,
     });
-    anim.setSpeed(1)
+    anim.setSpeed(1);
   }, [animationCon]);
 
   const { uiStore, userStore, matchStore } = useStore();
@@ -25,8 +28,15 @@ const Swipe = () => {
   const [match, setMatch] = useState(null);
 
   const deleteMatch = (e) => {
+    if(match){
+      if(match.accepted1 === 'false' || match.accepted2 === 'false'){
+        matchStore.deleteMatch(match);
+      } else if (match.userId2 === '' || match.userId2 === undefined){
+        matchStore.deleteMatch(match);
+      }
+    }
     e.preventDefault();
-    matchStore.deleteMatch(match);
+    history.push("/");
   };
 
   const setAccepted = () => {
@@ -96,11 +106,7 @@ const Swipe = () => {
       <header className={style.header}>
         <span></span>
         <h1 className={style.header__title}>Online Dancers</h1>
-        <Link
-          className={style.cancel}
-          onClick={(e) => deleteMatch(e)}
-          to="/"
-        >
+        <Link className={style.cancel} onClick={(e) => deleteMatch(e)} to="/">
           <img
             src="../../assets/img/icons/cross.svg"
             alt="Cancel"
@@ -113,15 +119,28 @@ const Swipe = () => {
         uiStore.currentUser.viewingUser !== null ? (
           match !== null ? (
             match.accepted1 === "true" && match.accepted2 === "true" ? (
-              match.roomUrl !== undefined || match.roomUrl !== "" ? (
+              match.roomUrl === undefined || match.roomUrl === "" ? (
+                user === "1" ? (
+                  <main className={`${style.main} ${style.main__nofooter}`}>
+                    <article className={style.searching__wrapper}>
+                      <h2 className={style.title}>Creating a call!</h2>
+                      <VideoStartButton match={match} />
+                    </article>
+                  </main>
+                ) : (
+                  <main className={`${style.main} ${style.main__nofooter}`}>
+                    <article className={style.searching__wrapper}>
+                      <h2 className={style.title}>Creating a call!</h2>
+                    </article>
+                  </main>
+                )
+              ) : (
                 <main className={`${style.main} ${style.main__nofooter}`}>
                   <article className={style.searching__wrapper}>
-                    <h2 className={style.title}>It's a match!</h2>
-                    <button className={style.button}>Join</button>
+                    <h2 className={style.title}>call created!</h2>
+                    <VideoStartButton match={match} />
                   </article>
                 </main>
-              ) : (
-                <VideoStartButton match={match} />
               )
             ) : match.accepted1 === "false" || match.accepted2 === "false" ? (
               <main className={`${style.main} ${style.main__nofooter}`}>
@@ -198,8 +217,14 @@ const Swipe = () => {
         ) : (
           <>
             <div className={style.main__nofooter + " " + style.searching}>
-              <article className={style.searching__wrapper + " " + style.grid__child}>
-              <img className={style.illustration} alt="searching" src="../../assets/img/illustrations/searching.svg"></img>
+              <article
+                className={style.searching__wrapper + " " + style.grid__child}
+              >
+                <img
+                  className={style.illustration}
+                  alt="searching"
+                  src="../../assets/img/illustrations/searching.svg"
+                ></img>
                 <p className={style.title}>Searching for Matches...</p>
                 <div className={style.load_wrapp}>
                   <div className={style.load3}>
@@ -216,7 +241,11 @@ const Swipe = () => {
         <main className={`${style.main} ${style.main__nofooter}`}>
           <article className={style.searching__wrapper}>
             <h2 className={style.title}>Start Searching</h2>
-            <img className={style.illustration} alt="start searching" src="../../assets/img/illustrations/start_search.svg"></img>
+            <img
+              className={style.illustration}
+              alt="start searching"
+              src="../../assets/img/illustrations/start_search.svg"
+            ></img>
             <button className={style.button} onClick={(e) => startSearching(e)}>
               Find Dance
             </button>
